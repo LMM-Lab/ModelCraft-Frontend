@@ -1,4 +1,4 @@
-import Text from "@/component/Text";
+import Text from "@/component/common/Text";
 import styled from "styled-components";
 
 const ModelList=()=>{

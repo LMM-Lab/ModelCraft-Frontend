@@ -2,7 +2,7 @@
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "@/styles/GlobalStyles";
 import theme from "@/styles/theme";
-import Text from "@/component/Text";
+import Text from "@/component/common/Text";
 
 export default function Home() {
   return (
