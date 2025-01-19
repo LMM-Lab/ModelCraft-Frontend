@@ -3,15 +3,22 @@ import GlobalStyles from "@/styles/GlobalStyles";
 import StyledComponentsRegistry from "./StyledComponentsRegistry";
 import { ThemeProvider } from "styled-components";
 import theme from "@/styles/theme";
+import SideBar from "@/component/common/SideBar";
+import Grid from "@/component/common/styles/Grid";
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
-    <html lang="en" style={{ fontSize: '62.5%' }}>
+    <html lang="en">
       <body>
         <StyledComponentsRegistry>
           <ThemeProvider theme={theme}>
-            {children}
             <GlobalStyles />
+            <main>
+              <Grid grid_template_columns="1.8fr 8.8fr">
+                <SideBar />
+                {children}
+              </Grid>
+            </main>
           </ThemeProvider>
         </StyledComponentsRegistry>
       </body>
