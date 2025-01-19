@@ -57,6 +57,7 @@ button {
   border: none; /* デフォルトの枠線を削除 */
   padding: 0; /* デフォルトのパディングを削除 */
   background: none; /* 背景をリセット */
+  font-family: 'Crimson Text', serif; 
 }
 
 `
