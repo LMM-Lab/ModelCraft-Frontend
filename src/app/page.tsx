@@ -4,12 +4,16 @@ import GlobalStyles from "@/styles/GlobalStyles";
 import theme from "@/styles/theme";
 import ButtonCSS from "@/component/Button";
 import StyledComponentsRegistry from "./StyledComponentsRegistry";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <StyledComponentsRegistry>
-        <ButtonCSS size="small">train</ButtonCSS>
+        <ButtonCSS variants="Large">
+          train
+        </ButtonCSS>
         <GlobalStyles />
       </StyledComponentsRegistry>
     </ThemeProvider>

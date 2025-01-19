@@ -1,7 +1,7 @@
 const fontSize={
-  Small:'1.4rem',
-  Normal:'2rem',
-  Large:'2.5rem',
+  Small:'1.5rem',
+  Medium:'2.5rem',
+  Large:'3.5rem',
   subTitle:'',
   title:'',
 }
