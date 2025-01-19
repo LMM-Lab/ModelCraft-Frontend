@@ -5,6 +5,7 @@ const colors={
   textBlack:'#191F2F',
   textWhite:'#ffffff',
   isActive:'#5E626D',
+  white:'#ffffff',
   model:{
     CNN:'#C0DC35',
     Pooling:'#DC9935',

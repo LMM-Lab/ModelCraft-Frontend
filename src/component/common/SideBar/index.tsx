@@ -2,10 +2,11 @@
 import styled from "styled-components";
 import Text from "../Text";
 import Button from "../Button";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Flex from "../styles/Flex";
 import theme from "@/styles/theme";
+import Box from "../styles/Box";
 
 const SideBarCSS = styled.div`
   background-color:${({ theme }) => theme.colors.sideBar};
@@ -13,29 +14,8 @@ const SideBarCSS = styled.div`
   padding-top:2rem;
 `
 
-
 const SideBar = () => {
-
   const pathname = usePathname()
-
-  const nav = [
-    { name: 'Classification', path: '/classification' },
-    { name: 'register', path: '/register' },
-  ]
-
-  const router = useRouter()
-
-  const handleNavClassification = () => {
-    router.push('/classification/train')
-  }
-
-  const handleNavModelList = () => {
-    router.push('/modelList')
-  }
-
-  const handleNavAccounts = () => {
-    router.push('/accounts')
-  }
 
   return (
     <div>
@@ -46,18 +26,19 @@ const SideBar = () => {
         <Link href='/classification/train'>
           <Button variants="nav" $isactive={(pathname === '/classification/train')} $marginTop="8rem">Classification</Button>
         </Link>
+        <Box $borderButton={`1px solid${theme.colors.white}`} $margin="15rem auto 0 auto" $width="70%"></Box>
         <Link href='/modelList'>
           <Button variants="nav" $isactive={(pathname === '/modelList')}>modelList</Button>
         </Link>
         <Link href='/accounts'>
           <Button variants="nav" $isactive={(pathname === '/accounts')}>accounts</Button>
         </Link>
-        <Flex $marginTop="10rem">
+        <Flex $marginTop="8rem">
           <Link href='/login'>
-            <Button variants="nav" fontSize={theme.fontSize.Small} height="3rem" padding="2rem" $isactive={(pathname === '/login')}>login</Button>
+            <Button variants="nav" fontSize={theme.fontSize.Small} height="3rem" padding="1rem" $isactive={(pathname === '/login')} $marginRight="1rem">login</Button>
           </Link>
           <Link href='/register'>
-            <Button variants="nav" fontSize={theme.fontSize.Small} height="3rem" padding="2rem" $isactive={(pathname === '/register')}>register</Button>
+            <Button variants="nav" fontSize={theme.fontSize.Small} height="3rem" padding="1rem" $isactive={(pathname === '/register')} $marginLeft="1rem">register</Button>
           </Link>
 
         </Flex>

@@ -13,6 +13,8 @@ type ButtonProps={
   fontSize?:string
   $isactive?:boolean
   $marginTop?:string
+  $marginRight?:string
+  $marginLeft?:string
 }
 
 const Button=styled.button<ButtonProps>`
@@ -61,6 +63,8 @@ const Button=styled.button<ButtonProps>`
   padding-left:${({padding})=>padding};
   padding-right:${({padding})=>padding};
   margin-top:${({$marginTop})=>$marginTop};
+  margin-right:${({$marginRight})=>$marginRight};
+  margin-left:${({$marginLeft})=>$marginLeft};
   font-size:${({fontSize})=>fontSize};
   border-radius:${({borderRadius='4px'})=>borderRadius};
   width:${({width})=>width};

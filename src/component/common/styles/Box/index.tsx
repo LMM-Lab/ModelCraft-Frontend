@@ -20,6 +20,7 @@ export type BoxProps = {
   $paddingRight?: string
   $paddingBottom?: string
   $paddingLeft?: string
+  $borderButton?:string
 }
 
 const Box=styled.div<BoxProps>`
@@ -42,6 +43,7 @@ const Box=styled.div<BoxProps>`
   padding-right:${({$paddingRight})=>$paddingRight};
   padding-bottom:${({$paddingBottom})=>$paddingBottom};
   padding-left:${({$paddingLeft})=>$paddingLeft};
+  border-bottom:${({$borderButton})=>$borderButton};
 `
 
 export default Box
