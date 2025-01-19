@@ -5,13 +5,12 @@ const meta={
   title:'Atoms/Button',
   component:Button,
   argTypes: {
-    backcolor: { control: 'color', description: '背景色を指定します' },
-    size: {
+    variants: {
       control: 'radio',
-      options: ['small', 'large'],
+      options: ['Small','Medium','Large','Icon'],
       description: 'ボタンのサイズを指定します',
     },
-    padding: { control: 'text', description: 'ボタンのパディングを指定します' },
+    padding: { control: 'text', description: 'ボタンの左右のパディング' },
     children: { control: 'text', description: 'ボタン内のテキスト' },
   },
 } satisfies Meta<typeof Button>
@@ -19,10 +18,9 @@ const meta={
 export default meta
 type Story=StoryObj<typeof Button>
 
-export const normal:Story={
+export const button:Story={
   args:{
     children:'train',
-    backcolor:'#9c9696',
-    size:'small',
+    variants:'Small',
   }
 }
