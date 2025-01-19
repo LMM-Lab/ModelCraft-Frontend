@@ -1,8 +1,9 @@
 const fontSize={
-  title:'48px',
-  subTitle:'36px',
-  textNormal:'',
-  textBold:'',
+  Small:'1.4rem',
+  Normal:'2rem',
+  Large:'2.5rem',
+  subTitle:'',
+  title:'',
 }
 
 export default fontSize
