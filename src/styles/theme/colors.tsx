@@ -4,6 +4,7 @@ const colors={
   Button:'#5569A1',
   textBlack:'#191F2F',
   textWhite:'#ffffff',
+  isActive:'#5E626D',
   model:{
     CNN:'#C0DC35',
     Pooling:'#DC9935',

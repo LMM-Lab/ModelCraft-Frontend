@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Box from "../Box";
 
 type GridProps = {
   grid_template_columns?: string;
@@ -15,7 +16,7 @@ type GridProps = {
   place_content?: string;
 };
 
-const Grid = styled.div<GridProps>`
+const Grid = styled(Box)<GridProps>`
   display: grid;
   grid-template-columns: ${({ grid_template_columns }) => grid_template_columns};
   grid-template-rows: ${({ grid_template_rows }) => grid_template_rows};
