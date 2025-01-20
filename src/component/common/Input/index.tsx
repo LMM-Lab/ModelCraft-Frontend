@@ -1,11 +1,13 @@
 'use client'
 import styled, { css } from "styled-components";
 import { BoxProps } from "../styles/Box";
+import React from "react";
 
-type InputProps=BoxProps&{
+type InputProps=BoxProps&React.InputHTMLAttributes<HTMLInputElement>&{
   variants?:'default'|'serch'
   onChange?:(event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?:string
+  $textAlign?:string
 }
 
 const InputCSS=styled.input<InputProps>`
@@ -42,15 +44,21 @@ const InputCSS=styled.input<InputProps>`
   padding-right:${({$paddingRight})=>$paddingRight};
   padding-bottom:${({$paddingBottom})=>$paddingBottom};
   padding-left:${({$paddingLeft='1rem'})=>$paddingLeft};
+  text-align:${({$textAlign})=>$textAlign};
   &:focus{
     outline:none;
   }
 `
 
-const Input=(props:InputProps)=>{
-  return (
-    <InputCSS {...props}/>
-  )
-}
+// const Input=({$inputRef,...rest}:InputProps)=>{
+//   return (
+//     <InputCSS $inputRef={$inputRef} {...rest}/>
+//   )
+// }
+
+const Input=React.forwardRef<HTMLInputElement,InputProps>(
+  (props,ref)=>{
+    return <InputCSS ref={ref} {...props}/>
+  })
 
 export default Input

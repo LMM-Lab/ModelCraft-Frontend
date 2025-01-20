@@ -15,6 +15,7 @@ type ButtonProps={
   $marginTop?:string
   $marginRight?:string
   $marginLeft?:string
+  type?:string
 }
 
 const Button=styled.button<ButtonProps>`
