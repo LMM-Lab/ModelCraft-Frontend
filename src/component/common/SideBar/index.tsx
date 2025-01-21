@@ -33,17 +33,14 @@ const SideBar = () => {
         <Link href='/accounts'>
           <Button variants="nav" $isactive={(pathname === '/accounts')}>accounts</Button>
         </Link>
-        <Flex $marginTop="8rem">
+        <Flex $justify_content="center" $marginTop="8rem">
           <Link href='/login'>
             <Button variants="nav" fontSize={theme.fontSize.Small} height="3rem" padding="1rem" $isactive={(pathname === '/login')} $marginRight="1rem">login</Button>
           </Link>
           <Link href='/register'>
             <Button variants="nav" fontSize={theme.fontSize.Small} height="3rem" padding="1rem" $isactive={(pathname === '/register')} $marginLeft="1rem">register</Button>
           </Link>
-
         </Flex>
-
-
       </SideBarCSS>
     </div>
   )
