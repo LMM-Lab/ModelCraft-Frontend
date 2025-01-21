@@ -8,6 +8,7 @@ type InputProps=BoxProps&React.InputHTMLAttributes<HTMLInputElement>&{
   onChange?:(event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?:string
   $textAlign?:string
+  type?:string
 }
 
 const InputCSS=styled.input<InputProps>`
@@ -50,11 +51,6 @@ const InputCSS=styled.input<InputProps>`
   }
 `
 
-// const Input=({$inputRef,...rest}:InputProps)=>{
-//   return (
-//     <InputCSS $inputRef={$inputRef} {...rest}/>
-//   )
-// }
 
 const Input=React.forwardRef<HTMLInputElement,InputProps>(
   (props,ref)=>{
