@@ -18,8 +18,8 @@ const Flex=styled(Box)<FlexProps>`
   flex-direction:${({$flex_direction})=>$flex_direction};
   flex-wrap:${({$flex_wrap})=>$flex_wrap};
   flex-flow:${({$flex_flow})=>$flex_flow};
-  justify-content:${({$justify_content='center'})=>$justify_content};
-  align-items:${({$align_items='center'})=>$align_items};
+  justify-content:${({$justify_content})=>$justify_content};
+  align-items:${({$align_items})=>$align_items};
   align-content:${({$align_content})=>$align_content};
   gap:${({$gap})=>$gap};
   row-gap:${({$row_gap})=>$row_gap};

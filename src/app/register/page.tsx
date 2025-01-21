@@ -7,6 +7,7 @@ import Button from "@/component/common/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import InputImage from "@/component/common/InputImage";
 import { useState } from "react";
+import UserNameInput from "@/component/common/UserNameInput";
 
 type FormData = {
   name: string
@@ -16,6 +17,7 @@ type FormData = {
 
 const Register = () => {
   const [icon, setIcon] = useState<File>()
+  const [userName,setUserName]=useState<string>('')
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
   const onSubmit: SubmitHandler<FormData> = (data) => {
@@ -27,11 +29,16 @@ const Register = () => {
     console.log(iconFile)
   }
 
+  const handleInput=(event:React.ChangeEvent<HTMLInputElement>)=>{
+    setUserName(event.target.value)
+    console.log('userName:',userName)
+  }
+
   return (
     <div>
       <Text variants="ExtraLarge" margin="5rem 0 0 10rem">Register</Text>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Flex $flex_direction="column" $marginTop="5rem">
+        <Flex $flex_direction="column" $marginTop="5rem" $justify_content="center" $align_items="center">
           <InputImage size={70} onFile={handleIcon}/>
           <Input
             {...register('name', { required: 'Enter your UserName' })}
@@ -48,6 +55,7 @@ const Register = () => {
           <Button type="submit" $marginTop="5rem" variants="Medium">login</Button>
         </Flex>
       </form>
+      <UserNameInput onChange={handleInput}>{userName}</UserNameInput>
     </div>
   )
 

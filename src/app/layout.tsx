@@ -5,6 +5,9 @@ import { ThemeProvider } from "styled-components";
 import theme from "@/styles/theme";
 import SideBar from "@/component/common/SideBar";
 import Grid from "@/component/common/styles/Grid";
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css'; // 必須: CSSをインポート
+config.autoAddCss = false; // 自動CSS追加を無効化
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
