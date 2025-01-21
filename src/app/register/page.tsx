@@ -39,14 +39,17 @@ const Register = () => {
       <Text variants="ExtraLarge" margin="5rem 0 0 10rem">Register</Text>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex $flex_direction="column" $marginTop="5rem" $justify_content="center" $align_items="center">
-          <InputImage size={70} onFile={handleIcon}/>
-          <Input
+          <Flex>
+            <InputImage size={70} onFile={handleIcon}/>
+            <UserNameInput width="150px" onChange={handleInput}>{userName}</UserNameInput>
+          </Flex>
+          {/* <Input
             {...register('name', { required: 'Enter your UserName' })}
             $marginTop="1.5rem" variants="default" placeholder="UserName" $textAlign="center" />
-          {errors.name && <Text color="red" variants="Medium">{errors.name.message}</Text>}
+          {errors.name && <Text color="red" variants="Medium">{errors.name.message}</Text>} */}
           <Input
             {...register('email', { required: 'Enter your email' })}
-            $marginTop="1.5rem" variants="default" placeholder="e-mail" $textAlign="center" />
+            $marginTop="5rem" variants="default" placeholder="e-mail" $textAlign="center" />
           {errors.email && <Text color="red" variants="Medium">{errors.email.message}</Text>}
           <Input
             {...register('password', { required: 'Enter your Password' })}
@@ -55,7 +58,6 @@ const Register = () => {
           <Button type="submit" $marginTop="5rem" variants="Medium">login</Button>
         </Flex>
       </form>
-      <UserNameInput onChange={handleInput}>{userName}</UserNameInput>
     </div>
   )
 
