@@ -70,7 +70,7 @@ const Button=styled.button<ButtonProps>`
   border-radius:${({borderRadius='4px'})=>borderRadius};
   width:${({width})=>width};
   height:${({height})=>height};
-  color:white;
+  color:${({color='White'})=>color};
   border:none;
   cursor: pointer;
   &:hover{
