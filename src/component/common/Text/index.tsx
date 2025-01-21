@@ -9,6 +9,8 @@ type TextProps={
   letterSpacing?:string
   margin?:string
   padding?:string
+  $marginTop?:string
+  fontFamily?:string
 }
 
 const Text=styled.p<TextProps>`
@@ -22,14 +24,14 @@ const Text=styled.p<TextProps>`
         `
       case 'Small':
         return css`
-          font-size:1.5rem;
-          font-weight:300;
+          font-size:1.3rem;
+          font-weight:400;
           letter-spacing:0rem;
         `
       case 'Medium':
         return css`
           font-size:2.5rem;
-          font-weight:300;
+          font-weight:400;
           letter-spacing:-0.1rem;
         `
       case 'Large':
@@ -51,7 +53,9 @@ const Text=styled.p<TextProps>`
   font-weight:${({fontWeight})=>fontWeight};
   letter-spacing:${({letterSpacing})=>letterSpacing};
   margin:${({margin})=>margin};
+  margin-top:${({$marginTop})=>$marginTop};
   padding:${({padding})=>padding};
+  font-family:${({fontFamily})=>fontFamily};
   display:inline-block;
 `
 
