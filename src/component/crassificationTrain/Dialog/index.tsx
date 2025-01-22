@@ -4,6 +4,7 @@ import Flex from "@/component/common/styles/Flex";
 import Text from "@/component/common/Text";
 import { ChangeEvent, ChangeEventHandler, useState } from "react";
 import styled from "styled-components";
+import Affine from "./Layer/Affine";
 
 const Select=styled.select`
   width:100px;
@@ -35,7 +36,7 @@ const Dialog=()=>{
     setLayer(event.target.value)
   }
   return (
-    <dialog open>
+    <dialog>
       <select name="" onChange={handleSelect}>
         <option value=''></option>
         <option value="Affine">Affine</option>
@@ -44,26 +45,7 @@ const Dialog=()=>{
       </select>
       {(layer==='Affine') && (
         <Flex $flex_direction="column" $justify_content="center" $align_items="center">
-          <Flex $justify_content="flex-end">
-            <Text variants='Medium'>input size</Text>
-            <Input type="number" />
-          </Flex>
-          <Flex $justify_content="flex-end">
-            <Text variants="Medium">output size</Text>
-            <Input type="number" />
-          </Flex>
-          <Flex $justify_content="flex-end">
-            <Text variants="Medium">activation func</Text>
-            <Select name="">
-              <option value="">Relu</option>
-              <option value="">Skip</option>
-            </Select>
-          </Flex>
-          <Flex $justify_content="flex-end">
-            <Text variants="Medium">input size</Text>
-            <Input type="number" />
-          </Flex>
-          <Button variants="Small" width="10rem" padding="1rem">Add</Button>
+          <Affine></Affine>
         </Flex>
       )}
       {(layer==='CNN') && (

@@ -11,6 +11,7 @@ type TextProps={
   padding?:string
   $marginTop?:string
   fontFamily?:string
+  width?:string
 }
 
 const Text=styled.p<TextProps>`
@@ -49,6 +50,7 @@ const Text=styled.p<TextProps>`
     }
   }}
   color:${({color})=>color};
+  width:${({width})=>width};
   font-size:${({fontSize})=>fontSize};
   font-weight:${({fontWeight})=>fontWeight};
   letter-spacing:${({letterSpacing})=>letterSpacing};
