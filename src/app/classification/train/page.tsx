@@ -1,5 +1,6 @@
+import Button from "@/component/common/Button";
 import Text from "@/component/common/Text";
-import Layer from "@/component/crassificationTrain/Layer";
+import DnD from "@/component/crassificationTrain/DnD";
 import styled from "styled-components";
 
 
@@ -7,10 +8,9 @@ const Train=()=>{
   return (
     <div>
       <Text variants="ExtraLarge">Train</Text>
-      <Layer name="Affine" input="120×120×3" output="245×120×3"></Layer>
+      <DnD></DnD>
     </div>
   )
-
 }
 
 export default Train
