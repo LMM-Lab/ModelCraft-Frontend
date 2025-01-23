@@ -36,32 +36,32 @@ const ModelSetting = () => {
   const gap = '0.7rem'
   return (
     <div>
-      <Button onClick={toggleOpen} $border={`1px solid#ffffff`} $padding="0.1rem 0.5rem 2.2rem 0" $backColor="transparent" color="black" $height="2rem">+ Model Setting</Button>
+      <Button onClick={toggleOpen} $border={`1px solid#ffffff`} $paddingRight="1rem" $backColor="transparent" $color="black" $height="3rem">+ Model Setting</Button>
       {isOpen && (
         <Dialog onClick={toggleOpen}>
           <Text $margin="2rem 0 0 2rem">Model Setting</Text>
           <InputParam name="model name" $marginTop="5rem">
-            <Input {...register('modelName', { required: 'enter modelName' })} variants="params" type="text"></Input>
+            <Input {...register('modelName', { required: 'enter modelName' })} $variants="params" type="text"></Input>
             {errors.modelName && <Text $variants="Small">{errors.modelName.message}</Text>}
           </InputParam>
 
           <InputParam name="epock" $marginTop={gap}>
-            <Input {...register('epock', { required: 'enter epock' })} variants="params" type="number" min={0}></Input>
+            <Input {...register('epock', { required: 'enter epock' })} $variants="params" type="number" min={0}></Input>
             {errors.epock && <Text $variants="Small">{errors.epock.message}</Text>}
           </InputParam>
 
           <InputParam name="batchSize" $marginTop={gap}>
-            <Input {...register('batchSize', { required: 'enter batchSize' })} variants="params" type="number" min={0}></Input>
+            <Input {...register('batchSize', { required: 'enter batchSize' })} $variants="params" type="number" min={0}></Input>
             {errors.batchSize && <Text $variants="Small">{errors.batchSize.message}</Text>}
           </InputParam>
 
           <InputParam name="learningRate" $marginTop={gap}>
-            <Input {...register('learningRate', { required: 'enter learningRate' })} variants="params" type="number" min={0}></Input>
+            <Input {...register('learningRate', { required: 'enter learningRate' })} $variants="params" type="number" min={0}></Input>
             {errors.learningRate && <Text $variants="Small">{errors.learningRate.message}</Text>}
           </InputParam>
 
           <InputParam name="optimizer" $marginTop={gap}>
-            <Select variants="param" {...register('optimizer', { required: 'enter optimizer' })}>
+            <Select $variants="param" {...register('optimizer', { required: 'enter optimizer' })}>
               <option value=""></option>
               <option value="SGD">SGD</option>
               <option value="Momentum">Momentum</option>
@@ -73,7 +73,7 @@ const ModelSetting = () => {
           </InputParam>
 
           <InputParam name="val size" $marginTop={gap}>
-            <Select variants="param" {...register('valSize', { required: 'enter optimizer' })}>
+            <Select $variants="param" {...register('valSize', { required: 'enter optimizer' })}>
               <option value=""></option>
               <option value="10%">10%</option>
               <option value="20%">20%</option>

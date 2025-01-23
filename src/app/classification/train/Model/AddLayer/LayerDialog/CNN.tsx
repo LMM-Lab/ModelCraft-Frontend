@@ -35,27 +35,27 @@ const CNN = () => {
   return (
     <form onSubmit={handleSubmit(handleInput)}>
       <InputParam $marginTop="4rem" name="kernel size">
-        <Input {...register('kernelSize', { required: 'enter kernelSize' })} variants="params" type="number" min={0}></Input>
+        <Input {...register('kernelSize', { required: 'enter kernelSize' })} $variants="params" type="number" min={0}></Input>
         {errors.kernelSize && <Text $variants="Small" color="red">{errors.kernelSize.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="pooling size">
-        <Input {...register('poolingSize', { required: 'enter poolingSize' })} variants="params" type="number" min={0}></Input>
+        <Input {...register('poolingSize', { required: 'enter poolingSize' })} $variants="params" type="number" min={0}></Input>
         {errors.poolingSize && <Text $variants="Small" color="red">{errors.poolingSize.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="padding size">
-        <Input {...register('paddingSize', { required: 'enter padding size' })} variants="params" type="number" min={0}></Input>
+        <Input {...register('paddingSize', { required: 'enter padding size' })} $variants="params" type="number" min={0}></Input>
         {errors.paddingSize && <Text $variants="Small" color="red">{errors.paddingSize.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="stride">
-        <Input {...register('stride', { required: 'enter stride' })} variants="params" type="number" min={0}></Input>
+        <Input {...register('stride', { required: 'enter stride' })} $variants="params" type="number" min={0}></Input>
         {errors.stride && <Text $variants="Small" color="red">{errors.stride.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="act func">
-        <Select variants="param" {...register('actFunc', { required: 'enter act func' })}>
+        <Select $variants="param" {...register('actFunc', { required: 'enter act func' })}>
           <option value=""></option>
           <option value="Sigmoid">Sigmoid</option>
           <option value="Relu">Relu</option>
@@ -64,7 +64,7 @@ const CNN = () => {
       </InputParam>
 
       <InputParam $marginTop={gap} name="weight init">
-        <Select variants="param" {...register('weightInit', { required: 'enter weight init' })}>
+        <Select $variants="param" {...register('weightInit', { required: 'enter weight init' })}>
           <option value=""></option>
           <option value="Zelo">Zelo</option>
           <option value="Ramdom">Ramdom</option>

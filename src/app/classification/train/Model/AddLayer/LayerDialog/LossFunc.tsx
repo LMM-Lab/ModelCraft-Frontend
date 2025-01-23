@@ -25,7 +25,7 @@ const LossFunc = () => {
     <form onSubmit={handleSubmit(handleInput)}>
 
       <InputParam $marginTop='4rem' name="lossFunc">
-        <Select variants="param" {...register('lossFunc', { required: 'enter weight init' })}>
+        <Select $variants="param" {...register('lossFunc', { required: 'enter weight init' })}>
           <option value=""></option>
           <option value="Sigmoid">Sigmoid</option>
           <option value="Relu">Relu</option>
