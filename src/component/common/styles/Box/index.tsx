@@ -21,6 +21,7 @@ export type BoxProps = {
   $paddingBottom?: string
   $paddingLeft?: string
   $borderButton?:string
+  $borderRadius?:string
 }
 
 const Box=styled.div<BoxProps>`
@@ -32,6 +33,7 @@ const Box=styled.div<BoxProps>`
   min-height:${({$minHeight})=>$minHeight};
   display:${({$display})=>$display};
   border:${({$border})=>$border};
+  border-radius:${({$borderRadius})=>$borderRadius};
   overflow:${({$overflow})=>$overflow};
   margin:${({$margin})=>$margin};
   margin-top:${({$marginTop})=>$marginTop};

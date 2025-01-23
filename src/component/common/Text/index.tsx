@@ -2,7 +2,7 @@
 import styled, { css } from "styled-components";
 
 type TextProps={
-  variants:'ExtraSmall'|'Small'|'Medium'|'Large'|'ExtraLarge'
+  variants?:'ExtraSmall'|'Small'|'Medium'|'Large'|'ExtraLarge'
   fontSize?:string
   color?:string
   fontWeight?:string
@@ -11,10 +11,11 @@ type TextProps={
   padding?:string
   $marginTop?:string
   fontFamily?:string
+  width?:string
 }
 
 const Text=styled.p<TextProps>`
-  ${({variants})=>{
+  ${({variants='Medium'})=>{
     switch (variants){
       case 'ExtraSmall':
         return css`
@@ -49,6 +50,7 @@ const Text=styled.p<TextProps>`
     }
   }}
   color:${({color})=>color};
+  width:${({width})=>width};
   font-size:${({fontSize})=>fontSize};
   font-weight:${({fontWeight})=>fontWeight};
   letter-spacing:${({letterSpacing})=>letterSpacing};

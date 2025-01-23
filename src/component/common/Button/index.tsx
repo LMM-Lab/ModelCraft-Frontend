@@ -10,12 +10,20 @@ type ButtonProps={
   children?:React.ReactNode
   borderRadius?:string
   padding?:string
+  $padding?:string
+  $paddingTop?:string
+  $paddingRight?:string
+  $paddingLeft?:string
+  $paddingBottom?:string
   fontSize?:string
   $isactive?:boolean
+  $margin?:string
   $marginTop?:string
   $marginRight?:string
   $marginLeft?:string
+  $marginBottom?:string
   type?:string
+  display?:string
 }
 
 const Button=styled.button<ButtonProps>`
@@ -25,7 +33,6 @@ const Button=styled.button<ButtonProps>`
       case 'Small':
         return css`
           height:30px;
-          padding:0 40px;
           font-size:${theme.fontSize.Small};
         `;
       case 'Medium':
@@ -61,17 +68,23 @@ const Button=styled.button<ButtonProps>`
         `
     }
   }};
-  padding-left:${({padding})=>padding};
-  padding-right:${({padding})=>padding};
+  padding:${({$padding})=>$padding};
+  padding-top:${({$paddingTop})=>$paddingTop};
+  padding-left:${({$paddingLeft})=>$paddingLeft};
+  padding-right:${({$paddingRight})=>$paddingRight};
+  padding-bottom:${({$paddingBottom})=>$paddingBottom};
+  margin:${({$margin})=>$margin};
   margin-top:${({$marginTop})=>$marginTop};
   margin-right:${({$marginRight})=>$marginRight};
   margin-left:${({$marginLeft})=>$marginLeft};
+  margin-bottom:${({$marginBottom})=>$marginBottom};
   font-size:${({fontSize})=>fontSize};
   border-radius:${({borderRadius='4px'})=>borderRadius};
   width:${({width})=>width};
   height:${({height})=>height};
   color:${({color='White'})=>color};
   border:none;
+  display:${({display='inline-block'})=>display};
   cursor: pointer;
   &:hover{
     background-color:white;
