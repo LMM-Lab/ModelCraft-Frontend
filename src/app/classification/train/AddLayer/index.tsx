@@ -4,6 +4,7 @@ import Dialog from "@/component/common/Dialog";
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import Affine from "./LayerDialog/Affine";
+import CNN from "./LayerDialog/CNN";
 
 const BackDiv = styled.div`
   width:100vw;
@@ -13,6 +14,16 @@ const BackDiv = styled.div`
   left:0;
   background-color:#d5d5d5;
   opacity:50%;
+`
+
+const Select=styled.select`
+  width:80px;
+  height:30px;
+  border-radius:5px;
+  text-align:center;
+  &:focus{
+    outline:none;
+  }
 `
 
 const AddLayer = () => {
@@ -32,18 +43,18 @@ const AddLayer = () => {
       {isOpend && (
         <div>
           <BackDiv onClick={openDialog}></BackDiv>
-          <Dialog>
-            <select onChange={handleSelect}>
+          <Dialog width="40rem">
+            <Select onChange={handleSelect}>
               <option value=''></option>
               <option value="Affine">Affine</option>
               <option value="CNN">CNN</option>
               <option value="Pooling">Pooling</option>
-            </select>
+            </Select>
             {(layer === 'Affine') && (
               <Affine></Affine>
             )}
             {(layer === 'CNN') && (
-              <Affine></Affine>
+              <CNN></CNN>
             )}
             {(layer === 'Pooling') && (
               <Affine></Affine>

@@ -1,7 +1,6 @@
 import Button from "@/component/common/Button";
 import Flex from "@/component/common/styles/Flex";
 import Text from "@/component/common/Text";
-import Dialog from "@/component/crassificationTrain/Dialog";
 import DnD from "@/component/crassificationTrain/DnD";
 import styled from "styled-components";
 import AddLayer from "./AddLayer";
@@ -20,7 +19,6 @@ const Train=()=>{
         </Flex>
       </Flex>
       <DnD></DnD>
-      <Dialog></Dialog>
     </div>
   )
 }

@@ -6,10 +6,11 @@ type DialogCSSProps={
   $borderRadius?:string
   $border?:string
   $backgroundColor?:string
+  children?:React.ReactNode
 }
 
 const DialogCSS=styled.dialog<DialogCSSProps>`
-  width:${({width='300px'})=>width};
+  width:${({width='400px'})=>width};
   height:${({height='auto'})=>height};
   min-height:300px;
   border-radius:${({$borderRadius='5px'})=>$borderRadius};
@@ -17,9 +18,9 @@ const DialogCSS=styled.dialog<DialogCSSProps>`
   background-color:${({theme,$backgroundColor})=>theme.colors.background||$backgroundColor};
 `
 
-const Dialog=({children}:{children?:React.ReactNode})=>{
+const Dialog=(props:DialogCSSProps)=>{
   return (
-    <DialogCSS open>{children}</DialogCSS>
+    <DialogCSS open {...props}>{props.children}</DialogCSS>
   )
 }
 

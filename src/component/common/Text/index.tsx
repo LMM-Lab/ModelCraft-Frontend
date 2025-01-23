@@ -2,7 +2,7 @@
 import styled, { css } from "styled-components";
 
 type TextProps={
-  variants:'ExtraSmall'|'Small'|'Medium'|'Large'|'ExtraLarge'
+  variants?:'ExtraSmall'|'Small'|'Medium'|'Large'|'ExtraLarge'
   fontSize?:string
   color?:string
   fontWeight?:string
@@ -15,7 +15,7 @@ type TextProps={
 }
 
 const Text=styled.p<TextProps>`
-  ${({variants})=>{
+  ${({variants='Medium'})=>{
     switch (variants){
       case 'ExtraSmall':
         return css`
