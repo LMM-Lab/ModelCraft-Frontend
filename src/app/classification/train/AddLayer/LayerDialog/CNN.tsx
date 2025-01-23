@@ -46,7 +46,7 @@ const CNN = () => {
 
   return (
     <form onSubmit={handleSubmit(handleInput)}>
-      <InputParam $marginTop="5rem" name="kernel size">
+      <InputParam $marginTop="4rem" name="kernel size">
         <Input {...register('kernelSize', { required: 'enter kernelSize' })} variants="params" type="number" min={0}></Input>
         {errors.kernelSize && <Text variants="Small" color="red">{errors.kernelSize.message}</Text>}
       </InputParam>

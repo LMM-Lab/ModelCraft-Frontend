@@ -1,23 +1,20 @@
 'use client'
 import Button from "@/component/common/Button";
-import Flex from "@/component/common/styles/Flex";
+import Input from "@/component/common/Input";
 import Text from "@/component/common/Text";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
+import InputParam from "./InputParam";
+
+type FormData = {
+  inputSize: number
+  outputSize: number
+  actFunc: string
+  weightInit: string
+}
 
 const Select = styled.select`
-  width:100px;
-  height:30px;
-  border: 1px solid#333;
-  border-radius:5px;
-  margin-left:1rem;
-  &:focus{
-    outline:none;
-  }
-`
-
-const Input = styled.input`
-  width:100px;
+  width:150px;
   height:30px;
   border: 1px solid#333;
   border-radius:5px;
@@ -29,69 +26,55 @@ const Input = styled.input`
   }
 `
 
-type FormData = {
-  inputSize: number
-  outputSize: number
-  activationFunc: string
-  weightInit: string
-}
-
-const Affine = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
-
+const CNN = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    defaultValues:{
+      inputSize:23,
+      outputSize:2,
+      actFunc:'Sigmoid',
+      weightInit:'Zelo',
+    }
+  })
   const handleInput: SubmitHandler<FormData> = (data) => {
     console.log('data:', data)
   }
+  const gap = '0.7rem'
 
   return (
     <form onSubmit={handleSubmit(handleInput)}>
-      <Flex $flex_direction="column" $justify_content="center" $align_items="center">
-        <div>
+      <InputParam $marginTop="4rem" name="inputSize">
+        <Input {...register('inputSize', { required: 'enter kernelSize' })} variants="params" type="number" min={0}></Input>
+        {errors.inputSize && <Text variants="Small" color="red">{errors.inputSize.message}</Text>}
+      </InputParam>
 
-          <Flex $flex_direction="column" $align_items='flex-end'>
-            <Flex>
-              <Text variants='Medium'>input size</Text>
-              <Input type="number" {...register('inputSize', { required: 'enter' })} />
-            </Flex>
-            {errors.inputSize && <Text color="red" variants="Small">enter input-size</Text>}
-          </Flex>
+      <InputParam $marginTop={gap} name="outputSize">
+        <Input {...register('outputSize', { required: 'enter poolingSize' })} variants="params" type="number" min={0}></Input>
+        {errors.outputSize && <Text variants="Small" color="red">{errors.outputSize.message}</Text>}
+      </InputParam>
 
-          <Flex $flex_direction="column" $align_items='flex-end'>
-            <Flex>
-              <Text variants='Medium'>input size</Text>
-              <Input type="number" {...register('outputSize', { required: 'enter' })} />
-            </Flex>
-            {errors.outputSize && <Text color="red" variants="Small">enter output-size</Text>}
-          </Flex>
+      <InputParam $marginTop={gap} name="act func">
+        <Select {...register('actFunc', { required: 'enter act func' })}>
+          <option value=""></option>
+          <option value="Sigmoid">Sigmoid</option>
+          <option value="Relu">Relu</option>
+        </Select>
+        {errors.actFunc && <Text variants="Small" color="red">{errors.actFunc.message}</Text>}
+      </InputParam>
 
-          <Flex $flex_direction="column" $align_items='flex-end'>
-            <Flex>
-              <Text variants="Medium">activation func</Text>
-              <Select {...register('activationFunc', { required: 'enter activationFunc' })}>
-                <option value="Relu">Relu</option>
-                <option value="Skip">Skip</option>
-              </Select>
-            </Flex>
-            {errors.activationFunc && <Text color="red" variants="Small">enter activationFunc</Text>}
-          </Flex>
+      <InputParam $marginTop={gap} name="weight init">
+        <Select {...register('weightInit', { required: 'enter weight init' })}>
+          <option value=""></option>
+          <option value="Zelo">Zelo</option>
+          <option value="Ramdom">Ramdom</option>
+          <option value="Xavier">Xavier</option>
+          <option value="He">He</option>
+        </Select>
+        {errors.weightInit && <Text variants="Small" color="red">{errors.weightInit.message}</Text>}
+      </InputParam>
 
-          <Flex $flex_direction="column" $align_items='flex-end'>
-            <Flex>
-              <Text variants="Medium">activation func</Text>
-              <Select {...register('weightInit', { required: 'enter weightInit' })}>
-                <option value=""></option>
-                <option value="Relu">Relu</option>
-                <option value="Skip">Skip</option>
-              </Select>
-            </Flex>
-            {errors.weightInit && <Text color="red" variants="Small">enter weightInit</Text>}
-          </Flex>
-
-        </div>
-        <Button variants="Small" width="10rem" padding="1rem">Add</Button>
-      </Flex>
+      <Button variants="Small" width="10rem" padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
     </form>
   )
 }
 
-export default Affine
+export default CNN

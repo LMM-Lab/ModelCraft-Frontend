@@ -5,6 +5,8 @@ import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import Affine from "./LayerDialog/Affine";
 import CNN from "./LayerDialog/CNN";
+import Pooling from "./LayerDialog/Pooling";
+import LossFunc from "./LayerDialog/LossFunc";
 
 const BackDiv = styled.div`
   width:100vw;
@@ -48,6 +50,7 @@ const AddLayer = () => {
               <option value="Affine">Affine</option>
               <option value="CNN">CNN</option>
               <option value="Pooling">Pooling</option>
+              <option value="LossFunc">LossFunc</option>
             </Select>
             {(layer === 'Affine') && (
               <Affine></Affine>
@@ -56,7 +59,10 @@ const AddLayer = () => {
               <CNN></CNN>
             )}
             {(layer === 'Pooling') && (
-              <Affine></Affine>
+              <Pooling></Pooling>
+            )}
+            {(layer === 'LossFunc') && (
+              <LossFunc></LossFunc>
             )}
           </Dialog>
         </div>

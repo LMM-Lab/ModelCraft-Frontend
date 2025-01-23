@@ -12,7 +12,7 @@ type DialogCSSProps={
 const DialogCSS=styled.dialog<DialogCSSProps>`
   width:${({width='400px'})=>width};
   height:${({height='auto'})=>height};
-  min-height:300px;
+  min-height:100px;
   border-radius:${({$borderRadius='5px'})=>$borderRadius};
   border:${({$border='1px solid#333'})=>$border};
   background-color:${({theme,$backgroundColor})=>theme.colors.background||$backgroundColor};
