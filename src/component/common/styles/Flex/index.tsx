@@ -12,6 +12,7 @@ type FlexProps={
   $gap?:string
   $row_gap?:string
   $column_gap?:string
+  $flexBasis?:string
 }
 
 const Flex=styled(Box)<FlexProps>`
@@ -25,6 +26,7 @@ const Flex=styled(Box)<FlexProps>`
   row-gap:${({$row_gap})=>$row_gap};
   column-gap:${({$column_gap})=>$column_gap};
   display:flex;
+  flex-basis:${({$flexBasis})=>$flexBasis};
 `
 
 export default Flex

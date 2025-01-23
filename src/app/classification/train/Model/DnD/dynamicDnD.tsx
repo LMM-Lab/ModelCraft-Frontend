@@ -8,6 +8,11 @@ import Sortable from "./Sortable";
 import Layer from "../Layer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import BentArrow from "./BentArrow";
+import Arrow from '@/public/images/Arrow.svg'
+import Image from "next/image";
+import styled from "styled-components";
+import { BoxProps } from "@/component/common/styles/Box";
 
 const DynamicDnD = () => {
   const [items, setItems] = useState(
@@ -21,6 +26,14 @@ const DynamicDnD = () => {
         { id: '6' },
         { id: '7' },
         { id: '8' },
+        { id: '9' },
+        { id: '10' },
+        { id: '11' },
+        { id: '12' },
+        { id: '13' },
+        { id: '14' },
+        { id: '15' },
+        { id: '16' },
       ],
     },
   )
@@ -41,18 +54,22 @@ const DynamicDnD = () => {
   }
 
   return (
-    <div style={{width:'91.5rem'}}>
+    <div style={{margin:'3rem 0 3rem 0'}}>
       <DndContext onDragEnd={handleDragEnd}>
         <SortableContext items={items.cards}>
           <Flex $flex_wrap="wrap">
             {items.cards.map((item, index) => (
-              <Flex $align_items="center" key={item.id}>
-                <Sortable id={item.id}>
-                  <Layer name="Affine" input="120×120×3" output="245×120×3" />
-                </Sortable>
-                {index < items.cards.length - 1 && !(index === 4) && (
-                  <FontAwesomeIcon icon={faAngleRight} style={{ fontSize: '2rem', margin: '0 0.8rem' }} />
-                )}
+              <Flex key={item.id} $flex_direction="column" $marginTop="1rem" >
+                <Flex $align_items="center">
+                {(index === 0) ?  (
+                    <FontAwesomeIcon icon={faAngleRight} style={{ fontSize: '2rem', margin: '0 0.8rem',color:'white'}} />
+                  ):(
+                    <FontAwesomeIcon icon={faAngleRight} style={{ fontSize: '2rem', margin: '0 0.8rem' }} />
+                  )}
+                  <Sortable id={item.id}>
+                    <Layer name="Affine" input="120×120×3" output="245×120×3" />
+                  </Sortable>
+                </Flex>
               </Flex>
             ))}
           </Flex>
