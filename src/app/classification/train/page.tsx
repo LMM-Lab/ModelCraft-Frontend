@@ -4,6 +4,7 @@ import Text from "@/component/common/Text";
 import DnD from "@/component/crassificationTrain/DnD";
 import styled from "styled-components";
 import AddLayer from "./AddLayer";
+import ModelSetting from "./ModelSetting";
 
 
 const Train=()=>{
@@ -15,7 +16,7 @@ const Train=()=>{
         <Text variants="Medium">Model</Text>
         <Flex $flex_direction="column" $justify_content="flex-start" $align_items="flex-start">
           <AddLayer></AddLayer>
-          <Button backcolor="transparent" color="black" height="2rem">+ Model Setting</Button>
+          <ModelSetting></ModelSetting>
         </Flex>
       </Flex>
       <DnD></DnD>

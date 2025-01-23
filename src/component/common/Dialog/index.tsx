@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 import styled from "styled-components";
 
 type DialogCSSProps={
@@ -7,6 +8,7 @@ type DialogCSSProps={
   $border?:string
   $backgroundColor?:string
   children?:React.ReactNode
+  onClick?:((event:MouseEvent<HTMLDivElement>)=>void)
 }
 
 const DialogCSS=styled.dialog<DialogCSSProps>`
@@ -18,9 +20,23 @@ const DialogCSS=styled.dialog<DialogCSSProps>`
   background-color:${({theme,$backgroundColor})=>theme.colors.background||$backgroundColor};
 `
 
+const Div = styled.div`
+  width:100vw;
+  height:100vh;
+  position:fixed;
+  top:0;
+  left:0;
+  background-color:#d5d5d5;
+  opacity:50%;
+`
+
 const Dialog=(props:DialogCSSProps)=>{
+  const {onClick,...rest}=props
   return (
-    <DialogCSS open {...props}>{props.children}</DialogCSS>
+    <div>
+      <Div onClick={onClick}></Div>
+      <DialogCSS open {...rest}>{props.children}</DialogCSS>
+    </div>
   )
 }
 

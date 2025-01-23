@@ -24,6 +24,7 @@ type ButtonProps={
   $marginBottom?:string
   type?:string
   display?:string
+  border?:string
 }
 
 const Button=styled.button<ButtonProps>`
@@ -83,7 +84,7 @@ const Button=styled.button<ButtonProps>`
   width:${({width})=>width};
   height:${({height})=>height};
   color:${({color='White'})=>color};
-  border:none;
+  border:${({border='none'})=>border};
   display:${({display='inline-block'})=>display};
   cursor: pointer;
   &:hover{
