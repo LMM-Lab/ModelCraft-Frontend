@@ -3,18 +3,18 @@ import styled,{css} from "styled-components"
 
 type ButtonProps={
   onClick?:(event: React.ChangeEvent<HTMLInputElement>) => void;
-  width?:string
-  height?:string
+  $width?:string
+  $height?:string
   $backColor?:string
   $variants?:'Small'|'Medium'|'Large'|'Icon'|'nav'
   children?:React.ReactNode
-  borderRadius?:string
+  $borderRadius?:string
   $padding?:string
   $paddingTop?:string
   $paddingRight?:string
   $paddingLeft?:string
   $paddingBottom?:string
-  fontSize?:string
+  $fontSize?:string
   $isactive?:boolean
   $margin?:string
   $marginTop?:string
@@ -22,7 +22,7 @@ type ButtonProps={
   $marginLeft?:string
   $marginBottom?:string
   type?:string
-  display?:string
+  $display?:string
   $border?:string
 }
 
@@ -78,13 +78,13 @@ const Button=styled.button<ButtonProps>`
   margin-right:${({$marginRight})=>$marginRight};
   margin-left:${({$marginLeft})=>$marginLeft};
   margin-bottom:${({$marginBottom})=>$marginBottom};
-  font-size:${({fontSize})=>fontSize};
-  border-radius:${({borderRadius='4px'})=>borderRadius};
-  width:${({width})=>width};
-  height:${({height})=>height};
+  font-size:${({$fontSize})=>$fontSize};
+  border-radius:${({$borderRadius='4px'})=>$borderRadius};
+  width:${({$width})=>$width};
+  height:${({$height})=>$height};
   color:${({color='White'})=>color};
   border:${({$border='none'})=>$border};
-  display:${({display='inline-block'})=>display};
+  display:${({$display='inline-block'})=>$display};
   cursor: pointer;
   &:hover{
     background-color:white;

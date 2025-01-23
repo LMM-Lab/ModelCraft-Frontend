@@ -23,7 +23,7 @@ const AddLayer = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
   }
   return (
     <div>
-      <Button $border={`1px solid${theme.colors.background}`} $backColor="transparent" color="black" height="2rem" onClick={toggleOpen}>+ Add Layer</Button>
+      <Button $border={`1px solid${theme.colors.background}`} $backColor="transparent" color="black" $height="2rem" onClick={toggleOpen}>+ Add Layer</Button>
       {isOpend && (
         <div>
           <Dialog width="40rem" onClick={toggleOpen}>

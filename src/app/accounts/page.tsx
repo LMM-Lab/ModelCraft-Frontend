@@ -27,7 +27,7 @@ const Accounts = () => {
           <UserNameInput onChange={handleUserName}>{userName}</UserNameInput>
         </Flex>
         <Button $marginTop="5rem" $variants="Medium">logout</Button>
-        <Button $marginTop="18rem" $backColor="transparent" color="#000000" fontSize="1.5rem">delete account</Button>
+        <Button $marginTop="18rem" $backColor="transparent" color="#000000" $fontSize="1.5rem">delete account</Button>
       </Flex>
     </div>
   )
