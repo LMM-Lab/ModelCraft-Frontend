@@ -39,7 +39,7 @@ const ModelSetting = () => {
       <Button onClick={toggleOpen} $border={`1px solid#ffffff`} $padding="0.1rem 0.5rem 2.2rem 0" $backColor="transparent" color="black" $height="2rem">+ Model Setting</Button>
       {isOpen && (
         <Dialog onClick={toggleOpen}>
-          <Text margin="2rem 0 0 2rem">Model Setting</Text>
+          <Text $margin="2rem 0 0 2rem">Model Setting</Text>
           <InputParam name="model name" $marginTop="5rem">
             <Input {...register('modelName', { required: 'enter modelName' })} variants="params" type="text"></Input>
             {errors.modelName && <Text $variants="Small">{errors.modelName.message}</Text>}

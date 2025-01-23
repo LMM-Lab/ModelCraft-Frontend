@@ -3,15 +3,22 @@ import styled, { css } from "styled-components";
 
 type TextProps={
   $variants?:'ExtraSmall'|'Small'|'Medium'|'Large'|'ExtraLarge'
-  fontSize?:string
-  color?:string
-  fontWeight?:string
-  letterSpacing?:string
-  margin?:string
-  padding?:string
+  $fontSize?:string
+  $fontWeight?:string
+  $letterSpacing?:string
+  $fontFamily?:string
+  $width?:string
+  $height?:string
+  $padding?:string
+  $paddingTop?:string
+  $paddingRight?:string
+  $paddingLeft?:string
+  $paddingBottom?:string
+  $margin?:string
   $marginTop?:string
-  fontFamily?:string
-  width?:string
+  $marginRight?:string
+  $marginLeft?:string
+  $marginBottom?:string
 }
 
 const Text=styled.p<TextProps>`
@@ -49,15 +56,22 @@ const Text=styled.p<TextProps>`
         `
     }
   }}
-  color:${({color})=>color};
-  width:${({width})=>width};
-  font-size:${({fontSize})=>fontSize};
-  font-weight:${({fontWeight})=>fontWeight};
-  letter-spacing:${({letterSpacing})=>letterSpacing};
-  margin:${({margin})=>margin};
-  margin-top:${({$marginTop})=>$marginTop};
-  padding:${({padding})=>padding};
-  font-family:${({fontFamily})=>fontFamily};
+  font-size: ${({ $fontSize }) => $fontSize};
+  font-weight: ${({ $fontWeight }) => $fontWeight};
+  letter-spacing: ${({ $letterSpacing }) => $letterSpacing};
+  font-family: ${({ $fontFamily }) => $fontFamily};
+  width: ${({ $width }) => $width};
+  height: ${({ $height }) => $height};
+  padding: ${({ $padding }) => $padding};
+  padding-top: ${({ $paddingTop }) => $paddingTop};
+  padding-right: ${({ $paddingRight }) => $paddingRight};
+  padding-left: ${({ $paddingLeft }) => $paddingLeft};
+  padding-bottom: ${({ $paddingBottom }) => $paddingBottom};
+  margin: ${({ $margin }) => $margin};
+  margin-top: ${({ $marginTop }) => $marginTop};
+  margin-right: ${({ $marginRight }) => $marginRight};
+  margin-left: ${({ $marginLeft }) => $marginLeft};
+  margin-bottom: ${({ $marginBottom }) => $marginBottom};
   display:inline-block;
 `
 

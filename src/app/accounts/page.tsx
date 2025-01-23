@@ -20,7 +20,7 @@ const Accounts = () => {
   }
   return (
     <div>
-      <Text $variants="ExtraLarge" margin="5rem 0 0 10rem">Accounts</Text>
+      <Text $variants="ExtraLarge" $margin="5rem 0 0 10rem">Accounts</Text>
       <Flex $marginTop="15rem" $flex_direction="column" $justify_content="center" $align_items="center">
         <Flex>
           <InputImage onFile={handleIcon}></InputImage>
