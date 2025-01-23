@@ -2,28 +2,18 @@
 import Button from "@/component/common/Button";
 import Dialog from "@/component/common/Dialog";
 import { ChangeEvent, useState } from "react";
-import styled from "styled-components";
 import Affine from "./LayerDialog/Affine";
 import CNN from "./LayerDialog/CNN";
 import Pooling from "./LayerDialog/Pooling";
 import LossFunc from "./LayerDialog/LossFunc";
 import Select from "@/component/common/Select";
-
-const Div = styled.div`
-  width:100vw;
-  height:100vh;
-  position:fixed;
-  top:0;
-  left:0;
-  background-color:#d5d5d5;
-  opacity:50%;
-`
+import theme from "@/styles/theme";
 
 const AddLayer = () => {
   const [isOpend, setIsOpend] = useState(false)
   const [layer, setLayer] = useState<string>('')
 
-  const openDialog = () => {
+  const toggleOpen = () => {
     setIsOpend((isOpend) => !isOpend)
     setLayer('Affine')
   }
@@ -32,11 +22,10 @@ const AddLayer = () => {
   }
   return (
     <div>
-      <Button backcolor="transparent" color="black" height="2rem" onClick={openDialog}>+ Add Layer</Button>
+      <Button border={`1px solid${theme.colors.background}`} backcolor="transparent" color="black" height="2rem" onClick={toggleOpen}>+ Add Layer</Button>
       {isOpend && (
         <div>
-          <Div onClick={openDialog}></Div>
-          <Dialog width="40rem">
+          <Dialog width="40rem" onClick={toggleOpen}>
             <Select variants="param" $width="11rem" $marginTop="1rem" defaultValue={'Affine'} onChange={handleSelect}>
               <option value="Affine">Affine</option>
               <option value="CNN">CNN</option>
