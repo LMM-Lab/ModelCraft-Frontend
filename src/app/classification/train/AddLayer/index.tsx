@@ -32,7 +32,7 @@ const AddLayer = () => {
 
   const openDialog = () => {
     setIsOpend((isOpend) => !isOpend)
-    setLayer('')
+    setLayer('Affine')
   }
   const handleSelect = (event: ChangeEvent<HTMLSelectElement>) => {
     setLayer(event.target.value)
@@ -44,8 +44,7 @@ const AddLayer = () => {
         <div>
           <BackDiv onClick={openDialog}></BackDiv>
           <Dialog width="40rem">
-            <Select onChange={handleSelect}>
-              <option value=''></option>
+            <Select defaultValue={'Affine'} onChange={handleSelect}>
               <option value="Affine">Affine</option>
               <option value="CNN">CNN</option>
               <option value="Pooling">Pooling</option>
