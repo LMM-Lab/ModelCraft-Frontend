@@ -8,11 +8,6 @@ import Sortable from "./Sortable";
 import Layer from "../Layer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import BentArrow from "./BentArrow";
-import Arrow from '@/public/images/Arrow.svg'
-import Image from "next/image";
-import styled from "styled-components";
-import { BoxProps } from "@/component/common/styles/Box";
 
 const DynamicDnD = () => {
   const [items, setItems] = useState(

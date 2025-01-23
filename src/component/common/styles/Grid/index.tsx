@@ -2,34 +2,34 @@ import styled from "styled-components";
 import Box from "../Box";
 
 type GridProps = {
-  grid_template_columns?: string;
-  grid_template_rows?: string;
-  grid_template_areas?: string;
-  grid_auto_columns?: string;
-  grid_auto_rows?: string;
-  grid_auto_flow?: string;
-  justify_items?: string;
-  align_items?: string;
-  place_items?: string;
-  justify_content?: string;
-  align_content?: string;
-  place_content?: string;
+  $gridTemplateColumns?: string;
+  $gridTemplateRows?: string;
+  $gridTemplateAreas?: string;
+  $gridAutoColumns?: string;
+  $gridAutoRows?: string;
+  $gridAutoFlow?: string;
+  $justifyItems?: string;
+  $alignItems?: string;
+  $placeItems?: string;
+  $justifyContent?: string;
+  $alignContent?: string;
+  $placeContent?: string;
 };
 
 const Grid = styled(Box)<GridProps>`
   display: grid;
-  grid-template-columns: ${({ grid_template_columns }) => grid_template_columns};
-  grid-template-rows: ${({ grid_template_rows }) => grid_template_rows};
-  grid-template-areas: ${({ grid_template_areas }) => grid_template_areas};
-  grid-auto-columns: ${({ grid_auto_columns }) => grid_auto_columns};
-  grid-auto-rows: ${({ grid_auto_rows }) => grid_auto_rows};
-  grid-auto-flow: ${({ grid_auto_flow }) => grid_auto_flow};
-  justify-items: ${({ justify_items }) => justify_items};
-  align-items: ${({ align_items }) => align_items};
-  place-items: ${({ place_items }) => place_items};
-  justify-content: ${({ justify_content }) => justify_content};
-  align-content: ${({ align_content }) => align_content};
-  place-content: ${({ place_content }) => place_content};
+  grid-template-columns: ${({ $gridTemplateColumns }) => $gridTemplateColumns};
+  grid-template-rows: ${({ $gridTemplateRows }) => $gridTemplateRows};
+  grid-template-areas: ${({ $gridTemplateAreas }) => $gridTemplateAreas};
+  grid-auto-columns: ${({ $gridAutoColumns }) => $gridAutoColumns};
+  grid-auto-rows: ${({ $gridAutoRows }) => $gridAutoRows};
+  grid-auto-flow: ${({ $gridAutoFlow }) => $gridAutoFlow};
+  justify-items: ${({ $justifyItems }) => $justifyItems};
+  align-items: ${({ $alignItems }) => $alignItems};
+  place-items: ${({ $placeItems }) => $placeItems};
+  justify-content: ${({ $justifyContent }) => $justifyContent};
+  align-content: ${({ $alignContent }) => $alignContent};
+  place-content: ${({ $placeContent }) => $placeContent};
 `;
 
 

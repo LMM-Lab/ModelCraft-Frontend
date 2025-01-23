@@ -20,14 +20,14 @@ const Accounts = () => {
   }
   return (
     <div>
-      <Text variants="ExtraLarge" margin="5rem 0 0 10rem">Accounts</Text>
+      <Text $variants="ExtraLarge" margin="5rem 0 0 10rem">Accounts</Text>
       <Flex $marginTop="15rem" $flex_direction="column" $justify_content="center" $align_items="center">
         <Flex>
           <InputImage onFile={handleIcon}></InputImage>
           <UserNameInput onChange={handleUserName}>{userName}</UserNameInput>
         </Flex>
-        <Button $marginTop="5rem" variants="Medium">logout</Button>
-        <Button $marginTop="18rem" backcolor="transparent" color="#000000" fontSize="1.5rem">delete account</Button>
+        <Button $marginTop="5rem" $variants="Medium">logout</Button>
+        <Button $marginTop="18rem" $backColor="transparent" color="#000000" fontSize="1.5rem">delete account</Button>
       </Flex>
     </div>
   )

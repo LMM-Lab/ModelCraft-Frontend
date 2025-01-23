@@ -33,15 +33,15 @@ const Div=styled.div<DivProps>`
 const Layer=({name,input,output}:LayerProps)=>{
   return(
     <DivContainer>
-      <Div><Text variants="Medium" fontSize="2rem">{name}</Text></Div>
+      <Div><Text $variants="Medium" fontSize="2rem">{name}</Text></Div>
       <Flex $justify_content="space-around" $align_items="center">
         <Flex $flex_direction="column" $justify_content="center" $align_items="center">
-          <Text variants="Small" $marginTop="0.5rem" fontSize="1.5rem">input</Text>
-          <Text variants="Small" $marginTop="0.5rem" letterSpacing="-0.1em" fontFamily='Arial, sans-serif'>{input}</Text>
+          <Text $variants="Small" $marginTop="0.5rem" fontSize="1.5rem">input</Text>
+          <Text $variants="Small" $marginTop="0.5rem" letterSpacing="-0.1em" fontFamily='Arial, sans-serif'>{input}</Text>
         </Flex>
         <Flex $flex_direction="column" $justify_content="center" $align_items="center">
-          <Text variants="Small" $marginTop="0.5rem" fontSize="1.5rem">output</Text>
-          <Text variants="Small" $marginTop="0.5rem" letterSpacing="-0.1em" fontFamily='Arial, sans-serif'>{output}</Text>
+          <Text $variants="Small" $marginTop="0.5rem" fontSize="1.5rem">output</Text>
+          <Text $variants="Small" $marginTop="0.5rem" letterSpacing="-0.1em" fontFamily='Arial, sans-serif'>{output}</Text>
         </Flex>
       </Flex>
     </DivContainer>

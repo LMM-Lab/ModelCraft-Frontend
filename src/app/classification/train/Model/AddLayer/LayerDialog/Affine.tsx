@@ -6,6 +6,7 @@ import Select from "@/component/common/Select";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 import InputParam from "./InputParam";
+import { paramsProps } from "../..";
 
 type FormData = {
   inputSize: number
@@ -14,7 +15,7 @@ type FormData = {
   weightInit: string
 }
 
-const CNN = () => {
+const CNN = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       inputSize:23,
@@ -29,15 +30,15 @@ const CNN = () => {
   const gap = '0.7rem'
 
   return (
-    <form onSubmit={handleSubmit(handleInput)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <InputParam $marginTop="4rem" name="inputSize">
         <Input {...register('inputSize', { required: 'enter kernelSize' })} variants="params" type="number" min={0}></Input>
-        {errors.inputSize && <Text variants="Small" color="red">{errors.inputSize.message}</Text>}
+        {errors.inputSize && <Text $variants="Small" color="red">{errors.inputSize.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="outputSize">
         <Input {...register('outputSize', { required: 'enter poolingSize' })} variants="params" type="number" min={0}></Input>
-        {errors.outputSize && <Text variants="Small" color="red">{errors.outputSize.message}</Text>}
+        {errors.outputSize && <Text $variants="Small" color="red">{errors.outputSize.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="act func">
@@ -46,7 +47,7 @@ const CNN = () => {
           <option value="Sigmoid">Sigmoid</option>
           <option value="Relu">Relu</option>
         </Select>
-        {errors.actFunc && <Text variants="Small" color="red">{errors.actFunc.message}</Text>}
+        {errors.actFunc && <Text $variants="Small" color="red">{errors.actFunc.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="weight init">
@@ -57,10 +58,10 @@ const CNN = () => {
           <option value="Xavier">Xavier</option>
           <option value="He">He</option>
         </Select>
-        {errors.weightInit && <Text variants="Small" color="red">{errors.weightInit.message}</Text>}
+        {errors.weightInit && <Text $variants="Small" color="red">{errors.weightInit.message}</Text>}
       </InputParam>
 
-      <Button variants="Small" width="10rem" padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
+      <Button $variants="Small" width="10rem" $padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
     </form>
   )
 }

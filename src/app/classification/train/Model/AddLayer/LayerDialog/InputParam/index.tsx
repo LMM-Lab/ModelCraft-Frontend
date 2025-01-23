@@ -18,7 +18,7 @@ const InputParam = ({ children, $marginTop, $marginRight = '6rem',name }: InputP
   return (
     <Flex $marginTop={$marginTop} $marginRight={$marginRight} $flex_direction="column" $align_items="flex-end">
       <Flex $justify_content="flex-end" $align_items="center">
-        <Text variants="Medium">{name}</Text>
+        <Text $variants="Medium">{name}</Text>
         {children0}
       </Flex>
       {children1}

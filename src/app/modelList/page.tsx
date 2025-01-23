@@ -4,7 +4,7 @@ import styled from "styled-components";
 const ModelList=()=>{
   return (
     <div>
-        <Text variants="ExtraLarge">ModelList</Text>
+        <Text $variants="ExtraLarge">ModelList</Text>
     </div>
   )
 

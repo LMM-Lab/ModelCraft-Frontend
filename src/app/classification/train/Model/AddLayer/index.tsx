@@ -8,8 +8,9 @@ import Pooling from "./LayerDialog/Pooling";
 import LossFunc from "./LayerDialog/LossFunc";
 import Select from "@/component/common/Select";
 import theme from "@/styles/theme";
+import { paramsProps } from "..";
 
-const AddLayer = () => {
+const AddLayer = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
   const [isOpend, setIsOpend] = useState(false)
   const [layer, setLayer] = useState<string>('')
 
@@ -22,7 +23,7 @@ const AddLayer = () => {
   }
   return (
     <div>
-      <Button border={`1px solid${theme.colors.background}`} backcolor="transparent" color="black" height="2rem" onClick={toggleOpen}>+ Add Layer</Button>
+      <Button $border={`1px solid${theme.colors.background}`} $backColor="transparent" color="black" height="2rem" onClick={toggleOpen}>+ Add Layer</Button>
       {isOpend && (
         <div>
           <Dialog width="40rem" onClick={toggleOpen}>
@@ -33,7 +34,7 @@ const AddLayer = () => {
               <option value="LossFunc">LossFunc</option>
             </Select>
             {(layer === 'Affine') && (
-              <Affine></Affine>
+              <Affine onSubmit={onSubmit}></Affine>
             )}
             {(layer === 'CNN') && (
               <CNN></CNN>

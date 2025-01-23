@@ -26,15 +26,15 @@ const Pooling = () => {
     <form onSubmit={handleSubmit(handleInput)}>
       <InputParam $marginTop="4rem" name="poolingSize">
         <Input {...register('poolingSize', { required: 'enter kernelSize' })} variants="params" type="number" min={0}></Input>
-        {errors.poolingSize && <Text variants="Small" color="red">{errors.poolingSize.message}</Text>}
+        {errors.poolingSize && <Text $variants="Small" color="red">{errors.poolingSize.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="stride">
         <Input {...register('poolingSize', { required: 'enter poolingSize' })} variants="params" type="number" min={0}></Input>
-        {errors.stride && <Text variants="Small" color="red">{errors.stride.message}</Text>}
+        {errors.stride && <Text $variants="Small" color="red">{errors.stride.message}</Text>}
       </InputParam>
 
-      <Button variants="Small" width="10rem" padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
+      <Button $variants="Small" width="10rem" $padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
     </form>
   )
 }

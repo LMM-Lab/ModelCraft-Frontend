@@ -36,28 +36,28 @@ const ModelSetting = () => {
   const gap = '0.7rem'
   return (
     <div>
-      <Button onClick={toggleOpen} border={`1px solid#ffffff`} $padding="0.1rem 0.5rem 2.2rem 0" backcolor="transparent" color="black" height="2rem">+ Model Setting</Button>
+      <Button onClick={toggleOpen} $border={`1px solid#ffffff`} $padding="0.1rem 0.5rem 2.2rem 0" $backColor="transparent" color="black" height="2rem">+ Model Setting</Button>
       {isOpen && (
         <Dialog onClick={toggleOpen}>
           <Text margin="2rem 0 0 2rem">Model Setting</Text>
           <InputParam name="model name" $marginTop="5rem">
             <Input {...register('modelName', { required: 'enter modelName' })} variants="params" type="text"></Input>
-            {errors.modelName && <Text variants="Small">{errors.modelName.message}</Text>}
+            {errors.modelName && <Text $variants="Small">{errors.modelName.message}</Text>}
           </InputParam>
 
           <InputParam name="epock" $marginTop={gap}>
             <Input {...register('epock', { required: 'enter epock' })} variants="params" type="number" min={0}></Input>
-            {errors.epock && <Text variants="Small">{errors.epock.message}</Text>}
+            {errors.epock && <Text $variants="Small">{errors.epock.message}</Text>}
           </InputParam>
 
           <InputParam name="batchSize" $marginTop={gap}>
             <Input {...register('batchSize', { required: 'enter batchSize' })} variants="params" type="number" min={0}></Input>
-            {errors.batchSize && <Text variants="Small">{errors.batchSize.message}</Text>}
+            {errors.batchSize && <Text $variants="Small">{errors.batchSize.message}</Text>}
           </InputParam>
 
           <InputParam name="learningRate" $marginTop={gap}>
             <Input {...register('learningRate', { required: 'enter learningRate' })} variants="params" type="number" min={0}></Input>
-            {errors.learningRate && <Text variants="Small">{errors.learningRate.message}</Text>}
+            {errors.learningRate && <Text $variants="Small">{errors.learningRate.message}</Text>}
           </InputParam>
 
           <InputParam name="optimizer" $marginTop={gap}>
@@ -69,7 +69,7 @@ const ModelSetting = () => {
               <option value="RMSProp">RMSProp</option>
               <option value="Adam">Adam </option>
             </Select>
-            {errors.optimizer && <Text variants="Small">{errors.optimizer.message}</Text>}
+            {errors.optimizer && <Text $variants="Small">{errors.optimizer.message}</Text>}
           </InputParam>
 
           <InputParam name="val size" $marginTop={gap}>
@@ -86,9 +86,9 @@ const ModelSetting = () => {
               <option value="90%">90%</option>
               <option value="100%">100%</option>
             </Select>
-            {errors.valSize && <Text variants="Small">{errors.valSize.message}</Text>}
+            {errors.valSize && <Text $variants="Small">{errors.valSize.message}</Text>}
           </InputParam>
-          <Button variants="Small" width="10rem" padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
+          <Button $variants="Small" width="10rem" $padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
         </Dialog>
       )}
     </div>
