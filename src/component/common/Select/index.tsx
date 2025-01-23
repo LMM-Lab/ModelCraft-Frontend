@@ -23,14 +23,14 @@ type SelectProps=React.SelectHTMLAttributes<HTMLSelectElement>&{
   $paddingLeft?: string
   $borderButton?:string
   $borderRadius?:string
-  variants?:'param'
+  $variants?:'param'
   placeholder?:string
   $textAlign?:string
 }
 
 const SelectCSS=styled.select<SelectProps>`
-  ${({variants})=>{
-    switch(variants){
+  ${({$variants})=>{
+    switch($variants){
       case 'param':
         return css`
           width:150px;

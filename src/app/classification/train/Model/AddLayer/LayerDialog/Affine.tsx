@@ -32,17 +32,17 @@ const CNN = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <InputParam $marginTop="4rem" name="inputSize">
-        <Input {...register('inputSize', { required: 'enter kernelSize' })} variants="params" type="number" min={0}></Input>
+        <Input {...register('inputSize', { required: 'enter kernelSize' })} $variants="params" type="number" min={0}></Input>
         {errors.inputSize && <Text $variants="Small" color="red">{errors.inputSize.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="outputSize">
-        <Input {...register('outputSize', { required: 'enter poolingSize' })} variants="params" type="number" min={0}></Input>
+        <Input {...register('outputSize', { required: 'enter poolingSize' })} $variants="params" type="number" min={0}></Input>
         {errors.outputSize && <Text $variants="Small" color="red">{errors.outputSize.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="act func">
-        <Select variants="param" {...register('actFunc', { required: 'enter act func' })}>
+        <Select $variants="param" {...register('actFunc', { required: 'enter act func' })}>
           <option value=""></option>
           <option value="Sigmoid">Sigmoid</option>
           <option value="Relu">Relu</option>
@@ -51,7 +51,7 @@ const CNN = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
       </InputParam>
 
       <InputParam $marginTop={gap} name="weight init">
-        <Select variants="param" {...register('weightInit', { required: 'enter weight init' })}>
+        <Select $variants="param" {...register('weightInit', { required: 'enter weight init' })}>
           <option value=""></option>
           <option value="Zelo">Zelo</option>
           <option value="Ramdom">Ramdom</option>

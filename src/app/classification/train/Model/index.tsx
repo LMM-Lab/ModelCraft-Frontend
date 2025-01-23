@@ -41,8 +41,10 @@ const Model = () => {
   const [params,setParams]=useState<paramsProps[]>([])
 
   const addParams=(param:paramsProps)=>{
-    setParams((prev)=>[...prev,param])
-    console.log(params)
+    setParams((prev)=>{
+      console.log(params)
+      return [...prev,param]
+    })
   }
 
   

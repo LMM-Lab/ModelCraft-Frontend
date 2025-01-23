@@ -24,15 +24,15 @@ type InputProps=React.InputHTMLAttributes<HTMLInputElement>&{
   $paddingLeft?: string
   $borderButton?:string
   $borderRadius?:string
-  variants?:'default'|'serch'|'params'
+  $variants?:'default'|'serch'|'params'
   onChange?:(event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?:string
   $textAlign?:string
 }
 
 const InputCSS=styled.input<InputProps>`
-  ${({variants,theme})=>{
-    switch (variants){
+  ${({$variants,theme})=>{
+    switch ($variants){
       case 'default':
         return css`
           width:48rem;
