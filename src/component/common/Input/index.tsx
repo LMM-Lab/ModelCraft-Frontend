@@ -1,6 +1,6 @@
 'use client'
 import styled, { css } from "styled-components";
-import React from "react";
+import React, { forwardRef } from "react";
 
 type InputProps=React.InputHTMLAttributes<HTMLInputElement>&{
   $color?: string
@@ -80,7 +80,7 @@ const InputCSS=styled.input<InputProps>`
   }
 `
 
-const Input=React.forwardRef<HTMLInputElement,InputProps>(
+const Input=forwardRef<HTMLInputElement,InputProps>(
   (props,ref)=>{
     return <InputCSS ref={ref} {...props}/>
   })

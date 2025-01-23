@@ -7,8 +7,9 @@ import Affine from "./LayerDialog/Affine";
 import CNN from "./LayerDialog/CNN";
 import Pooling from "./LayerDialog/Pooling";
 import LossFunc from "./LayerDialog/LossFunc";
+import Select from "@/component/common/Select";
 
-const BackDiv = styled.div`
+const Div = styled.div`
   width:100vw;
   height:100vh;
   position:fixed;
@@ -16,16 +17,6 @@ const BackDiv = styled.div`
   left:0;
   background-color:#d5d5d5;
   opacity:50%;
-`
-
-const Select=styled.select`
-  width:80px;
-  height:30px;
-  border-radius:5px;
-  text-align:center;
-  &:focus{
-    outline:none;
-  }
 `
 
 const AddLayer = () => {
@@ -44,9 +35,9 @@ const AddLayer = () => {
       <Button backcolor="transparent" color="black" height="2rem" onClick={openDialog}>+ Add Layer</Button>
       {isOpend && (
         <div>
-          <BackDiv onClick={openDialog}></BackDiv>
+          <Div onClick={openDialog}></Div>
           <Dialog width="40rem">
-            <Select defaultValue={'Affine'} onChange={handleSelect}>
+            <Select variants="param" $width="11rem" $marginTop="1rem" defaultValue={'Affine'} onChange={handleSelect}>
               <option value="Affine">Affine</option>
               <option value="CNN">CNN</option>
               <option value="Pooling">Pooling</option>

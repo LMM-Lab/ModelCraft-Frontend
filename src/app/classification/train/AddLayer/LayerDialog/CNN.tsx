@@ -2,6 +2,7 @@
 import Button from "@/component/common/Button";
 import Input from "@/component/common/Input";
 import Text from "@/component/common/Text";
+import Select from "@/component/common/Select";
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from "styled-components";
 import InputParam from "./InputParam";
@@ -14,19 +15,6 @@ type FormData = {
   actFunc: string
   weightInit: string
 }
-
-const Select = styled.select`
-  width:150px;
-  height:30px;
-  border: 1px solid#333;
-  border-radius:5px;
-  margin-left:1rem;
-  padding-left:0.8rem;
-  font-size:1.5rem;
-  &:focus{
-    outline:none;
-  }
-`
 
 const CNN = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
@@ -67,7 +55,7 @@ const CNN = () => {
       </InputParam>
 
       <InputParam $marginTop={gap} name="act func">
-        <Select {...register('actFunc', { required: 'enter act func' })}>
+        <Select variants="param" {...register('actFunc', { required: 'enter act func' })}>
           <option value=""></option>
           <option value="Sigmoid">Sigmoid</option>
           <option value="Relu">Relu</option>
@@ -76,7 +64,7 @@ const CNN = () => {
       </InputParam>
 
       <InputParam $marginTop={gap} name="weight init">
-        <Select {...register('weightInit', { required: 'enter weight init' })}>
+        <Select variants="param" {...register('weightInit', { required: 'enter weight init' })}>
           <option value=""></option>
           <option value="Zelo">Zelo</option>
           <option value="Ramdom">Ramdom</option>
