@@ -34,7 +34,7 @@ const Pooling = () => {
         {errors.stride && <Text $variants="Small" color="red">{errors.stride.message}</Text>}
       </InputParam>
 
-      <Button $variants="Small" width="10rem" $padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
+      <Button $variants="Small" $width="10rem" $padding="0 1rem" $margin="2rem auto" $display="block">Add</Button>
     </form>
   )
 }

@@ -35,10 +35,10 @@ const SideBar = () => {
         </Link>
         <Flex $justify_content="center" $marginTop="3rem">
           <Link href='/login'>
-            <Button $variants="nav" fontSize={theme.fontSize.Small} height="3rem" $padding="1rem" $isactive={(pathname === '/login')} $marginRight="1rem">login</Button>
+            <Button $variants="nav" $fontSize={theme.fontSize.Small} $height="3rem" $padding="1rem" $isactive={(pathname === '/login')} $marginRight="1rem">login</Button>
           </Link>
           <Link href='/register'>
-            <Button $variants="nav" fontSize={theme.fontSize.Small} height="3rem" $padding="1rem" $isactive={(pathname === '/register')} $marginLeft="1rem">register</Button>
+            <Button $variants="nav" $fontSize={theme.fontSize.Small} $height="3rem" $padding="1rem" $isactive={(pathname === '/register')} $marginLeft="1rem">register</Button>
           </Link>
         </Flex>
       </SideBarCSS>

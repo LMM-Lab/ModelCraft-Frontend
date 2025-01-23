@@ -33,7 +33,7 @@ const LossFunc = () => {
         {errors.lossFunc && <Text $variants="Small" color="red">{errors.lossFunc.message}</Text>}
       </InputParam>
 
-      <Button $variants="Small" width="10rem" $padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
+      <Button $variants="Small" $width="10rem" $padding="0 1rem" $margin="2rem auto" $display="block">Add</Button>
     </form>
   )
 }

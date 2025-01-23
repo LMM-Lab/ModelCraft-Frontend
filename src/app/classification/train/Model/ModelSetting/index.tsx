@@ -36,7 +36,7 @@ const ModelSetting = () => {
   const gap = '0.7rem'
   return (
     <div>
-      <Button onClick={toggleOpen} $border={`1px solid#ffffff`} $padding="0.1rem 0.5rem 2.2rem 0" $backColor="transparent" color="black" height="2rem">+ Model Setting</Button>
+      <Button onClick={toggleOpen} $border={`1px solid#ffffff`} $padding="0.1rem 0.5rem 2.2rem 0" $backColor="transparent" color="black" $height="2rem">+ Model Setting</Button>
       {isOpen && (
         <Dialog onClick={toggleOpen}>
           <Text margin="2rem 0 0 2rem">Model Setting</Text>
@@ -88,7 +88,7 @@ const ModelSetting = () => {
             </Select>
             {errors.valSize && <Text $variants="Small">{errors.valSize.message}</Text>}
           </InputParam>
-          <Button $variants="Small" width="10rem" $padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
+          <Button $variants="Small" $width="10rem" $padding="0 1rem" $margin="2rem auto" $display="block">Add</Button>
         </Dialog>
       )}
     </div>
