@@ -3,26 +3,25 @@ import Button from "@/component/common/Button";
 import Input from "@/component/common/Input";
 import Text from "@/component/common/Text";
 import Select from "@/component/common/Select";
-import { SubmitHandler, useForm } from "react-hook-form";
-import styled from "styled-components";
+import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
+import { paramsProps } from "../..";
 
 type FormData = {
-lossFunc: string
+  model:string
+  lossFunc: string
 }
 
-const LossFunc = () => {
+const LossFunc = ({onSubmit}:{onSubmit:(params:paramsProps)=>void}) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
+      model:'LossFunc',
       lossFunc:'Sigmoid',
     }
   })
-  const handleInput: SubmitHandler<FormData> = (data) => {
-    console.log('data:', data)
-  }
 
   return (
-    <form onSubmit={handleSubmit(handleInput)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
 
       <InputParam $marginTop='4rem' name="lossFunc">
         <Select $variants="param" {...register('lossFunc', { required: 'enter weight init' })}>

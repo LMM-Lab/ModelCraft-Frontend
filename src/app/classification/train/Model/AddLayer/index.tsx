@@ -37,13 +37,13 @@ const AddLayer = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
               <Affine onSubmit={onSubmit}></Affine>
             )}
             {(layer === 'CNN') && (
-              <CNN></CNN>
+              <CNN onSubmit={onSubmit}></CNN>
             )}
             {(layer === 'Pooling') && (
-              <Pooling></Pooling>
+              <Pooling onSubmit={onSubmit}></Pooling>
             )}
             {(layer === 'LossFunc') && (
-              <LossFunc></LossFunc>
+              <LossFunc onSubmit={onSubmit}></LossFunc>
             )}
           </Dialog>
         </div>

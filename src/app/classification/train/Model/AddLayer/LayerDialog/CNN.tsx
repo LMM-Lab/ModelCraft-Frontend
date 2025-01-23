@@ -3,11 +3,12 @@ import Button from "@/component/common/Button";
 import Input from "@/component/common/Input";
 import Text from "@/component/common/Text";
 import Select from "@/component/common/Select";
-import { SubmitHandler, useForm } from "react-hook-form";
-import styled from "styled-components";
+import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
+import { paramsProps } from "../..";
 
 type FormData = {
+  model:string
   kernelSize: number
   poolingSize: number
   paddingSize:number
@@ -16,9 +17,10 @@ type FormData = {
   weightInit: string
 }
 
-const CNN = () => {
+const CNN = ({onSubmit}:{onSubmit:(params:paramsProps)=>void}) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
+      model:'CNN',
       kernelSize:23,
       poolingSize:2,
       paddingSize:2,
@@ -27,13 +29,10 @@ const CNN = () => {
       weightInit:'Zelo',
     }
   })
-  const handleInput: SubmitHandler<FormData> = (data) => {
-    console.log('data:', data)
-  }
   const gap = '0.7rem'
 
   return (
-    <form onSubmit={handleSubmit(handleInput)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <InputParam $marginTop="4rem" name="kernel size">
         <Input {...register('kernelSize', { required: 'enter kernelSize' })} $variants="params" type="number" min={0}></Input>
         {errors.kernelSize && <Text $variants="Small" color="red">{errors.kernelSize.message}</Text>}
