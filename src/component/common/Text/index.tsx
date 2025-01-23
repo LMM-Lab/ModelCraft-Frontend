@@ -19,6 +19,7 @@ type TextProps={
   $marginRight?:string
   $marginLeft?:string
   $marginBottom?:string
+  $color?:string
 }
 
 const Text=styled.p<TextProps>`
@@ -56,6 +57,7 @@ const Text=styled.p<TextProps>`
         `
     }
   }}
+  color: ${({ $color }) => $color};
   font-size: ${({ $fontSize }) => $fontSize};
   font-weight: ${({ $fontWeight }) => $fontWeight};
   letter-spacing: ${({ $letterSpacing }) => $letterSpacing};

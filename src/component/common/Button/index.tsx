@@ -24,6 +24,7 @@ type ButtonProps={
   type?:string
   $display?:string
   $border?:string
+  $color?:string
 }
 
 const Button=styled.button<ButtonProps>`
@@ -82,7 +83,7 @@ const Button=styled.button<ButtonProps>`
   border-radius:${({$borderRadius='4px'})=>$borderRadius};
   width:${({$width})=>$width};
   height:${({$height})=>$height};
-  color:${({color='White'})=>color};
+  color:${({$color='White'})=>$color};
   border:${({$border='none'})=>$border};
   display:${({$display='inline-block'})=>$display};
   cursor: pointer;
