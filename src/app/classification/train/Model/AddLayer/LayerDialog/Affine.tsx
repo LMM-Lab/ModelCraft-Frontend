@@ -3,30 +3,28 @@ import Button from "@/component/common/Button";
 import Input from "@/component/common/Input";
 import Text from "@/component/common/Text";
 import Select from "@/component/common/Select";
-import { SubmitHandler, useForm } from "react-hook-form";
-import styled from "styled-components";
+import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
 import { paramsProps } from "../..";
 
 type FormData = {
+  model:string
   inputSize: number
   outputSize: number
   actFunc: string
   weightInit: string
 }
 
-const CNN = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
+const Affine = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
+      model:'Affine',
       inputSize:23,
       outputSize:2,
       actFunc:'Sigmoid',
       weightInit:'Zelo',
     }
   })
-  const handleInput: SubmitHandler<FormData> = (data) => {
-    console.log('data:', data)
-  }
   const gap = '0.7rem'
 
   return (
@@ -66,4 +64,4 @@ const CNN = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
   )
 }
 
-export default CNN
+export default Affine

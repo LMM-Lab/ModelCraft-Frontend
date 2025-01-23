@@ -6,7 +6,7 @@ import DnD from "@/app/classification/train/Model/DnD";
 import styled from "styled-components";
 import AddLayer from "./AddLayer";
 import ModelSetting from "./ModelSetting";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 type AffineParams={
@@ -41,12 +41,12 @@ const Model = () => {
   const [params,setParams]=useState<paramsProps[]>([])
 
   const addParams=(param:paramsProps)=>{
-    setParams((prev)=>{
-      console.log(params)
-      return [...prev,param]
-    })
+    setParams((prev)=>[...prev,param])
   }
 
+  useEffect(()=>{
+    console.log(params)
+  },[params])
   
   return (
     <Flex $width="95%" $minHeight="360px" $flex_direction="column" $align_items="center" $backgroundColor="White" $borderRadius="15px" $margin="0 auto">
