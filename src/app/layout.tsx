@@ -17,7 +17,7 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
           <ThemeProvider theme={theme}>
             <GlobalStyles />
             <main style={{backgroundColor:theme.colors.background}}>
-              <Grid grid_template_columns="240fr 1043fr">
+              <Grid $gridTemplateColumns="240fr 1043fr">
                 <SideBar />
                 {children}
               </Grid>

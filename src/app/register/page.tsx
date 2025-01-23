@@ -36,7 +36,7 @@ const Register = () => {
 
   return (
     <div>
-      <Text variants="ExtraLarge" margin="5rem 0 0 10rem">Register</Text>
+      <Text $variants="ExtraLarge" margin="5rem 0 0 10rem">Register</Text>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex $flex_direction="column" $marginTop="5rem" $justify_content="center" $align_items="center">
           <Flex>
@@ -50,12 +50,12 @@ const Register = () => {
           <Input
             {...register('email', { required: 'Enter your email' })}
             $marginTop="5rem" variants="default" placeholder="e-mail" $textAlign="center" />
-          {errors.email && <Text color="red" variants="Medium">{errors.email.message}</Text>}
+          {errors.email && <Text color="red" $variants="Medium">{errors.email.message}</Text>}
           <Input
             {...register('password', { required: 'Enter your Password' })}
             $marginTop="1.5rem" variants="default" placeholder="Password" $textAlign="center" />
-          {errors.password && <Text color="red" variants="Medium">{errors.password.message}</Text>}
-          <Button type="submit" $marginTop="5rem" variants="Medium">login</Button>
+          {errors.password && <Text color="red" $variants="Medium">{errors.password.message}</Text>}
+          <Button type="submit" $marginTop="5rem" $variants="Medium">login</Button>
         </Flex>
       </form>
     </div>

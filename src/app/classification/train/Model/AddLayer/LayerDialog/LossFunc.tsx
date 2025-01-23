@@ -30,10 +30,10 @@ const LossFunc = () => {
           <option value="Sigmoid">Sigmoid</option>
           <option value="Relu">Relu</option>
         </Select>
-        {errors.lossFunc && <Text variants="Small" color="red">{errors.lossFunc.message}</Text>}
+        {errors.lossFunc && <Text $variants="Small" color="red">{errors.lossFunc.message}</Text>}
       </InputParam>
 
-      <Button variants="Small" width="10rem" padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
+      <Button $variants="Small" width="10rem" $padding="0 1rem" $margin="2rem auto" display="block">Add</Button>
     </form>
   )
 }

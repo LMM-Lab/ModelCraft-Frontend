@@ -5,11 +5,10 @@ type ButtonProps={
   onClick?:(event: React.ChangeEvent<HTMLInputElement>) => void;
   width?:string
   height?:string
-  backcolor?:string
-  variants?:'Small'|'Medium'|'Large'|'Icon'|'nav'
+  $backColor?:string
+  $variants?:'Small'|'Medium'|'Large'|'Icon'|'nav'
   children?:React.ReactNode
   borderRadius?:string
-  padding?:string
   $padding?:string
   $paddingTop?:string
   $paddingRight?:string
@@ -24,13 +23,13 @@ type ButtonProps={
   $marginBottom?:string
   type?:string
   display?:string
-  border?:string
+  $border?:string
 }
 
 const Button=styled.button<ButtonProps>`
-  background-color:${({backcolor,theme})=>backcolor||theme.colors.Button};
-  ${({variants,theme,$isactive=false})=>{
-    switch (variants){
+  background-color:${({$backColor,theme})=>$backColor||theme.colors.Button};
+  ${({$variants,theme,$isactive=false})=>{
+    switch ($variants){
       case 'Small':
         return css`
           height:30px;
@@ -84,7 +83,7 @@ const Button=styled.button<ButtonProps>`
   width:${({width})=>width};
   height:${({height})=>height};
   color:${({color='White'})=>color};
-  border:${({border='none'})=>border};
+  border:${({$border='none'})=>$border};
   display:${({display='inline-block'})=>display};
   cursor: pointer;
   &:hover{

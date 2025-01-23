@@ -6,7 +6,7 @@ import Text from "@/component/common/Text";
 
 export default function Home() {
   return (
-      <Text variants="ExtraLarge">
+      <Text $variants="ExtraLarge">
         /page
       </Text>
   );
