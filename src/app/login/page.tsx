@@ -20,7 +20,7 @@ const Login = () => {
 
   return (
     <div>
-      <Text $variants="ExtraLarge" margin="5rem 0 0 10rem">Login</Text>
+      <Text $variants="ExtraLarge" $margin="5rem 0 0 10rem">Login</Text>
       <form onSubmit={handleSubmit(onSubmit)}>
       <Flex $flex_direction="column" $marginTop="10rem" $justify_content="center" $align_items="center">
           <Input {...register('mail',{required:'please enter your e-mail'})} $textAlign="center" variants="default" placeholder="e-mail" />

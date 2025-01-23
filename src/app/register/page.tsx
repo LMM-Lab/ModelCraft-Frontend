@@ -36,7 +36,7 @@ const Register = () => {
 
   return (
     <div>
-      <Text $variants="ExtraLarge" margin="5rem 0 0 10rem">Register</Text>
+      <Text $variants="ExtraLarge" $margin="5rem 0 0 10rem">Register</Text>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex $flex_direction="column" $marginTop="5rem" $justify_content="center" $align_items="center">
           <Flex>
