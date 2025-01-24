@@ -11,9 +11,6 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { paramsProps } from "..";
 
 const DynamicDnD = ({params,setParams}:{params:paramsProps[],setParams:(params:paramsProps[])=>void}) => {
-
-  console.log('params',params)
-
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over) return;

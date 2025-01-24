@@ -7,38 +7,40 @@ import styled from "styled-components";
 import AddLayer from "./AddLayer";
 import ModelSetting from "./ModelSetting";
 import { useEffect, useState } from "react";
+import { IOCaculator } from "./DnD/IOCalculator";
 
 
-type AffineParams={
-  model:string
-  id:number
+type AffineParams = {
+  model: string
+  id: number
   inputSize: number
   outputSize: number
+  actFunc?: string
+  weightInit: string
+}
+
+type CNNParams = {
+  model: string
+  id: number
+  filters: number
+  kernel: number
+  stride: number
+  padding: number
   actFunc: string
   weightInit: string
 }
 
-type CNNParams={
-  model:string
-  id:number
-  kernelSize: number
-  poolingSize: number
-  paddingSize:number
-  stride:number
-  actFunc: string
-  weightInit: string
+type PoolingParams = {
+  model: string
+  id: number
+  kernel: number
+  stride: number
+  padding:number
 }
 
-type PoolingParams={
-  model:string
-  id:number
-  poolingSize: number
-  stride:number
-}
-
-type LossFuncParams={
-  model:string
-  id:number
+type LossFuncParams = {
+  model: string
+  id: number
   lossFunc: string
 }
 
@@ -55,7 +57,9 @@ const Model = () => {
   useEffect(()=>{
     // console.log(params)
   },[params])
-  
+
+  console.log('IOCaculator',IOCaculator([28],{model:'Affine',inputSize:28,outputSize:2}))
+
   return (
     <Flex $width="95%" $minHeight="360px" $flex_direction="column" $backgroundColor="White" $borderRadius="15px" $margin="0 auto">
       <Flex $justify_content="space-between" $align_items="center" $width="95%" $height="fit-content" $margin="2rem auto 0 auto">

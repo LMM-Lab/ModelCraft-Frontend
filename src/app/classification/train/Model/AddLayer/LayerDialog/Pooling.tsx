@@ -8,16 +8,18 @@ import { paramsProps } from "../..";
 
 type FormData = {
   model:string
-  poolingSize: number
+  kernel: number
   stride:number
+  padding:number
 }
 
 const Pooling = ({onSubmit,onClick}:{onSubmit:(params:paramsProps)=>void,onClick:()=>void}) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'Pooling',
-      poolingSize:2,
+      kernel:2,
       stride:3,
+      padding:2
     }
   })
   const handleFormSubmit=(data:FormData)=>{
@@ -32,13 +34,13 @@ const Pooling = ({onSubmit,onClick}:{onSubmit:(params:paramsProps)=>void,onClick
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <InputParam $marginTop="4rem" name="poolingSize">
-        <Input {...register('poolingSize', { required: 'enter kernelSize' })} $variants="params" type="number" min={0}></Input>
-        {errors.poolingSize && <Text $variants="Small" color="red">{errors.poolingSize.message}</Text>}
+      <InputParam $marginTop="4rem" name="pooling">
+        <Input {...register('kernel', { required: 'enter kernelSize' })} $variants="params" type="number" min={0}></Input>
+        {errors.kernel && <Text $variants="Small" color="red">{errors.kernel.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="stride">
-        <Input {...register('poolingSize', { required: 'enter poolingSize' })} $variants="params" type="number" min={0}></Input>
+        <Input {...register('stride', { required: 'enter pooling' })} $variants="params" type="number" min={0}></Input>
         {errors.stride && <Text $variants="Small" color="red">{errors.stride.message}</Text>}
       </InputParam>
 
