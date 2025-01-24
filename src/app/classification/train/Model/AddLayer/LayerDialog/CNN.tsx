@@ -5,7 +5,7 @@ import Text from "@/component/common/Text";
 import Select from "@/component/common/Select";
 import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
-import { paramsProps } from "../..";
+import { paramsProps } from "../../types"; 
 
 type FormData = {
   model:string

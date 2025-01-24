@@ -1,16 +1,17 @@
 'use client'
 import dynamic from "next/dynamic";
-import { paramsProps } from "..";
+import { paramsProps,TypeIO } from "../types";
 
 type DnDProps={
-  params:paramsProps[]
-  setParams:(params:paramsProps[])=>void
+  layerIO:TypeIO[]
+  setLayerIO:React.Dispatch<React.SetStateAction<TypeIO[]>>
+  setParams:React.Dispatch<React.SetStateAction<paramsProps[]>>
 }
 
 const DynamicDnD = dynamic(() => import("@/app/classification/train/Model/DnD/dynamicDnD"), { ssr: false });
 
-function DnD({ params,setParams }: DnDProps) {
-  return <DynamicDnD params={params} setParams={setParams} />;
+function DnD({ layerIO,setLayerIO ,setParams}: DnDProps) {
+  return <DynamicDnD layerIO={layerIO} setLayerIO={setLayerIO} setParams={setParams}/>;
 }
 
 export default DnD

@@ -5,7 +5,7 @@ import Text from "@/component/common/Text";
 import Select from "@/component/common/Select";
 import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
-import { paramsProps } from "../..";
+import { paramsProps } from "../../types"; 
 
 type FormData = {
   model:string
@@ -37,12 +37,8 @@ const Affine = ({onSubmit,onClick}:{onSubmit:(param: paramsProps) => void,onClic
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <InputParam $marginTop="4rem" name="inputSize">
-        <Input {...register('inputSize', { required: 'enter kernelSize' })} $variants="params" type="number" min={0}></Input>
-        {errors.inputSize && <Text $variants="Small" color="red">{errors.inputSize.message}</Text>}
-      </InputParam>
 
-      <InputParam $marginTop={gap} name="outputSize">
+      <InputParam $marginTop='4rem' name="outputSize">
         <Input {...register('outputSize', { required: 'enter poolingSize' })} $variants="params" type="number" min={0}></Input>
         {errors.outputSize && <Text $variants="Small" color="red">{errors.outputSize.message}</Text>}
       </InputParam>

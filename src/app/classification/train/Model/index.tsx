@@ -1,64 +1,27 @@
 'use client'
-import Button from "@/component/common/Button";
 import Flex from "@/component/common/styles/Flex";
 import Text from "@/component/common/Text";
 import DnD from "@/app/classification/train/Model/DnD";
-import styled from "styled-components";
 import AddLayer from "./AddLayer";
 import ModelSetting from "./ModelSetting";
 import { useEffect, useState } from "react";
-import { IOCaculator } from "./DnD/IOCalculator";
-
-
-type AffineParams = {
-  model: string
-  id: number
-  inputSize: number
-  outputSize: number
-  actFunc?: string
-  weightInit: string
-}
-
-type CNNParams = {
-  model: string
-  id: number
-  filters: number
-  kernel: number
-  stride: number
-  padding: number
-  actFunc: string
-  weightInit: string
-}
-
-type PoolingParams = {
-  model: string
-  id: number
-  kernel: number
-  stride: number
-  padding:number
-}
-
-type LossFuncParams = {
-  model: string
-  id: number
-  lossFunc: string
-}
-
-export type paramsProps=AffineParams|CNNParams|PoolingParams|LossFuncParams
+import { LayerIOCalculator } from "./DnD/IOCalculator";
+import { TypeIO,paramsProps } from "./types";
 
 const Model = () => {
 
-  const [params,setParams]=useState<paramsProps[]>([])
+  const [params,setParams]=useState<paramsProps[]>([]);
+  const [layerIO, setLayerIO] = useState<TypeIO[]>([]);
 
   const addParams=(param:paramsProps)=>{
     setParams((prev)=>[...prev,param])
   }
 
   useEffect(()=>{
-    // console.log(params)
+    const IO=LayerIOCalculator(params,[28])
+    setLayerIO(IO)
+    console.log('IO',IO)
   },[params])
-
-  console.log('IOCaculator',IOCaculator([28],{model:'Affine',inputSize:28,outputSize:2}))
 
   return (
     <Flex $width="95%" $minHeight="360px" $flex_direction="column" $backgroundColor="White" $borderRadius="15px" $margin="0 auto">
@@ -69,7 +32,7 @@ const Model = () => {
           <ModelSetting></ModelSetting>
         </Flex>
       </Flex>
-      <DnD params={params} setParams={setParams}></DnD>
+      <DnD layerIO={layerIO} setLayerIO={setLayerIO} setParams={setParams}></DnD>
     </Flex>
   )
 }
