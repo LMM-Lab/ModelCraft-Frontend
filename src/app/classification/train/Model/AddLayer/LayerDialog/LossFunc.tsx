@@ -12,16 +12,24 @@ type FormData = {
   lossFunc: string
 }
 
-const LossFunc = ({onSubmit}:{onSubmit:(params:paramsProps)=>void}) => {
+const LossFunc = ({onSubmit,onClick}:{onSubmit:(params:paramsProps)=>void,onClick:()=>void}) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'LossFunc',
       lossFunc:'Sigmoid',
     }
   })
+  const handleFormSubmit=(data:FormData)=>{
+    const params={
+      ...data,
+      id:new Date().getTime()
+    }
+    onSubmit(params)
+    onClick()
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
 
       <InputParam $marginTop='4rem' name="lossFunc">
         <Select $variants="param" {...register('lossFunc', { required: 'enter weight init' })}>

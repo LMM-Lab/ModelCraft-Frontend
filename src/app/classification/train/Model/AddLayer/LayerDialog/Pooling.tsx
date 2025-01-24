@@ -12,7 +12,7 @@ type FormData = {
   stride:number
 }
 
-const Pooling = ({onSubmit}:{onSubmit:(params:paramsProps)=>void}) => {
+const Pooling = ({onSubmit,onClick}:{onSubmit:(params:paramsProps)=>void,onClick:()=>void}) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'Pooling',
@@ -20,10 +20,18 @@ const Pooling = ({onSubmit}:{onSubmit:(params:paramsProps)=>void}) => {
       stride:3,
     }
   })
+  const handleFormSubmit=(data:FormData)=>{
+    const params={
+      ...data,
+      id:new Date().getTime()
+    }
+    onSubmit(params)
+    onClick()
+  }
   const gap = '0.7rem'
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
       <InputParam $marginTop="4rem" name="poolingSize">
         <Input {...register('poolingSize', { required: 'enter kernelSize' })} $variants="params" type="number" min={0}></Input>
         {errors.poolingSize && <Text $variants="Small" color="red">{errors.poolingSize.message}</Text>}

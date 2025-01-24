@@ -17,7 +17,7 @@ type FormData = {
   weightInit: string
 }
 
-const CNN = ({onSubmit}:{onSubmit:(params:paramsProps)=>void}) => {
+const CNN = ({onSubmit,onClick}:{onSubmit:(params:paramsProps)=>void,onClick:()=>void}) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'CNN',
@@ -29,10 +29,18 @@ const CNN = ({onSubmit}:{onSubmit:(params:paramsProps)=>void}) => {
       weightInit:'Zelo',
     }
   })
+  const handleFormSubmit=(data:FormData)=>{
+    const params={
+      ...data,
+      id:new Date().getTime()
+    }
+    onSubmit(params)
+    onClick()
+  }
   const gap = '0.7rem'
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
       <InputParam $marginTop="4rem" name="kernel size">
         <Input {...register('kernelSize', { required: 'enter kernelSize' })} $variants="params" type="number" min={0}></Input>
         {errors.kernelSize && <Text $variants="Small" color="red">{errors.kernelSize.message}</Text>}

@@ -7,9 +7,10 @@ const colors={
   isActive:'#5E626D',
   white:'#ffffff',
   model:{
+    Affine:'#CEE3FF',
     CNN:'#C0DC35',
     Pooling:'#DC9935',
-    Affine:'#CEE3FF'
+    LossFunc:'#E4E4E4',
   }
 }
 

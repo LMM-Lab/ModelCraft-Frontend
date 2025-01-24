@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 
 
 type AffineParams={
+  model:string
+  id:number
   inputSize: number
   outputSize: number
   actFunc: string
@@ -17,6 +19,8 @@ type AffineParams={
 }
 
 type CNNParams={
+  model:string
+  id:number
   kernelSize: number
   poolingSize: number
   paddingSize:number
@@ -26,11 +30,15 @@ type CNNParams={
 }
 
 type PoolingParams={
+  model:string
+  id:number
   poolingSize: number
   stride:number
 }
 
 type LossFuncParams={
+  model:string
+  id:number
   lossFunc: string
 }
 
@@ -45,19 +53,19 @@ const Model = () => {
   }
 
   useEffect(()=>{
-    console.log(params)
+    // console.log(params)
   },[params])
   
   return (
-    <Flex $width="95%" $minHeight="360px" $flex_direction="column" $align_items="center" $backgroundColor="White" $borderRadius="15px" $margin="0 auto">
-      <Flex $justify_content="space-between" $align_items="center" $width="95%" $height="fit-content" $marginTop="2rem">
+    <Flex $width="95%" $minHeight="360px" $flex_direction="column" $backgroundColor="White" $borderRadius="15px" $margin="0 auto">
+      <Flex $justify_content="space-between" $align_items="center" $width="95%" $height="fit-content" $margin="2rem auto 0 auto">
         <Text $variants="Medium">Model</Text>
         <Flex $flex_direction="column" $justify_content="flex-start" $align_items="flex-start">
           <AddLayer onSubmit={addParams}></AddLayer>
           <ModelSetting></ModelSetting>
         </Flex>
       </Flex>
-      <DnD></DnD>
+      <DnD params={params} setParams={setParams}></DnD>
     </Flex>
   )
 }
