@@ -21,7 +21,8 @@ const Sortable=({children,id}:SortableProps)=>{
   const style={
     transform:CSS.Transform.toString(transform),
     transition,
-    backgroundColor:isDragging ? 'green':undefined,
+    backgroundColor:'white',
+    borderRadius:'5px',
   }
 
   return(

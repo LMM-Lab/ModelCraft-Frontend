@@ -10,16 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { paramsProps } from "..";
 
-const DynamicDnD = ({params}:{params:paramsProps[]}) => {
-  const [items, setItems] = useState(
-    {cards: params},
-  )
-  useEffect(() => {
-    setItems({ cards: params });
-  }, [params]);
+const DynamicDnD = ({params,setParams}:{params:paramsProps[],setParams:(params:paramsProps[])=>void}) => {
 
   console.log('params',params)
-  console.log('items',items)
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -30,18 +23,15 @@ const DynamicDnD = ({params}:{params:paramsProps[]}) => {
     const newSortable = over.data.current?.sortable;
     if (!oldSortable || !newSortable) return;
 
-    setItems({
-      ...items,
-      cards: arrayMove(items.cards, oldSortable.index, newSortable.index)
-    })
+    setParams(arrayMove(params,oldSortable.index, newSortable.index))
   }
 
   return (
-    <div style={{margin:'3rem 0 3rem 0'}}>
+    <div style={{width:'97%', margin:'3rem auto'}}>
       <DndContext onDragEnd={handleDragEnd}>
-        <SortableContext items={items.cards}>
+        <SortableContext items={params}>
           <Flex $flex_wrap="wrap">
-            {items.cards.map((item, index) => (
+            {params.map((item, index) => (
               <Flex key={item.id} $flex_direction="column" $marginTop="1rem" >
                 <Flex $align_items="center">
                 {(index === 0) ?  (
@@ -50,7 +40,7 @@ const DynamicDnD = ({params}:{params:paramsProps[]}) => {
                     <FontAwesomeIcon icon={faAngleRight} style={{ fontSize: '2rem', margin: '0 0.8rem' }} />
                   )}
                   <Sortable id={item.id}>
-                    <Layer name="Affine" input={`${100}×${40}×${100}`} output="245×120×3" />
+                    <Layer name={item.model} input={`${100}×${40}×${100}`} output="245×120×3" />
                   </Sortable>
                 </Flex>
               </Flex>

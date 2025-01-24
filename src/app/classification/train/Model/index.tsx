@@ -58,14 +58,14 @@ const Model = () => {
   
   return (
     <Flex $width="95%" $minHeight="360px" $flex_direction="column" $backgroundColor="White" $borderRadius="15px" $margin="0 auto">
-      <Flex $justify_content="space-between" $align_items="center" $width="95%" $height="fit-content" $marginTop="2rem">
+      <Flex $justify_content="space-between" $align_items="center" $width="95%" $height="fit-content" $margin="2rem auto 0 auto">
         <Text $variants="Medium">Model</Text>
         <Flex $flex_direction="column" $justify_content="flex-start" $align_items="flex-start">
           <AddLayer onSubmit={addParams}></AddLayer>
           <ModelSetting></ModelSetting>
         </Flex>
       </Flex>
-      <DnD params={params}></DnD>
+      <DnD params={params} setParams={setParams}></DnD>
     </Flex>
   )
 }
