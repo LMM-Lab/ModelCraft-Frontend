@@ -15,7 +15,7 @@ type FormData = {
   weightInit: string
 }
 
-const Affine = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
+const Affine = ({onSubmit,onClick}:{onSubmit:(param: paramsProps) => void,onClick:()=>void}) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'Affine',
@@ -25,10 +25,18 @@ const Affine = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
       weightInit:'Zelo',
     }
   })
+  const handleFormSubmit=(data:FormData)=>{
+    const params={
+      ...data,
+      id:new Date().getTime()
+    }
+    onSubmit(params)
+    onClick()
+  }
   const gap = '0.7rem'
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
       <InputParam $marginTop="4rem" name="inputSize">
         <Input {...register('inputSize', { required: 'enter kernelSize' })} $variants="params" type="number" min={0}></Input>
         {errors.inputSize && <Text $variants="Small" color="red">{errors.inputSize.message}</Text>}

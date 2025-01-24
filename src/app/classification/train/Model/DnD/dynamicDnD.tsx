@@ -2,36 +2,24 @@
 import { DragEndEvent } from "@dnd-kit/core"
 import { arrayMove, SortableContext } from "@dnd-kit/sortable"
 import { DndContext } from "@dnd-kit/core"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Flex from "@/component/common/styles/Flex"
 import Sortable from "./Sortable";
-import Layer from "../Layer";
+import Layer from "./Layer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { paramsProps } from "..";
 
-const DynamicDnD = () => {
+const DynamicDnD = ({params}:{params:paramsProps[]}) => {
   const [items, setItems] = useState(
-    {
-      cards: [
-        { id: '1' },
-        { id: '2' },
-        { id: '3' },
-        { id: '4' },
-        { id: '5' },
-        { id: '6' },
-        { id: '7' },
-        { id: '8' },
-        { id: '9' },
-        { id: '10' },
-        { id: '11' },
-        { id: '12' },
-        { id: '13' },
-        { id: '14' },
-        { id: '15' },
-        { id: '16' },
-      ],
-    },
+    {cards: params},
   )
+  useEffect(() => {
+    setItems({ cards: params });
+  }, [params]);
+
+  console.log('params',params)
+  console.log('items',items)
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -62,7 +50,7 @@ const DynamicDnD = () => {
                     <FontAwesomeIcon icon={faAngleRight} style={{ fontSize: '2rem', margin: '0 0.8rem' }} />
                   )}
                   <Sortable id={item.id}>
-                    <Layer name="Affine" input="120×120×3" output="245×120×3" />
+                    <Layer name="Affine" input={`${100}×${40}×${100}`} output="245×120×3" />
                   </Sortable>
                 </Flex>
               </Flex>
