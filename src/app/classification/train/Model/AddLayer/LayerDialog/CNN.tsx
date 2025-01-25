@@ -5,26 +5,28 @@ import Text from "@/component/common/Text";
 import Select from "@/component/common/Select";
 import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
-import { paramsProps } from "../..";
+import { LayerProps } from "../../types"; 
 
 type FormData = {
   model:string
-  kernelSize: number
-  poolingSize: number
-  paddingSize:number
+  kernel: number
+  filters: number
+  padding:number
   stride:number
+  inputChannel:number
   actFunc: string
   weightInit: string
 }
 
-const CNN = ({onSubmit,onClick}:{onSubmit:(params:paramsProps)=>void,onClick:()=>void}) => {
+const CNN = ({onSubmit,onClick}:LayerProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'CNN',
-      kernelSize:23,
-      poolingSize:2,
-      paddingSize:2,
+      kernel:3,
+      filters:2,
+      padding:2,
       stride:3,
+      inputChannel:3,
       actFunc:'Sigmoid',
       weightInit:'Zelo',
     }
@@ -41,24 +43,29 @@ const CNN = ({onSubmit,onClick}:{onSubmit:(params:paramsProps)=>void,onClick:()=
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <InputParam $marginTop="4rem" name="kernel size">
-        <Input {...register('kernelSize', { required: 'enter kernelSize' })} $variants="params" type="number" min={0}></Input>
-        {errors.kernelSize && <Text $variants="Small" color="red">{errors.kernelSize.message}</Text>}
+      <InputParam $marginTop="4rem" name="kernel">
+        <Input {...register('kernel', { required: 'enter kernel' })} $variants="params" type="number" min={0}></Input>
+        {errors.kernel && <Text $variants="Small" color="red">{errors.kernel.message}</Text>}
       </InputParam>
 
-      <InputParam $marginTop={gap} name="pooling size">
-        <Input {...register('poolingSize', { required: 'enter poolingSize' })} $variants="params" type="number" min={0}></Input>
-        {errors.poolingSize && <Text $variants="Small" color="red">{errors.poolingSize.message}</Text>}
+      <InputParam $marginTop={gap} name="filters">
+        <Input {...register('filters', { required: 'enter filters' })} $variants="params" type="number" min={0}></Input>
+        {errors.filters && <Text $variants="Small" color="red">{errors.filters.message}</Text>}
       </InputParam>
 
-      <InputParam $marginTop={gap} name="padding size">
-        <Input {...register('paddingSize', { required: 'enter padding size' })} $variants="params" type="number" min={0}></Input>
-        {errors.paddingSize && <Text $variants="Small" color="red">{errors.paddingSize.message}</Text>}
+      <InputParam $marginTop={gap} name="padding">
+        <Input {...register('padding', { required: 'enter padding' })} $variants="params" type="number" min={0}></Input>
+        {errors.padding && <Text $variants="Small" color="red">{errors.padding.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="stride">
         <Input {...register('stride', { required: 'enter stride' })} $variants="params" type="number" min={0}></Input>
         {errors.stride && <Text $variants="Small" color="red">{errors.stride.message}</Text>}
+      </InputParam>
+
+      <InputParam $marginTop={gap} name="input-channel">
+        <Input {...register('inputChannel', { required: 'enter poolingSize' })} $variants="params" type="number" min={0}></Input>
+        {errors.inputChannel && <Text $variants="Small" color="red">{errors.inputChannel.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="act func">
