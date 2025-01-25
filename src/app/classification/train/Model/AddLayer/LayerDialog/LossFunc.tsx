@@ -5,14 +5,14 @@ import Text from "@/component/common/Text";
 import Select from "@/component/common/Select";
 import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
-import { paramsProps } from "../../types"; 
+import { LayerProps } from "../../types"; 
 
 type FormData = {
   model:string
   lossFunc: string
 }
 
-const LossFunc = ({onSubmit,onClick}:{onSubmit:(params:paramsProps)=>void,onClick:()=>void}) => {
+const LossFunc = ({onSubmit,onClick}:LayerProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'LossFunc',

@@ -14,6 +14,7 @@ export type CNNParams = {
   kernel: number
   stride: number
   padding: number
+  inputChannel:number
   actFunc?: string
   weightInit?: string
 }
@@ -40,3 +41,8 @@ export type TypeIO = {
 }
 
 export type paramsProps=AffineParams|CNNParams|PoolingParams|LossFuncParams|TypeIO
+
+export type LayerProps={
+  onSubmit:(param: paramsProps) => void
+  onClick:()=>void
+}

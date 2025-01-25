@@ -8,7 +8,7 @@ import Pooling from "./LayerDialog/Pooling";
 import LossFunc from "./LayerDialog/LossFunc";
 import Select from "@/component/common/Select";
 import theme from "@/styles/theme";
-import { paramsProps } from "..";
+import { paramsProps } from "../types"; 
 
 const AddLayer = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
   const [isOpend, setIsOpend] = useState(false)

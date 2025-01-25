@@ -18,9 +18,17 @@ const Model = () => {
   }
 
   useEffect(()=>{
-    const IO=LayerIOCalculator(params,[28])
-    setLayerIO(IO)
-    console.log('IO',IO)
+    try{
+      console.log('params:',params)
+      setLayerIO(LayerIOCalculator(params,[28]))
+      console.log('Modelsuccess')
+    } catch(error) {
+      console.log('Modelerror')
+      console.log(error)
+      setParams((prev)=>{
+        return prev.slice(0,-1)
+      })
+    }
   },[params])
 
   return (

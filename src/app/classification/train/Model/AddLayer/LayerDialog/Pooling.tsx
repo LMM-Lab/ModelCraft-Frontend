@@ -4,7 +4,7 @@ import Input from "@/component/common/Input";
 import Text from "@/component/common/Text";
 import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
-import { paramsProps } from "../../types"; 
+import { LayerProps } from "../../types"; 
 
 type FormData = {
   model:string
@@ -13,7 +13,7 @@ type FormData = {
   padding:number
 }
 
-const Pooling = ({onSubmit,onClick}:{onSubmit:(params:paramsProps)=>void,onClick:()=>void}) => {
+const Pooling = ({onSubmit,onClick}:LayerProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'Pooling',

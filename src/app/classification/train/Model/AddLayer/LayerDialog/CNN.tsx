@@ -5,7 +5,7 @@ import Text from "@/component/common/Text";
 import Select from "@/component/common/Select";
 import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
-import { paramsProps } from "../../types"; 
+import { LayerProps } from "../../types"; 
 
 type FormData = {
   model:string
@@ -13,18 +13,20 @@ type FormData = {
   filters: number
   padding:number
   stride:number
+  inputChannel:number
   actFunc: string
   weightInit: string
 }
 
-const CNN = ({onSubmit,onClick}:{onSubmit:(params:paramsProps)=>void,onClick:()=>void}) => {
+const CNN = ({onSubmit,onClick}:LayerProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'CNN',
-      kernel:23,
+      kernel:3,
       filters:2,
       padding:2,
       stride:3,
+      inputChannel:3,
       actFunc:'Sigmoid',
       weightInit:'Zelo',
     }
@@ -59,6 +61,11 @@ const CNN = ({onSubmit,onClick}:{onSubmit:(params:paramsProps)=>void,onClick:()=
       <InputParam $marginTop={gap} name="stride">
         <Input {...register('stride', { required: 'enter stride' })} $variants="params" type="number" min={0}></Input>
         {errors.stride && <Text $variants="Small" color="red">{errors.stride.message}</Text>}
+      </InputParam>
+
+      <InputParam $marginTop={gap} name="input-channel">
+        <Input {...register('inputChannel', { required: 'enter poolingSize' })} $variants="params" type="number" min={0}></Input>
+        {errors.inputChannel && <Text $variants="Small" color="red">{errors.inputChannel.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="act func">

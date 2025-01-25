@@ -6,7 +6,7 @@ const AffineIOCalculator = (input: number[], params: AffineParams, batch?: numbe
   }
   // 入力次元数を計算
   const inputSize = input.length > 1 ? input.reduce((prev, curr) => prev * curr, 1) : input[0];
-  // 入出力の形状を返す
+
   return {
     model: 'Affine',
     id:params.id,
@@ -20,81 +20,97 @@ const CNNIOCalculator = (input: number[], params: CNNParams, batch?: number): Ty
   if (input.length === 0) {
     throw new Error("Input dimensions must not be empty");
   }
-  
-  // 入力次元の分岐処理
   let inChannels: number;
   let spatialDims: number[];
-  
-  if (input.length === 1) {
-    // 一次元入力の場合の処理
-    inChannels = 1; 
-    spatialDims = input; // 一次元をそのまま空間次元として扱う
-  } else if (input.length === 2) {
-    inChannels = 1; 
-    spatialDims = input; // 二次元入力
-  } else if (input.length >= 3) {
-    inChannels = input.slice(0, input.length - 2).reduce((a, b) => a * b, 1); // 前の次元をチャネル数とみなす
-    spatialDims = input.slice(-2); // 最後の2次元を高さと幅
+  if (input.length === 3) {
+    // 三次元入力の処理
+    if (input[0] !== params.inputChannel) {
+      throw new Error("Input channel size does not match");
+    }
+    inChannels = input[0]; // チャネル数
+    spatialDims = input.slice(1); // 高さと幅
   } else {
-    throw new Error("Unsupported input dimensions");
+    // 三次元以外の入力を `(inputChannel, height, width)` に変換
+    const totalSize = input.reduce((a, b) => a * b, 1); // 全要素数を計算
+    if (totalSize % params.inputChannel !== 0) {
+      throw new Error("Input dimensions cannot be evenly divided by inputChannel");
+    }
+    const spatialSize = totalSize / params.inputChannel; // 空間次元の合計
+    const height = Math.floor(Math.sqrt(spatialSize));
+    const width = spatialSize / height;
+    if (!Number.isInteger(width)) {
+      throw new Error("Input dimensions cannot be reshaped into valid height and width");
+    }
+    inChannels = params.inputChannel; // 指定されたチャネル数
+    spatialDims = [height, width];
   }
-
-  // 出力次元の計算
+  // カーネルサイズの検証
+  spatialDims.forEach((dim) => {
+    if (params.kernel > dim + 2 * params.padding) {
+      throw new Error(
+        `Kernel size (${params.kernel}) exceeds the allowed limit for dimension size (${dim + 2 * params.padding})`
+      );
+    }
+  });
+  // 各次元（高さ・幅）の出力サイズを計算
   const outputDims = spatialDims.map((dim) => {
     return Math.floor((dim + 2 * params.padding - params.kernel) / params.stride + 1);
   });
   const outputShape = [params.filters, ...outputDims];
-
-  // 結果の返却
   return {
-    model: 'CNN',
+    model: "CNN",
     id: params.id,
     input: batch ? [batch, inChannels, ...spatialDims] : [inChannels, ...spatialDims],
     output: batch ? [batch, ...outputShape] : [...outputShape],
   };
 };
+
+
 
 const PoolingIOCalculator = (input: number[], params: PoolingParams, batch?: number): TypeIO => {
   if (input.length === 0) {
     throw new Error("Input dimensions must not be empty");
   }
-
-  // 入力次元の分岐処理
   let inChannels: number;
   let spatialDims: number[];
-
-  if (input.length === 1) {
-    // 一次元入力の場合
-    inChannels = 1; // チャネル数を1とする
-    spatialDims = input; // 入力次元をそのまま空間次元として扱う
-  } else if (input.length === 2) {
-    // 二次元データ
-    inChannels = 1; // チャネル数を1とする
-    spatialDims = input; // 空間次元として扱う
-  } else if (input.length >= 3) {
-    // 多次元データ
-    inChannels = input.slice(0, input.length - 2).reduce((a, b) => a * b, 1); // 前の次元をチャネル数とみなす
-    spatialDims = input.slice(-2); // 最後の2次元を高さと幅
+  if (input.length === 3) {
+    // 三次元入力の処理
+    inChannels = input[0]; // チャネル数
+    spatialDims = input.slice(1); // 高さと幅
   } else {
-    throw new Error("Unsupported input dimensions");
-  }
+    // 三次元以外の入力を `(1, height, width)` に変換
+    const totalSize = input.reduce((a, b) => a * b, 1); // 全要素数を計算
+    const height = Math.floor(Math.sqrt(totalSize));
+    const width = totalSize / height;
 
+    if (!Number.isInteger(width)) {
+      throw new Error("Input dimensions cannot be reshaped into valid height and width");
+    }
+    inChannels = 1; // Poolingの場合、デフォルトのチャネル数を1とする
+    spatialDims = [height, width];
+  }
+  // カーネルサイズの検証
+  spatialDims.forEach((dim) => {
+    if (params.kernel > dim + 2 * params.padding) {
+      throw new Error(
+        `Kernel size (${params.kernel}) exceeds the allowed limit for dimension size (${dim + 2 * params.padding})`
+      );
+    }
+  });
   // 各次元（高さ・幅）の出力サイズを計算
   const outputDims = spatialDims.map((dim) => {
     return Math.floor((dim + 2 * params.padding - params.kernel) / params.stride + 1);
   });
-
-  // 出力の形状を決定
   const outputShape = [inChannels, ...outputDims];
-
-  // 結果の返却
+  // 結果を返却
   return {
-    model: 'Pooling',
+    model: "Pooling",
     id: params.id,
     input: batch ? [batch, inChannels, ...spatialDims] : [inChannels, ...spatialDims],
     output: batch ? [batch, ...outputShape] : [...outputShape],
   };
 };
+
 
 
 const LossFuncIOCalculator = (input: number[], params: LossFuncParams,batch?:number):TypeIO => {
@@ -150,8 +166,6 @@ export const LayerIOCalculator = (params: paramsProps[], initialInputSize: numbe
   let currentInputSize = [...initialInputSize];
   return params.map((param) => {
     const data = IOCaculator(currentInputSize, param, batch);
-
-    // 次のレイヤーの入力を今のレイヤーの出力に置き換える
     currentInputSize = data.output;
 
     const layerIO: TypeIO = {

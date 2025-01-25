@@ -2,7 +2,7 @@
 import { DragEndEvent } from "@dnd-kit/core"
 import { arrayMove, SortableContext } from "@dnd-kit/sortable"
 import { DndContext } from "@dnd-kit/core"
-import React from "react"
+import React, { useEffect } from "react"
 import Flex from "@/component/common/styles/Flex"
 import Sortable from "./Sortable";
 import Layer from "./Layer";
@@ -36,12 +36,23 @@ const DynamicDnD = ({
     setParams((prevParams) => {
       const newParams = arrayMove(prevParams, oldSortable.index, newSortable.index);
 
-      // 新しい順番のparamsを使ってLayerIOを再計算
-      const recalculatedLayerIO = LayerIOCalculator(newParams, newLayerIO[0].input);
-      setLayerIO(recalculatedLayerIO); // 再計算後のLayerIOで更新
+      try {
+        // 新しい順番のparamsを使ってLayerIOを再計算
+        const recalculatedLayerIO = LayerIOCalculator(newLayerIO, [28]);
+        setLayerIO(recalculatedLayerIO); // 再計算後のLayerIOで更新
+        console.log('DynamicDnDsuccess')
+      } catch (error) {
+        console.log('DynamicDnDerror')
+        console.log(error);
+      }
+
       return newParams;
     });
   }
+
+  useEffect(() => {
+    console.log('layerIO:',layerIO)
+  }, [layerIO]);
 
   return (
     <div style={{width:'97%', margin:'3rem auto'}}>
