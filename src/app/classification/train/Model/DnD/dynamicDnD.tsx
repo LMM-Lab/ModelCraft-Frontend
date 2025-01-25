@@ -2,13 +2,13 @@
 import { DragEndEvent } from "@dnd-kit/core"
 import { arrayMove, SortableContext } from "@dnd-kit/sortable"
 import { DndContext } from "@dnd-kit/core"
-import React, { use, useEffect, useState } from "react"
+import React from "react"
 import Flex from "@/component/common/styles/Flex"
 import Sortable from "./Sortable";
 import Layer from "./Layer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { paramsProps,TypeIO } from "../types";
+import { paramsProps } from "../types";
 import { LayerIOCalculator } from "./IOCalculator";
 import { useGlobalState } from "../../page";
 
@@ -59,7 +59,7 @@ const DynamicDnD = ({
                     <FontAwesomeIcon icon={faAngleRight} style={{ fontSize: '2rem', margin: '0 0.8rem' }} />
                   )}
                   <Sortable id={item.id}>
-                    <Layer name={item.model} input={`${item.io.input}`} output={`${item.io.output}`} />
+                    <Layer name={item.model} input={`(${item.io.input})`} output={`(${item.io.output})`} />
                   </Sortable>
                 </Flex>
               </Flex>

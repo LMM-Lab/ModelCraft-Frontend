@@ -80,15 +80,18 @@ const PoolingIOCalculator = (input: number[], params: PoolingParams, batch?: num
     inChannels = input[0]; // チャネル数
     spatialDims = input.slice(1); // 高さと幅
   } else {
-    // 三次元以外の入力を `(1, height, width)` に変換
+    // 三次元以外の入力を `(inputChannel, height, width)` に変換
     const totalSize = input.reduce((a, b) => a * b, 1); // 全要素数を計算
-    const height = Math.floor(Math.sqrt(totalSize));
-    const width = totalSize / height;
-
+    if (totalSize % params.inputChannel !== 0) {
+      throw new Error("Input dimensions cannot be evenly divided by inputChannel");
+    }
+    const spatialSize = totalSize / params.inputChannel; // 空間次元の合計
+    const height = Math.floor(Math.sqrt(spatialSize));
+    const width = spatialSize / height;
     if (!Number.isInteger(width)) {
       throw new Error("Input dimensions cannot be reshaped into valid height and width");
     }
-    inChannels = 1; // Poolingの場合、デフォルトのチャネル数を1とする
+    inChannels = params.inputChannel; // 指定されたチャネル数
     spatialDims = [height, width];
   }
   // カーネルサイズの検証
@@ -104,7 +107,6 @@ const PoolingIOCalculator = (input: number[], params: PoolingParams, batch?: num
     return Math.floor((dim + 2 * params.padding - params.kernel) / params.stride + 1);
   });
   const outputShape = [inChannels, ...outputDims];
-  // 結果を返却
   return {
     ...params,
     io:{

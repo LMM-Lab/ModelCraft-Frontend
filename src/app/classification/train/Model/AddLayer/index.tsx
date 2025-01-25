@@ -11,11 +11,9 @@ import { paramsProps } from "../types";
 
 type AddLayerProps = {
   addParams:(param: paramsProps) => void
-  params:paramsProps[]
-  setParams:React.Dispatch<React.SetStateAction<paramsProps[]>>
 }
 
-const AddLayer = ({addParams,params,setParams}:AddLayerProps) => {
+const AddLayer = ({addParams}:AddLayerProps) => {
   const [isOpend, setIsOpend] = useState(false)
   const [layer, setLayer] = useState<string>('')
 

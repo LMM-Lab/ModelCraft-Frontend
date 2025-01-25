@@ -1,6 +1,6 @@
 'use client'
 import dynamic from "next/dynamic";
-import { paramsProps,TypeIO } from "../types";
+import { paramsProps } from "../types";
 
 type DnDProps={
   params:paramsProps[]

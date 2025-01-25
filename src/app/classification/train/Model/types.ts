@@ -31,6 +31,7 @@ export type PoolingParams = {
   kernel: number
   stride: number
   padding:number
+  inputChannel:number
   io: TypeIO
 }
 

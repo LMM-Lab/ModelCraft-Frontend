@@ -35,7 +35,7 @@ const Model = () => {
       <Flex $justify_content="space-between" $align_items="center" $width="95%" $height="fit-content" $margin="2rem auto 0 auto">
         <Text $variants="Medium">Model</Text>
         <Flex $flex_direction="column" $justify_content="flex-start" $align_items="flex-start">
-          <AddLayer addParams={addParams} params={params} setParams={setParams}></AddLayer>
+          <AddLayer addParams={addParams}></AddLayer>
           <ModelSetting></ModelSetting>
         </Flex>
       </Flex>
