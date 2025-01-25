@@ -4,22 +4,27 @@ import Input from "@/component/common/Input";
 import Text from "@/component/common/Text";
 import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
-import { LayerProps } from "../../types"; 
+import { LayerProps, TypeIO } from "../../types"; 
 
 type FormData = {
   model:string
   kernel: number
   stride:number
   padding:number
+  io: TypeIO
 }
 
-const Pooling = ({onSubmit,onClick}:LayerProps) => {
+const Pooling = ({addParams,onClick}:LayerProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'Pooling',
       kernel:2,
       stride:3,
-      padding:2
+      padding:2,
+      io:{
+        input:[],
+        output:[]
+      }
     }
   })
   const handleFormSubmit=(data:FormData)=>{
@@ -27,7 +32,7 @@ const Pooling = ({onSubmit,onClick}:LayerProps) => {
       ...data,
       id:new Date().getTime()
     }
-    onSubmit(params)
+    addParams(params)
     onClick()
   }
   const gap = '0.7rem'

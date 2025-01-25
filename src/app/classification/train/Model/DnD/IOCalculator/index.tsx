@@ -1,6 +1,6 @@
 import { AffineParams, CNNParams, PoolingParams, LossFuncParams,TypeIO,paramsProps } from '../../types'
 
-const AffineIOCalculator = (input: number[], params: AffineParams, batch?: number):TypeIO => {
+const AffineIOCalculator = (input: number[], params: AffineParams, batch?: number):paramsProps => {
   if (input.length === 0) {
     throw new Error("Input dimensions must not be empty");
   }
@@ -8,15 +8,16 @@ const AffineIOCalculator = (input: number[], params: AffineParams, batch?: numbe
   const inputSize = input.length > 1 ? input.reduce((prev, curr) => prev * curr, 1) : input[0];
 
   return {
-    model: 'Affine',
-    id:params.id,
-    input: batch ? [batch, inputSize] : [inputSize],
-    output: batch ? [batch, params.outputSize] : [params.outputSize],
+    ...params,
+    io:{
+      input: batch ? [batch, inputSize] : [inputSize],
+      output: batch ? [batch, params.outputSize] : [params.outputSize],
+    }
   };
 };
 
 
-const CNNIOCalculator = (input: number[], params: CNNParams, batch?: number): TypeIO => {
+const CNNIOCalculator = (input: number[], params: CNNParams, batch?: number): paramsProps => {
   if (input.length === 0) {
     throw new Error("Input dimensions must not be empty");
   }
@@ -58,16 +59,17 @@ const CNNIOCalculator = (input: number[], params: CNNParams, batch?: number): Ty
   });
   const outputShape = [params.filters, ...outputDims];
   return {
-    model: "CNN",
-    id: params.id,
-    input: batch ? [batch, inChannels, ...spatialDims] : [inChannels, ...spatialDims],
-    output: batch ? [batch, ...outputShape] : [...outputShape],
+    ...params,
+    io:{
+      input: batch ? [batch, inChannels, ...spatialDims] : [inChannels, ...spatialDims],
+      output: batch ? [batch, ...outputShape] : [...outputShape],
+    }
   };
 };
 
 
 
-const PoolingIOCalculator = (input: number[], params: PoolingParams, batch?: number): TypeIO => {
+const PoolingIOCalculator = (input: number[], params: PoolingParams, batch?: number): paramsProps => {
   if (input.length === 0) {
     throw new Error("Input dimensions must not be empty");
   }
@@ -104,29 +106,32 @@ const PoolingIOCalculator = (input: number[], params: PoolingParams, batch?: num
   const outputShape = [inChannels, ...outputDims];
   // 結果を返却
   return {
-    model: "Pooling",
-    id: params.id,
-    input: batch ? [batch, inChannels, ...spatialDims] : [inChannels, ...spatialDims],
-    output: batch ? [batch, ...outputShape] : [...outputShape],
+    ...params,
+    io:{
+      input: batch ? [batch, inChannels, ...spatialDims] : [inChannels, ...spatialDims],
+      output: batch ? [batch, ...outputShape] : [...outputShape],
+    }
   };
 };
 
 
 
-const LossFuncIOCalculator = (input: number[], params: LossFuncParams,batch?:number):TypeIO => {
+const LossFuncIOCalculator = (input: number[], params: LossFuncParams,batch?:number):paramsProps => {
   if(batch){
     return {
-      model: 'LossFunc',
-      id:params.id,
-      input: [batch, ...input],
-      output: [batch, ...input],
+      ...params,
+      io:{
+        input: [batch, ...input],
+        output: [batch, ...input],
+      }
     };
   } else {
     return {
-      model: 'LossFunc',
-      id:params.id,
-      input: input,
-      output: input,
+      ...params,
+      io:{
+        input: input,
+        output: input,
+      }
     };
   }
 }
@@ -166,13 +171,14 @@ export const LayerIOCalculator = (params: paramsProps[], initialInputSize: numbe
   let currentInputSize = [...initialInputSize];
   return params.map((param) => {
     const data = IOCaculator(currentInputSize, param, batch);
-    currentInputSize = data.output;
+    currentInputSize = data.io.output;
 
-    const layerIO: TypeIO = {
-      model: data.model,
-      id:param.id,
-      input: data.input,
-      output: data.output
+    const layerIO: paramsProps = {
+      ...data,
+      io:{
+        input: data.io.input,
+        output: data.io.output
+      }
     };
     return layerIO;
   });

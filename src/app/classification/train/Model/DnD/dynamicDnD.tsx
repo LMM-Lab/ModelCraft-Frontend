@@ -2,7 +2,7 @@
 import { DragEndEvent } from "@dnd-kit/core"
 import { arrayMove, SortableContext } from "@dnd-kit/sortable"
 import { DndContext } from "@dnd-kit/core"
-import React, { useEffect } from "react"
+import React, { use, useEffect, useState } from "react"
 import Flex from "@/component/common/styles/Flex"
 import Sortable from "./Sortable";
 import Layer from "./Layer";
@@ -10,56 +10,47 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { paramsProps,TypeIO } from "../types";
 import { LayerIOCalculator } from "./IOCalculator";
+import { useGlobalState } from "../../page";
 
 type DynamicDnDProps={
-  layerIO:TypeIO[]
-  setLayerIO:React.Dispatch<React.SetStateAction<TypeIO[]>>
+  params:paramsProps[]
   setParams:React.Dispatch<React.SetStateAction<paramsProps[]>>
 }
 
 const DynamicDnD = ({
-  layerIO,
-  setLayerIO,
+  params,
   setParams
 }:DynamicDnDProps
 ) => {
+  const {state,setState}=useGlobalState()
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over) return;
     if (active.id === over.id) return;
 
-    const oldSortable = active.data.current?.sortable;
-    const newSortable = over.data.current?.sortable;
-    if (!oldSortable || !newSortable) return;
-    const newLayerIO = arrayMove(layerIO, oldSortable.index, newSortable.index);
-
-    setParams((prevParams) => {
-      const newParams = arrayMove(prevParams, oldSortable.index, newSortable.index);
-
+    setParams((prev) => {
+      const oldIndex = prev.findIndex(p => p.id === active.id);
+      const newIndex = prev.findIndex(p => p.id === over.id);
+      if (oldIndex < 0 || newIndex < 0) return prev;
+    
+      const rearranged = arrayMove(prev, oldIndex, newIndex);
+    
       try {
-        // 新しい順番のparamsを使ってLayerIOを再計算
-        const recalculatedLayerIO = LayerIOCalculator(newLayerIO, [28]);
-        setLayerIO(recalculatedLayerIO); // 再計算後のLayerIOで更新
-        console.log('DynamicDnDsuccess')
-      } catch (error) {
-        console.log('DynamicDnDerror')
+        const recalculated = LayerIOCalculator(rearranged, state);
+        return recalculated;
+      } catch(error) {
         console.log(error);
+        return prev;
       }
-
-      return newParams;
     });
   }
-
-  useEffect(() => {
-    console.log('layerIO:',layerIO)
-  }, [layerIO]);
 
   return (
     <div style={{width:'97%', margin:'3rem auto'}}>
       <DndContext onDragEnd={handleDragEnd}>
-        <SortableContext items={layerIO}>
+        <SortableContext items={params}>
           <Flex $flex_wrap="wrap">
-            {layerIO.map((item, index) => (
+            {params.map((item, index) => (
               <Flex key={item.id} $flex_direction="column" $marginTop="1rem" >
                 <Flex $align_items="center">
                 {(index === 0) ?  (
@@ -68,7 +59,7 @@ const DynamicDnD = ({
                     <FontAwesomeIcon icon={faAngleRight} style={{ fontSize: '2rem', margin: '0 0.8rem' }} />
                   )}
                   <Sortable id={item.id}>
-                    <Layer name={item.model} input={`${item.input}`} output={`${item.output}`} />
+                    <Layer name={item.model} input={`${item.io.input}`} output={`${item.io.output}`} />
                   </Sortable>
                 </Flex>
               </Flex>

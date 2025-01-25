@@ -1,10 +1,15 @@
+export type TypeIO = {
+  input: number[]
+  output: number[]
+}
+
 export type AffineParams = {
   model: string
   id: number
-  inputSize: number
   outputSize: number
   actFunc?: string
   weightInit?: string
+  io: TypeIO
 }
 
 export type CNNParams = {
@@ -17,6 +22,7 @@ export type CNNParams = {
   inputChannel:number
   actFunc?: string
   weightInit?: string
+  io: TypeIO
 }
 
 export type PoolingParams = {
@@ -25,24 +31,19 @@ export type PoolingParams = {
   kernel: number
   stride: number
   padding:number
+  io: TypeIO
 }
 
 export type LossFuncParams = {
   model: string
   id: number
   lossFunc: string
+  io: TypeIO
 }
 
-export type TypeIO = {
-  model: 'Affine' | 'CNN' | 'Pooling' | 'LossFunc'
-  id:number
-  input: number[]
-  output: number[]
-}
-
-export type paramsProps=AffineParams|CNNParams|PoolingParams|LossFuncParams|TypeIO
+export type paramsProps=AffineParams|CNNParams|PoolingParams|LossFuncParams
 
 export type LayerProps={
-  onSubmit:(param: paramsProps) => void
+  addParams:(param: paramsProps) => void
   onClick:()=>void
 }

@@ -7,10 +7,15 @@ import CNN from "./LayerDialog/CNN";
 import Pooling from "./LayerDialog/Pooling";
 import LossFunc from "./LayerDialog/LossFunc";
 import Select from "@/component/common/Select";
-import theme from "@/styles/theme";
 import { paramsProps } from "../types"; 
 
-const AddLayer = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
+type AddLayerProps = {
+  addParams:(param: paramsProps) => void
+  params:paramsProps[]
+  setParams:React.Dispatch<React.SetStateAction<paramsProps[]>>
+}
+
+const AddLayer = ({addParams,params,setParams}:AddLayerProps) => {
   const [isOpend, setIsOpend] = useState(false)
   const [layer, setLayer] = useState<string>('')
 
@@ -34,16 +39,16 @@ const AddLayer = ({onSubmit}:{onSubmit:(param: paramsProps) => void;}) => {
               <option value="LossFunc">LossFunc</option>
             </Select>
             {(layer === 'Affine') && (
-              <Affine onSubmit={onSubmit} onClick={toggleOpen}></Affine>
+              <Affine addParams={addParams} onClick={toggleOpen}></Affine>
             )}
             {(layer === 'CNN') && (
-              <CNN onSubmit={onSubmit} onClick={toggleOpen}></CNN>
+              <CNN addParams={addParams} onClick={toggleOpen}></CNN>
             )}
             {(layer === 'Pooling') && (
-              <Pooling onSubmit={onSubmit} onClick={toggleOpen}></Pooling>
+              <Pooling addParams={addParams} onClick={toggleOpen}></Pooling>
             )}
             {(layer === 'LossFunc') && (
-              <LossFunc onSubmit={onSubmit} onClick={toggleOpen}></LossFunc>
+              <LossFunc addParams={addParams} onClick={toggleOpen}></LossFunc>
             )}
           </Dialog>
         </div>
