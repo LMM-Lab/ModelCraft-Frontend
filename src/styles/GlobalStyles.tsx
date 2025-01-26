@@ -25,6 +25,7 @@ const GlobalStyles=createGlobalStyle`
     vertical-align: baseline;
     font-size: 62.5%;
     font-family: 'Crimson Text', serif; 
+    text-decoration:none;
   }
   
   article, aside, details, figcaption, figure,

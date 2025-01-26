@@ -85,7 +85,7 @@ const Button=styled.button<ButtonProps>`
   height:${({$height})=>$height};
   color:${({$color='White'})=>$color};
   border:${({$border='none'})=>$border};
-  display:${({$display='inline-block'})=>$display};
+  display:${({$display='block'})=>$display};
   cursor: pointer;
   &:hover{
     background-color:white;
