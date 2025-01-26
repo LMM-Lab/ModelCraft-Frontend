@@ -2,6 +2,8 @@
 import Text from "@/component/common/Text";
 import Model from "./Model";
 import React, { createContext, useContext, useState } from "react";
+import Progress from "./Progress";
+import Flex from "@/component/common/styles/Flex";
 
 type GlobalStateType = {
   state: number[];
@@ -21,12 +23,14 @@ export const useGlobalState = () => {
 const Train = () => {
   const [state, setState] = useState<number[]>([10]);
   return (
-    <div>
+    <Flex $flex_direction="column" $align_items="center">
       <GlobalStateContext.Provider value={{ state, setState }}>
-        <Text $variants="ExtraLarge">Train</Text>
         <Model></Model>
       </GlobalStateContext.Provider>
-    </div>
+      <Flex $justify_content="space-between" $marginTop="6rem">
+        <Progress></Progress>
+      </Flex>
+    </Flex>
   )
 }
 

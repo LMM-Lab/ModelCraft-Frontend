@@ -12,13 +12,14 @@ const SideBarCSS = styled.div`
   background-color:${({ theme }) => theme.colors.sideBar};
   height:100vh;
   padding-top:2rem;
+  position:sticky;
+  top:0;
 `
 
 const SideBar = () => {
   const pathname = usePathname()
 
   return (
-    <div>
       <SideBarCSS>
         <Flex $justify_content="center">
           <Text $variants="Large" $color="#ffffff" >ModelCraft</Text>
@@ -42,7 +43,6 @@ const SideBar = () => {
           </Link>
         </Flex>
       </SideBarCSS>
-    </div>
   )
 }
 

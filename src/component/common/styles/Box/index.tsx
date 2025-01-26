@@ -5,6 +5,8 @@ export type BoxProps = {
   $backgroundColor?: string
   $width?: string
   $height?: string
+  $maxWidth?: string
+  $maxHeight?: string
   $minWidth?: string
   $minHeight?: string
   $display?: string
@@ -29,6 +31,8 @@ const Box=styled.div<BoxProps>`
   background-color:${({$backgroundColor})=>$backgroundColor};
   width:${({$width})=>$width};
   height:${({$height})=>$height};
+  max-width:${({$maxWidth})=>$maxWidth};
+  max-height:${({$maxHeight})=>$maxHeight};
   min-width:${({$minWidth})=>$minWidth};
   min-height:${({$minHeight})=>$minHeight};
   display:${({$display})=>$display};
