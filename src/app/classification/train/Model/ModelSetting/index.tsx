@@ -4,13 +4,14 @@ import Dialog from "@/component/common/Dialog"
 import Select from "@/component/common/Select"
 import Input from "@/component/common/Input"
 import Text from "@/component/common/Text"
-import { useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 import InputParam from "../AddLayer/LayerDialog/InputParam"
 import { useFieldArray, useForm } from "react-hook-form"
 import styled from "styled-components"
 import Flex from "@/component/common/styles/Flex"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
+import { ModelConfigType, useModelConfig } from "@/Context/ModelConfig"
 
 const SetSection = styled.div`
   width:11rem;
@@ -23,23 +24,11 @@ const SetSection = styled.div`
   align-items:center;
 `
 
-type FormData = {
-  modelName: string
-  epock: number
-  batchSize: number
-  learningRate: number
-  optimizer: string
-  valSize: string
-  label: { [key: string]: string }[]
-  resorce: string
-  local?: string
-  GoogleColab?: string
-}
-
 const ModelSetting = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [resorce, setResorce] = useState<string>('Local')
-  const { control, register, handleSubmit, formState: { errors }, watch } = useForm<FormData>({
+  const {modelConfig,setModelConfig}=useModelConfig()
+  const { control, register, handleSubmit, formState: { errors }, watch } = useForm<ModelConfigType>({
     defaultValues: {
       epock: 1,
       batchSize: 32,
@@ -66,8 +55,10 @@ const ModelSetting = () => {
     setIsOpen((isOpen) => !isOpen)
   }
 
-  const handleFormSubmit = (data: FormData) => {
+  const handleFormSubmit = (data: ModelConfigType) => {
     console.log('data:', data)
+    setModelConfig(data)
+    setIsOpen(false)
   }
 
   const gap = '0.7rem'
