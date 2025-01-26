@@ -8,6 +8,7 @@ import Pooling from "./LayerDialog/Pooling";
 import LossFunc from "./LayerDialog/LossFunc";
 import Select from "@/component/common/Select";
 import { paramsProps } from "../types"; 
+import Text from "@/component/common/Text";
 
 type AddLayerProps = {
   addParams:(param: paramsProps) => void
@@ -30,7 +31,8 @@ const AddLayer = ({addParams}:AddLayerProps) => {
       {isOpend && (
         <div>
           <Dialog $variants="layer" $width="40rem" onClick={toggleOpen}>
-            <Select $variants="param" $width="11rem" $marginTop="1rem" defaultValue={'Affine'} onChange={handleSelect}>
+          <Text $margin="2rem 0 0 2rem">Add Layer</Text>
+            <Select $variants="param" $width="11rem" $margin="4rem auto 0 auto" defaultValue={'Affine'} onChange={handleSelect}>
               <option value="Affine">Affine</option>
               <option value="CNN">CNN</option>
               <option value="Pooling">Pooling</option>

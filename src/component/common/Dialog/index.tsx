@@ -24,11 +24,12 @@ type DialogCSSProps = {
   $marginLeft?: string
   $marginBottom?: string
   $textAlign?: string
+  $overFlow?:string
   onClick?: ((event: MouseEvent<HTMLDivElement>) => void)
 }
 
 const DialogCSS = styled.dialog<DialogCSSProps>`
-  ${({ $variants }) => {
+  ${({ $variants,$overFlow }) => {
     switch ($variants) {
       case 'layer':
         return css`
@@ -36,6 +37,10 @@ const DialogCSS = styled.dialog<DialogCSSProps>`
           height:auto;
           min-height:100px;
           border-radius:5px;
+          position:fixed;
+          top:3%;
+          max-height:90vh;
+          overflow-y:${$overFlow};
         `
       default:
         return css`
