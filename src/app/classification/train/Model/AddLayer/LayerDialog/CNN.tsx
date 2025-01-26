@@ -5,7 +5,7 @@ import Text from "@/component/common/Text";
 import Select from "@/component/common/Select";
 import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
-import { LayerProps } from "../../types"; 
+import { LayerProps, TypeIO } from "../../types"; 
 
 type FormData = {
   model:string
@@ -16,9 +16,10 @@ type FormData = {
   inputChannel:number
   actFunc: string
   weightInit: string
+  io: TypeIO
 }
 
-const CNN = ({onSubmit,onClick}:LayerProps) => {
+const CNN = ({addParams,onClick}:LayerProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'CNN',
@@ -29,6 +30,10 @@ const CNN = ({onSubmit,onClick}:LayerProps) => {
       inputChannel:3,
       actFunc:'Sigmoid',
       weightInit:'Zelo',
+      io:{
+        input:[],
+        output:[]
+      }
     }
   })
   const handleFormSubmit=(data:FormData)=>{
@@ -36,7 +41,7 @@ const CNN = ({onSubmit,onClick}:LayerProps) => {
       ...data,
       id:new Date().getTime()
     }
-    onSubmit(params)
+    addParams(params)
     onClick()
   }
   const gap = '0.7rem'

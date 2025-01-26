@@ -5,8 +5,7 @@ import Text from "@/component/common/Text";
 import Select from "@/component/common/Select";
 import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
-import { LayerProps } from "../../types"; 
-import { LayerIOCalculator } from "../../DnD/IOCalculator";
+import { LayerProps, TypeIO } from "../../types"; 
 
 type FormData = {
   model:string
@@ -14,10 +13,11 @@ type FormData = {
   outputSize: number
   actFunc: string
   weightInit: string
-  IO:{}
+  io: TypeIO
 }
 
-const Affine = ({onSubmit,onClick}:LayerProps) => {
+const Affine = ({addParams,onClick,}:LayerProps) => {
+
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'Affine',
@@ -25,6 +25,10 @@ const Affine = ({onSubmit,onClick}:LayerProps) => {
       outputSize:108,
       actFunc:'Sigmoid',
       weightInit:'Zelo',
+      io:{
+        input:[],
+        output:[]
+      }
     }
   })
   const handleFormSubmit=(data:FormData)=>{
@@ -32,7 +36,7 @@ const Affine = ({onSubmit,onClick}:LayerProps) => {
       ...data,
       id:new Date().getTime()
     }
-    onSubmit(params)
+    addParams(params)
     onClick()
   }
   const gap = '0.7rem'

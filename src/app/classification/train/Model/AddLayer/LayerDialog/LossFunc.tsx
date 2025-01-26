@@ -1,22 +1,26 @@
 'use client'
 import Button from "@/component/common/Button";
-import Input from "@/component/common/Input";
 import Text from "@/component/common/Text";
 import Select from "@/component/common/Select";
 import { useForm } from "react-hook-form";
 import InputParam from "./InputParam";
-import { LayerProps } from "../../types"; 
+import { LayerProps, TypeIO } from "../../types"; 
 
 type FormData = {
   model:string
   lossFunc: string
+  io: TypeIO
 }
 
-const LossFunc = ({onSubmit,onClick}:LayerProps) => {
+const LossFunc = ({addParams,onClick}:LayerProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'LossFunc',
       lossFunc:'Sigmoid',
+      io:{
+        input:[],
+        output:[]
+      }
     }
   })
   const handleFormSubmit=(data:FormData)=>{
@@ -24,7 +28,7 @@ const LossFunc = ({onSubmit,onClick}:LayerProps) => {
       ...data,
       id:new Date().getTime()
     }
-    onSubmit(params)
+    addParams(params)
     onClick()
   }
 

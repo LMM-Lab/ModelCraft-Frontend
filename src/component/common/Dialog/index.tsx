@@ -1,41 +1,102 @@
 import { MouseEvent } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import Flex from "../styles/Flex";
 
-type DialogCSSProps={
-  width?:string
-  height?:string
-  $borderRadius?:string
-  $border?:string
-  $backgroundColor?:string
-  children?:React.ReactNode
-  onClick?:((event:MouseEvent<HTMLDivElement>)=>void)
+type DialogCSSProps = {
+  $variants?: 'layer'
+  $width?: string
+  $height?: string
+  $borderRadius?: string
+  $border?: string
+  $backgroundColor?: string
+  children?: React.ReactNode
+  $minHeight?: string
+  $maxWidth?: string
+  $padding?: string
+  $paddingTop?: string
+  $paddingRight?: string
+  $paddingLeft?: string
+  $paddingBottom?: string
+  $fontSize?: string
+  $margin?: string
+  $marginTop?: string
+  $marginRight?: string
+  $marginLeft?: string
+  $marginBottom?: string
+  $textAlign?: string
+  onClick?: ((event: MouseEvent<HTMLDivElement>) => void)
 }
 
-const DialogCSS=styled.dialog<DialogCSSProps>`
-  width:${({width='400px'})=>width};
-  height:${({height='auto'})=>height};
-  min-height:100px;
-  border-radius:${({$borderRadius='5px'})=>$borderRadius};
-  border:${({$border='1px solid#333'})=>$border};
-  background-color:${({theme,$backgroundColor})=>theme.colors.background||$backgroundColor};
+const DialogCSS = styled.dialog<DialogCSSProps>`
+  ${({ $variants }) => {
+    switch ($variants) {
+      case 'layer':
+        return css`
+          width:400px;
+          height:auto;
+          min-height:100px;
+          border-radius:5px;
+        `
+      default:
+        return css`
+          max-width:1000px;
+          padding:2rem;
+          box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        `
+    }
+  }}
+  width:${({ $width }) => $width};
+  height:${({ $height }) => $height};
+  max-width:${({ $maxWidth }) => $maxWidth};
+  min-height:${({ $minHeight }) => $minHeight};
+  border-radius:${({ $borderRadius }) => $borderRadius};
+  border:${({ $border = 'none' }) => $border};
+  background-color:${({ theme, $backgroundColor }) => theme.colors.background || $backgroundColor};
+  padding:${({ $padding }) => $padding};
+  padding-top:${({ $paddingTop }) => $paddingTop};
+  padding-left:${({ $paddingLeft }) => $paddingLeft};
+  padding-right:${({ $paddingRight }) => $paddingRight};
+  padding-bottom:${({ $paddingBottom }) => $paddingBottom};
+  margin:${({ $margin }) => $margin};
+  margin-top:${({ $marginTop }) => $marginTop};
+  margin-right:${({ $marginRight }) => $marginRight};
+  margin-left:${({ $marginLeft }) => $marginLeft};
+  margin-bottom:${({ $marginBottom }) => $marginBottom};
+  font-size:${({ $fontSize }) => $fontSize};
+  text-align:${({ $textAlign }) => $textAlign};
 `
 
-const Div = styled.div`
+const Div = styled.div<DialogCSSProps>`
+${({ $variants }) => {
+    switch ($variants) {
+      case 'layer':
+        return css`
+        background-color:#c5c5c5;
+        `
+      default:
+        return css`
+        background-color:#4c4c4c;
+        `
+    }
+  }}
   width:100vw;
   height:100vh;
   position:fixed;
   top:0;
   left:0;
-  background-color:#d5d5d5;
-  opacity:50%;
+  opacity:70%;
 `
 
-const Dialog=(props:DialogCSSProps)=>{
-  const {onClick,...rest}=props
+const Dialog = (props: DialogCSSProps) => {
+  const { onClick, children, ...rest } = props
   return (
     <div>
-      <Div onClick={onClick}></Div>
-      <DialogCSS open {...rest}>{props.children}</DialogCSS>
+      <Div onClick={onClick} {...rest}></Div>
+      <DialogCSS {...rest} open>
+        <Flex $flex_direction="column">
+          {children}
+        </Flex>
+      </DialogCSS>
     </div>
   )
 }
