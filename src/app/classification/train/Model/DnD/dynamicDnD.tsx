@@ -9,8 +9,6 @@ import Layer from "./Layer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { paramsProps } from "../types";
-import { LayerIOCalculator } from "./IOCalculator";
-import { useGlobalState } from "../../page";
 
 type DynamicDnDProps={
   params:paramsProps[]
@@ -24,7 +22,6 @@ const DynamicDnD = ({
   handleParamsUpdate
 }:DynamicDnDProps
 ) => {
-  const {state,setState}=useGlobalState()
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over) return;

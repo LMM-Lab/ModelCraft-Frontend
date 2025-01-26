@@ -7,17 +7,20 @@ import ModelSetting from "./ModelSetting";
 import {  useEffect, useState } from "react";
 import { LayerIOCalculator } from "./DnD/IOCalculator";
 import { paramsProps } from "./types";
-import { useGlobalState } from "../page";
 import Dialog from "@/component/common/Dialog";
 
-const Model = () => {
-  const [params,setParams]=useState<paramsProps[]>([]);
+type ModelProps={
+  inputSize:number[]
+  params:paramsProps[]
+  setParams:React.Dispatch<React.SetStateAction<paramsProps[]>>
+}
+
+const Model = ({inputSize,params,setParams}:ModelProps) => {
   const [error,setError]=useState<string|null>(null)
-  const {state,setState}=useGlobalState()
 
   const handleParamsUpdate=(params:paramsProps[],prev:paramsProps[])=>{
     try {
-      const recalculated = LayerIOCalculator(params, state);
+      const recalculated = LayerIOCalculator(params, inputSize);
       return recalculated;
     } catch (error:any) {
       setError(error.message)
@@ -33,8 +36,8 @@ const Model = () => {
   }
 
   useEffect(()=>{
-    setParams(LayerIOCalculator(params,state))
-  },[state])
+    setParams(LayerIOCalculator(params,inputSize))
+  },[inputSize])
 
   return (
     <Flex $width="95%" $minHeight="360px" $flex_direction="column" $backgroundColor="White" $borderRadius="15px" $margin="16rem auto 0 auto">
