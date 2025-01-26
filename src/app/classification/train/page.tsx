@@ -1,9 +1,9 @@
 'use client'
-import Text from "@/component/common/Text";
 import Model from "./Model";
 import React, { createContext, useContext, useState } from "react";
 import Progress from "./Progress";
 import Flex from "@/component/common/styles/Flex";
+import { paramsProps } from "./Model/types";
 
 type GlobalStateType = {
   state: number[];
@@ -21,11 +21,13 @@ export const useGlobalState = () => {
 };
 
 const Train = () => {
-  const [state, setState] = useState<number[]>([10]);
+  const [params,setParams]=useState<paramsProps[]>([]);
+  const [state, setState] = useState<number[]>([108]);
+  const [inputSize,setInputSize]=useState<number[]>([10])
   return (
     <Flex $flex_direction="column" $align_items="center">
       <GlobalStateContext.Provider value={{ state, setState }}>
-        <Model></Model>
+        <Model inputSize={inputSize} params={params} setParams={setParams}></Model>
       </GlobalStateContext.Provider>
       <Flex $justify_content="space-between" $marginTop="6rem">
         <Progress></Progress>
