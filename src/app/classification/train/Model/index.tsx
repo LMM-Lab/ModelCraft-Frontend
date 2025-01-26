@@ -8,21 +8,27 @@ import {  useEffect, useState } from "react";
 import { LayerIOCalculator } from "./DnD/IOCalculator";
 import { paramsProps } from "./types";
 import { useGlobalState } from "../page";
+import Dialog from "@/component/common/Dialog";
 
 const Model = () => {
   const [params,setParams]=useState<paramsProps[]>([]);
+  const [error,setError]=useState<string|null>(null)
   const {state,setState}=useGlobalState()
+
+  const handleParamsUpdate=(params:paramsProps[],prev:paramsProps[])=>{
+    try {
+      const recalculated = LayerIOCalculator(params, state);
+      return recalculated;
+    } catch (error:any) {
+      setError(error.message)
+      return prev;
+    }
+  }
 
   const addParams=(param:paramsProps)=>{
     setParams((prev) => {
       const newParams = [...prev, param];
-      try {
-        const recalculated = LayerIOCalculator(newParams, state);
-        return recalculated;
-      } catch (error) {
-        console.log(error);
-        return prev;
-      }
+      return handleParamsUpdate(newParams,prev)
     });
   }
 
@@ -39,7 +45,12 @@ const Model = () => {
           <ModelSetting></ModelSetting>
         </Flex>
       </Flex>
-      <DnD params={params} setParams={setParams}></DnD>
+      <DnD params={params} setParams={setParams} handleParamsUpdate={handleParamsUpdate}></DnD>
+      {error && 
+      <Dialog onClick={()=>{setError(null)}}>
+        <Text $marginBottom="1rem">Error Info</Text>
+        <Text $variants="Small" $color="red">{error}</Text>
+      </Dialog>}
     </Flex>
   )
 }

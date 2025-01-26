@@ -29,7 +29,7 @@ const AddLayer = ({addParams}:AddLayerProps) => {
       <Button $border={`1px solid#ffffff`} $paddingRight="1rem" $backColor="transparent" $color="black" $height="3rem" onClick={toggleOpen}>+ Add Layer</Button>
       {isOpend && (
         <div>
-          <Dialog width="40rem" onClick={toggleOpen}>
+          <Dialog $variants="layer" $width="40rem" onClick={toggleOpen}>
             <Select $variants="param" $width="11rem" $marginTop="1rem" defaultValue={'Affine'} onChange={handleSelect}>
               <option value="Affine">Affine</option>
               <option value="CNN">CNN</option>

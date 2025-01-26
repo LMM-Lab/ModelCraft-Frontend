@@ -1,11 +1,7 @@
 'use client'
-import Button from "@/component/common/Button";
-import Flex from "@/component/common/styles/Flex";
 import Text from "@/component/common/Text";
-import DnD from "@/app/classification/train/Model/DnD";
-import styled from "styled-components";
 import Model from "./Model";
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 type GlobalStateType = {
   state: number[];

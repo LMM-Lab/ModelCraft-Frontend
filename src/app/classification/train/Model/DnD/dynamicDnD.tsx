@@ -15,11 +15,13 @@ import { useGlobalState } from "../../page";
 type DynamicDnDProps={
   params:paramsProps[]
   setParams:React.Dispatch<React.SetStateAction<paramsProps[]>>
+  handleParamsUpdate:(params:paramsProps[],prev:paramsProps[])=>paramsProps[]
 }
 
 const DynamicDnD = ({
   params,
-  setParams
+  setParams,
+  handleParamsUpdate
 }:DynamicDnDProps
 ) => {
   const {state,setState}=useGlobalState()
@@ -34,14 +36,7 @@ const DynamicDnD = ({
       if (oldIndex < 0 || newIndex < 0) return prev;
     
       const rearranged = arrayMove(prev, oldIndex, newIndex);
-    
-      try {
-        const recalculated = LayerIOCalculator(rearranged, state);
-        return recalculated;
-      } catch(error) {
-        console.log(error);
-        return prev;
-      }
+      return handleParamsUpdate(rearranged,prev)
     });
   }
 
