@@ -27,7 +27,9 @@ const Train = () => {
       <GlobalStateContext.Provider value={{ state, setState }}>
         <Model></Model>
       </GlobalStateContext.Provider>
-      <Progress></Progress>
+      <Flex $justify_content="space-between" $marginTop="6rem">
+        <Progress></Progress>
+      </Flex>
     </Flex>
   )
 }

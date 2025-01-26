@@ -15,8 +15,8 @@ export type log={
 const Progress=()=>{
   const [logs,setLogs]=useState<log[]>([{epoch:1,trainLoss:4,valLoss:9,time:3},{epoch:2,trainLoss:4,valLoss:9,time:3},{epoch:3,trainLoss:4,valLoss:9,time:3}])
   return(
-    <Flex $flex_direction="column" $width="60%" $borderRadius="15px" $backgroundColor="white">
-      <Text $variants="Medium">Progress</Text>
+    <Flex $flex_direction="column" $width="60rem" $borderRadius="15px" $backgroundColor="white">
+      <Text $variants="Medium" $margin="2rem 0 0 3rem">Progress</Text>
       <ProgressBar logs={logs}></ProgressBar>
       <ProgressText logs={logs}></ProgressText>
     </Flex>

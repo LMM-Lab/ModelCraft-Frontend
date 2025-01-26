@@ -15,11 +15,11 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
       <body>
         <StyledComponentsRegistry>
           <ThemeProvider theme={theme}>
-            <GlobalStyles />
+            <GlobalStyles/>
             <main style={{backgroundColor:theme.colors.background}}>
               <Grid $gridTemplateColumns="240fr 1043fr">
-                <SideBar />
-                {children}
+                <SideBar></SideBar>
+                  {children}
               </Grid>
             </main>
           </ThemeProvider>
