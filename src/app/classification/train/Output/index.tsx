@@ -23,7 +23,7 @@ const Acc: resultType = {
 
 const Output = () => {
   return (
-    <Flex $flex_direction="column" $width="95rem" $height="auto" $margin="5rem 0 5rem 0" $backgroundColor="white" $borderRadius="15px">
+    <Flex $flex_direction="column" $width="95rem" $height="auto" $margin="3rem 0 3rem 0" $backgroundColor="white" $borderRadius="15px">
       <Text $variants="Medium" $margin="2rem 0 0 3rem">Output</Text>
       <Flex $width="100%" $margin="5rem auto" $justify_content="space-around">
         <Flex $flex_direction="column">
