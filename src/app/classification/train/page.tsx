@@ -5,16 +5,12 @@ import Progress from "./Progress";
 import Flex from "@/component/common/styles/Flex";
 import { paramsProps } from "./Model/types";
 import { ModelConfigContext, ModelConfigType } from "@/Context/ModelConfig";
-
+import Output from "./Output";
 
 const Train = () => {
   const [params, setParams] = useState<paramsProps[]>([]);
   const [modelConfig, setModelConfig] = useState<ModelConfigType>()
   const [inputSize, setInputSize] = useState<number[]>([10])
-
-  useEffect(()=>{
-    console.log('modelConfig:',modelConfig)
-  },[modelConfig])
   return (
     <ModelConfigContext.Provider value={{ modelConfig, setModelConfig }}>
       <Flex $flex_direction="column" $align_items="center">
@@ -22,6 +18,7 @@ const Train = () => {
         <Flex $justify_content="space-between" $marginTop="6rem">
           <Progress></Progress>
         </Flex>
+        <Output></Output>
       </Flex>
     </ModelConfigContext.Provider>
   )
