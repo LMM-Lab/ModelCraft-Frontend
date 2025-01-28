@@ -50,7 +50,7 @@ const DialogCSS = styled.dialog<DialogCSSProps>`
           position:fixed;
           top:50%;
           left:50%;
-          transform:translate(-120%,-50%);
+          transform:translate(-100%,-50%);
         `
     }
   }}
