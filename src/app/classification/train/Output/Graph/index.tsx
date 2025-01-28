@@ -1,7 +1,7 @@
 'use client'
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale,Legend  } from 'chart.js';
 import { useEffect, useRef } from 'react';
-import { resultType } from '../../page';
+import { resultType } from '..'; 
 import styled from 'styled-components';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale,Legend)
@@ -47,7 +47,7 @@ const Graph = ({ data }: GraphProps) => {
           plugins: {
             legend: {
               display: true,
-              position:'top',
+              position:'bottom',
               align:'end',
             },
           },
