@@ -26,6 +26,7 @@ const GlobalStyles=createGlobalStyle`
     font-size: 62.5%;
     font-family: 'Crimson Text', serif; 
     text-decoration:none;
+    color:black;
   }
   
   article, aside, details, figcaption, figure,
