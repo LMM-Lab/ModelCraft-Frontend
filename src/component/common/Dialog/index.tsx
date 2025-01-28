@@ -47,6 +47,10 @@ const DialogCSS = styled.dialog<DialogCSSProps>`
           max-width:1000px;
           padding:2rem;
           box-shadow: 0 0 50px rgba(0,0,0,0.5);
+          position:fixed;
+          top:50%;
+          left:50%;
+          transform:translate(-120%,-50%);
         `
     }
   }}
