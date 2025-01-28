@@ -15,7 +15,7 @@ const Train = () => {
       <Flex $flex_direction="column" $align_items="center">
         <Nav nav="train"></Nav>
         <Model inputSize={inputSize}></Model>
-        <Flex $justify_content="space-between" $marginTop="6rem">
+        <Flex $justify_content="space-between" $marginTop="3rem">
           <Progress></Progress>
         </Flex>
         <Output></Output>
