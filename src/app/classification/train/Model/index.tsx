@@ -11,12 +11,11 @@ import Dialog from "@/component/common/Dialog";
 
 type ModelProps={
   inputSize:number[]
-  params:paramsProps[]
-  setParams:React.Dispatch<React.SetStateAction<paramsProps[]>>
 }
 
-const Model = ({inputSize,params,setParams}:ModelProps) => {
+const Model = ({inputSize,}:ModelProps) => {
   const [error,setError]=useState<string|null>(null)
+  const [params, setParams] = useState<paramsProps[]>([]);
 
   const handleParamsUpdate=(params:paramsProps[],prev:paramsProps[])=>{
     try {
