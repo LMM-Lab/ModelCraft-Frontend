@@ -6,6 +6,7 @@ import InputImage from "@/component/common/InputImage";
 import Button from "@/component/common/Button";
 import Flex from "@/component/common/styles/Flex";
 import React, { useState } from "react";
+import theme from "@/styles/theme";
 
 const Accounts = () => {
   const [icon, setIcon] = useState<File>()
@@ -27,7 +28,7 @@ const Accounts = () => {
           <UserNameInput onChange={handleUserName}>{userName}</UserNameInput>
         </Flex>
         <Button $marginTop="5rem" $variants="Medium">logout</Button>
-        <Button $marginTop="18rem" $backColor="transparent" color="#000000" $fontSize="1.5rem">delete account</Button>
+        <Button $marginTop="18rem" $padding="0 0.5rem" $border={`1px solid${theme.colors.background}`} $backColor="transparent" $color="#d32525" $fontSize="1.8rem">delete account</Button>
       </Flex>
     </div>
   )
