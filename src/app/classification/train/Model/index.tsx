@@ -8,6 +8,7 @@ import {  useEffect, useState } from "react";
 import { LayerIOCalculator } from "./DnD/IOCalculator";
 import { paramsProps } from "./types";
 import Dialog from "@/component/common/Dialog";
+import theme from "@/styles/theme";
 
 type ModelProps={
   inputSize:number[]
@@ -39,7 +40,7 @@ const Model = ({inputSize,}:ModelProps) => {
   },[inputSize])
 
   return (
-    <Flex $width="95%" $minHeight="22.5rem" $flex_direction="column" $backgroundColor="White" $borderRadius="15px" $margin="8rem auto 0 auto">
+    <Flex $width="95%" $minHeight="22.5rem" $flex_direction="column" $backgroundColor={`${theme.colors.white}`} $borderRadius="15px" $margin="3rem auto 0 auto">
       <Flex $justify_content="space-between" $align_items="center" $width="95%" $height="fit-content" $margin="2rem auto 0 auto">
         <Text $variants="Medium">Model</Text>
         <Flex $flex_direction="column" $justify_content="flex-start" $align_items="flex-start">

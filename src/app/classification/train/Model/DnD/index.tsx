@@ -11,7 +11,6 @@ type DnDProps={
 const DynamicDnD = dynamic(() => import("@/app/classification/train/Model/DnD/dynamicDnD"), { ssr: false });
 
 function DnD({ params,setParams,handleParamsUpdate}: DnDProps) {
-  console.log('DnD:',params)
   return <DynamicDnD params={params} setParams={setParams} handleParamsUpdate={handleParamsUpdate}/>;
 }
 
