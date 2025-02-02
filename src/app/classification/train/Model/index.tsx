@@ -12,11 +12,12 @@ import theme from "@/styles/theme";
 
 type ModelProps={
   inputSize:number[]
+  setParams:React.Dispatch<React.SetStateAction<paramsProps[]>>
+  params:paramsProps[]
 }
 
-const Model = ({inputSize,}:ModelProps) => {
+const Model = ({inputSize,setParams,params}:ModelProps) => {
   const [error,setError]=useState<string|null>(null)
-  const [params, setParams] = useState<paramsProps[]>([]);
 
   const handleParamsUpdate=(params:paramsProps[],prev:paramsProps[])=>{
     try {
@@ -29,10 +30,9 @@ const Model = ({inputSize,}:ModelProps) => {
   }
 
   const addParams=(param:paramsProps)=>{
-    setParams((prev) => {
-      const newParams = [...prev, param];
-      return handleParamsUpdate(newParams,prev)
-    });
+    const newParams = [...params, param];
+    const updatedParams=handleParamsUpdate(newParams,params)
+    setParams(updatedParams);
   }
 
   useEffect(()=>{
