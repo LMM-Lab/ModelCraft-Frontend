@@ -27,14 +27,13 @@ const DynamicDnD = ({
     if (!over) return;
     if (active.id === over.id) return;
 
-    setParams((prev) => {
-      const oldIndex = prev.findIndex(p => p.id === active.id);
-      const newIndex = prev.findIndex(p => p.id === over.id);
-      if (oldIndex < 0 || newIndex < 0) return prev;
+      const oldIndex = params.findIndex(p => p.id === active.id);
+      const newIndex = params.findIndex(p => p.id === over.id);
+      if (oldIndex < 0 || newIndex < 0) return params;
     
-      const rearranged = arrayMove(prev, oldIndex, newIndex);
-      return handleParamsUpdate(rearranged,prev)
-    });
+      const rearranged = arrayMove(params, oldIndex, newIndex);
+      const updatedParams=handleParamsUpdate(rearranged,params)
+      setParams(updatedParams);
   }
 
   return (
