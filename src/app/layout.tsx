@@ -8,8 +8,10 @@ import Grid from "@/component/common/styles/Grid";
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css'; // 必須: CSSをインポート
 config.autoAddCss = false; // 自動CSS追加を無効化
+import { useProgressBarAtTransition } from "@/hooks/useProgressBarAtTransition";
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
+  useProgressBarAtTransition()
   return (
     <html lang="en">
       <body>
