@@ -52,6 +52,13 @@ const CNNIOCalculator = (input: number[], params: CNNParams, batch?: number): pa
       );
     }
   });
+
+  if (params.padding > Math.floor(params.kernel / 2)) {
+    throw new Error(
+      `パディング (${params.padding}) はカーネルサイズの半分以下 (${Math.floor(params.kernel / 2)}) である必要があります`
+    );
+  }
+  
   // 高さと幅の出力サイズを計算
   const outputDims = spatialDims.map((dim) => {
     return Math.floor((dim + 2 * params.padding - params.kernel) / params.stride + 1);
@@ -101,6 +108,13 @@ const PoolingIOCalculator = (input: number[], params: PoolingParams, batch?: num
       );
     }
   });
+
+  if (params.padding > Math.floor(params.kernel / 2)) {
+    throw new Error(
+      `パディング (${params.padding}) はカーネルサイズの半分以下 (${Math.floor(params.kernel / 2)}) である必要があります`
+    );
+  }
+
   // 高さと幅の出力サイズを計算
   const outputDims = spatialDims.map((dim) => {
     return Math.floor((dim + 2 * params.padding - params.kernel) / params.stride + 1);
