@@ -24,7 +24,7 @@ const Affine = ({addParams,onClick,}:LayerProps) => {
       inputSize:23,
       outputSize:108,
       actFunc:'Sigmoid',
-      weightInit:'Zelo',
+      weightInit:'Xavier',
       io:{
         input:[],
         output:[]
@@ -45,7 +45,7 @@ const Affine = ({addParams,onClick,}:LayerProps) => {
     <form onSubmit={handleSubmit(handleFormSubmit)}>
 
       <InputParam $marginTop='4rem' name="outputSize">
-        <Input {...register('outputSize', { required: 'enter poolingSize' })} $variants="params" type="number" min={0}></Input>
+        <Input {...register('outputSize', { required: 'enter poolingSize',valueAsNumber: true})} $variants="params" type="number" min={0}></Input>
         {errors.outputSize && <Text $variants="Small" color="red">{errors.outputSize.message}</Text>}
       </InputParam>
 

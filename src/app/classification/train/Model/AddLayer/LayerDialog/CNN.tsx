@@ -24,12 +24,12 @@ const CNN = ({addParams,onClick}:LayerProps) => {
     defaultValues:{
       model:'CNN',
       kernel:3,
-      filters:2,
-      padding:2,
-      stride:3,
+      filters:32,
+      padding:1,
+      stride:1,
       inputChannel:3,
       actFunc:'Sigmoid',
-      weightInit:'Zelo',
+      weightInit:'Xavier',
       io:{
         input:[],
         output:[]

@@ -21,8 +21,8 @@ const Pooling = ({addParams,onClick}:LayerProps) => {
     defaultValues:{
       model:'Pooling',
       kernel:2,
-      stride:3,
-      padding:2,
+      stride:2,
+      padding:0,
       inputChannel:3,
       io:{
         input:[],

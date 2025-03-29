@@ -16,7 +16,7 @@ const LossFunc = ({addParams,onClick}:LayerProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     defaultValues:{
       model:'LossFunc',
-      lossFunc:'Sigmoid',
+      lossFunc:'CrossEntropy',
       io:{
         input:[],
         output:[]
@@ -38,7 +38,7 @@ const LossFunc = ({addParams,onClick}:LayerProps) => {
       <InputParam $marginTop='4rem' name="lossFunc">
         <Select $variants="param" {...register('lossFunc', { required: 'enter weight init' })}>
           <option value=""></option>
-          <option value="Sigmoid">Sigmoid</option>
+          <option value="CrossEntropy">CrossEntropy</option>
           <option value="Relu">Relu</option>
         </Select>
         {errors.lossFunc && <Text $variants="Small" color="red">{errors.lossFunc.message}</Text>}
