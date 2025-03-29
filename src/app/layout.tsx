@@ -9,9 +9,26 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css'; // 必須: CSSをインポート
 config.autoAddCss = false; // 自動CSS追加を無効化
 import { useProgressBarAtTransition } from "@/hooks/useProgressBarAtTransition";
+import { UserContext, UserType } from "@/Context/User";
+import { useEffect, useState } from "react";
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   useProgressBarAtTransition()
+  const [user, setUser] = useState<UserType>()
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await fetch("http://localhost:8000/auth/me", {
+        credentials: "include",
+      });
+      if (res.ok) {
+        const user = await res.json();
+        setUser({'username':user.username})
+      }
+    };
+    fetchUser();
+  }, []);
+
   return (
     <html lang="en">
       <body>
@@ -20,8 +37,10 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
             <GlobalStyles/>
             <main style={{backgroundColor:theme.colors.background}}>
               <Grid $gridTemplateColumns="240fr 1043fr">
-                <SideBar></SideBar>
+                <UserContext.Provider value={{user,setUser}}>
+                  <SideBar></SideBar>
                   {children}
+                </UserContext.Provider>
               </Grid>
             </main>
           </ThemeProvider>

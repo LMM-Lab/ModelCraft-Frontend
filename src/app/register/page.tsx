@@ -17,11 +17,37 @@ type FormData = {
 
 const Register = () => {
   const [icon, setIcon] = useState<File>()
-  const [userName,setUserName]=useState<string>('')
+  const [userName, setUserName] = useState<string>('')
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data)
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      const payload = {
+        username: userName,
+        email: data.email,
+        password: data.password,
+      }
+
+      const res = await fetch('http://localhost:8000/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      if (!res.ok) {
+        const error = await res.json()
+        console.error('❌ 登録失敗:', error)
+      } else {
+        const result = await res.json()
+        console.log('✅ 登録成功:', result)
+      }
+
+    } catch (err) {
+      console.error('❌ ネットワークエラー:', err)
+    }
   }
 
   const handleIcon = (iconFile: File) => {
@@ -29,9 +55,9 @@ const Register = () => {
     console.log(iconFile)
   }
 
-  const handleInput=(event:React.ChangeEvent<HTMLInputElement>)=>{
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value)
-    console.log('userName:',userName)
+    console.log('userName:', userName)
   }
 
   return (
@@ -40,13 +66,9 @@ const Register = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex $flex_direction="column" $marginTop="5rem" $justify_content="center" $align_items="center">
           <Flex>
-            <InputImage size={70} onFile={handleIcon}/>
+            <InputImage size={70} onFile={handleIcon} />
             <UserNameInput width="150px" onChange={handleInput}>{userName}</UserNameInput>
           </Flex>
-          {/* <Input
-            {...register('name', { required: 'Enter your UserName' })}
-            $marginTop="1.5rem" variants="default" placeholder="UserName" $textAlign="center" />
-          {errors.name && <Text $color="red" variants="Medium">{errors.name.message}</Text>} */}
           <Input
             {...register('email', { required: 'Enter your email' })}
             $marginTop="5rem" $variants="default" placeholder="e-mail" $textAlign="center" />
