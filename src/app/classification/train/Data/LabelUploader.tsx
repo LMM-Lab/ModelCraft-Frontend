@@ -27,7 +27,7 @@ const LabelUploader = ({setData}:LabelUploaderProps) => {
         setLabelInfo(rows.length)
         setData((prev)=>({
           ...prev,
-          label:rows
+          label:file
         }))
       }
     }
