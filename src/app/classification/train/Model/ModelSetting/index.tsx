@@ -30,11 +30,12 @@ const ModelSetting = () => {
   const {modelConfig,setModelConfig}=useModelConfig()
   const { control, register, handleSubmit, formState: { errors }, watch } = useForm<ModelConfigType>({
     defaultValues: {
+      modelName:'ResNet',
       epock: 1,
       batchSize: 32,
-      learningRate: 1,
+      learningRate: 0.01,
       optimizer: 'Adam',
-      valSize: '30%',
+      valSize: '0.3',
       label: [{}],
       resorce: 'Local',
       local: 'CPU',
@@ -56,7 +57,6 @@ const ModelSetting = () => {
   }
 
   const handleFormSubmit = (data: ModelConfigType) => {
-    console.log('data:', data)
     setModelConfig(data)
     setIsOpen(false)
   }
@@ -87,7 +87,7 @@ const ModelSetting = () => {
             </InputParam>
 
             <InputParam name="learning rate" $marginTop={gap}>
-              <Input {...register('learningRate', { required: 'Enter Learning Rate' })} $variants="params" type="number" min={0}></Input>
+              <Input {...register('learningRate', { required: 'Enter Learning Rate' })} $variants="params" type="number" step="any"></Input>
               {errors.learningRate && <Text $variants="Small" $color="red">{errors.learningRate.message}</Text>}
             </InputParam>
 
@@ -104,16 +104,16 @@ const ModelSetting = () => {
 
             <InputParam name="val size" $marginTop={gap}>
               <Select $variants="param" {...register('valSize')}>
-                <option value="10%">10%</option>
-                <option value="20%">20%</option>
-                <option value="30%">30%</option>
-                <option value="40%">40%</option>
-                <option value="50%">50%</option>
-                <option value="60%">60%</option>
-                <option value="70%">70%</option>
-                <option value="80%">80%</option>
-                <option value="90%">90%</option>
-                <option value="100%">100%</option>
+                <option value="0.1">10%</option>
+                <option value="0.2">20%</option>
+                <option value="0.3">30%</option>
+                <option value="0.4">40%</option>
+                <option value="0.5">50%</option>
+                <option value="0.6">60%</option>
+                <option value="0.7">70%</option>
+                <option value="0.8">80%</option>
+                <option value="0.9">90%</option>
+                <option value="1">100%</option>
               </Select>
             </InputParam>
 
@@ -130,31 +130,31 @@ const ModelSetting = () => {
             ))}
             <Button $width="5rem" $margin="2rem 6rem 0 auto" onClick={() => append({ 'number': `${fields.length}`, 'label': '' })} type="button"><Text $variants="Small">+</Text></Button>
 
-            <SetSection><Text $variants="Medium">resorce</Text></SetSection>
-            <InputParam name="resorce" $marginTop={gap}>
-              <Select $variants="param" {...register('resorce')}>
-                <option value="Local">Local</option>
-                <option value="GoogleColab">GoogleColab</option>
-              </Select>
-            </InputParam>
-
-            {resorce === 'Local' && (
-              <InputParam name="local" $marginTop={gap}>
-                <Select $variants="param" {...register('local')}>
-                  <option value="CPU">CPU</option>
-                  <option value="GPU">GPU</option>
+              {/* <SetSection><Text $variants="Medium">resorce</Text></SetSection>
+              <InputParam name="resorce" $marginTop={gap}>
+                <Select $variants="param" {...register('resorce')}>
+                  <option value="Local">Local</option>
+                  <option value="GoogleColab">GoogleColab</option>
                 </Select>
               </InputParam>
-            )}
 
-            {resorce === 'GoogleColab' && (
-              <InputParam name="google colab" $marginTop={gap}>
-                <Select $variants="param" {...register('GoogleColab')}>
-                  <option value="CPU">CPU</option>
-                  <option value="T4">T4</option>
-                </Select>
-              </InputParam>
-            )}
+              {resorce === 'Local' && (
+                <InputParam name="local" $marginTop={gap}>
+                  <Select $variants="param" {...register('local')}>
+                    <option value="CPU">CPU</option>
+                    <option value="GPU">GPU</option>
+                  </Select>
+                </InputParam>
+              )}
+
+              {resorce === 'GoogleColab' && (
+                <InputParam name="google colab" $marginTop={gap}>
+                  <Select $variants="param" {...register('GoogleColab')}>
+                    <option value="CPU">CPU</option>
+                    <option value="T4">T4</option>
+                  </Select>
+                </InputParam>
+              )} */}
 
             <Button type="submit" $variants="Small" $width="10rem" $padding="0 1rem" $margin="2rem auto" $display="block">Add</Button>
           </form>
