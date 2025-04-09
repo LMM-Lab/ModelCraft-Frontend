@@ -21,6 +21,15 @@ const Output = () => {
   const [valAcc,setValAcc]=useState<number[]>([])
 
   useEffect(() => {
+    if (progressData === undefined) {
+      setEpoch([]);
+      setTrainLoss([]);
+      setTrainAcc([]);
+      setValLoss([]);
+      setValAcc([]);
+      return;
+    }
+
     if (progressData?.epoch !== undefined) {
       setEpoch((prev) => [...prev, progressData.epoch]);
     }
@@ -53,7 +62,7 @@ const Output = () => {
   }
 
   return (
-    <Flex $flex_direction="column" $width="95rem" $height="auto" $margin="3rem 0 3rem 0" $backgroundColor="white" $borderRadius="15px">
+    <Flex $flex_direction="column" $width="90rem" $height="auto" $margin="3rem 0 3rem 0" $backgroundColor="white" $borderRadius="15px">
       <Text $variants="Medium" $margin="2rem 0 0 3rem">Output</Text>
       <Flex $width="100%" $margin="5rem auto" $justify_content="space-around">
         <Flex $flex_direction="column">

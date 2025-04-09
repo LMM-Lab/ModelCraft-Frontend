@@ -6,12 +6,14 @@ type DnDProps={
   params:paramsProps[]
   setParams:React.Dispatch<React.SetStateAction<paramsProps[]>>
   handleParamsUpdate:(params:paramsProps[],prev:paramsProps[])=>paramsProps[]
+  inputSize:number[]
+  setError:React.Dispatch<React.SetStateAction<string|null>>
 }
 
 const DynamicDnD = dynamic(() => import("@/app/classification/train/Model/DnD/dynamicDnD"), { ssr: false });
 
-function DnD({ params,setParams,handleParamsUpdate}: DnDProps) {
-  return <DynamicDnD params={params} setParams={setParams} handleParamsUpdate={handleParamsUpdate}/>;
+function DnD({ params,setParams,handleParamsUpdate,inputSize,setError}: DnDProps) {
+  return <DynamicDnD setError={setError} inputSize={inputSize} params={params} setParams={setParams} handleParamsUpdate={handleParamsUpdate}/>;
 }
 
 export default DnD

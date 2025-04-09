@@ -40,7 +40,7 @@ const Model = ({inputSize,setParams,params}:ModelProps) => {
   },[inputSize])
 
   return (
-    <Flex $width="95%" $minHeight="22.5rem" $flex_direction="column" $backgroundColor={`${theme.colors.white}`} $borderRadius="15px" $margin="3rem auto 0 auto">
+    <Flex $width="90%" $minHeight="22.5rem" $flex_direction="column" $backgroundColor={`${theme.colors.white}`} $borderRadius="15px" $margin="3rem auto 0 auto">
       <Flex $justify_content="space-between" $align_items="center" $width="95%" $height="fit-content" $margin="2rem auto 0 auto">
         <Text $variants="Medium">Model</Text>
         <Flex $flex_direction="column" $justify_content="flex-start" $align_items="flex-start">
@@ -48,7 +48,7 @@ const Model = ({inputSize,setParams,params}:ModelProps) => {
           <ModelSetting></ModelSetting>
         </Flex>
       </Flex>
-      <DnD params={params} setParams={setParams} handleParamsUpdate={handleParamsUpdate}></DnD>
+      <DnD setError={setError} inputSize={inputSize} params={params} setParams={setParams} handleParamsUpdate={handleParamsUpdate}></DnD>
       {error && 
       <Dialog onClick={()=>{setError(null)}}>
         <Text $marginBottom="1rem">Error Info</Text>

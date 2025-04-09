@@ -1,7 +1,10 @@
 'use client'
 import Flex from "@/component/common/styles/Flex";
 import Text from "@/component/common/Text";
+import { useState } from "react";
 import styled,{css} from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 type DivProps={
   name:string
@@ -11,6 +14,7 @@ type LayerProps={
   name:string
   input:string
   output:string
+  onDelete?: () => void;
 }
 
 const DivContainer=styled.div`
@@ -53,10 +57,18 @@ const Div=styled.div<DivProps>`
   align-items:center;
 `
 
-const Layer=({name,input,output}:LayerProps)=>{
+const Button=styled.button`
+  margin-left:0.5rem;`
+
+const Layer=({name,input,output,onDelete}:LayerProps)=>{
+  const [hoverd,setHovered]=useState<boolean>(false)
+
   return(
     <DivContainer>
-      <Div name={name}><Text $variants="Medium" $fontSize="2rem">{name}</Text></Div>
+      <Div name={name} onMouseEnter={()=>{setHovered(true)}} onMouseLeave={()=>{setHovered(false)}}>
+        <Text $variants="Medium" $fontSize="2rem">{name}</Text>
+        {hoverd && <Button onClick={onDelete} onPointerDown={(e) => e.stopPropagation()}><FontAwesomeIcon icon={faTrash} /></Button>}
+      </Div>
       <Flex $justify_content="space-around" $align_items="center">
         <Flex $flex_direction="column" $justify_content="center" $align_items="center">
           <Text $variants="Small" $marginTop="0.5rem" $fontSize="1.5rem">input</Text>
