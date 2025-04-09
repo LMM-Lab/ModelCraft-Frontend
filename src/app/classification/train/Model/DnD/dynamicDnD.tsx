@@ -9,19 +9,17 @@ import Layer from "./Layer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { paramsProps } from "../types";
+import { LayerIOCalculator } from "./IOCalculator";
 
 type DynamicDnDProps={
   params:paramsProps[]
   setParams:React.Dispatch<React.SetStateAction<paramsProps[]>>
   handleParamsUpdate:(params:paramsProps[],prev:paramsProps[])=>paramsProps[]
+  inputSize:number[]
+  setError:React.Dispatch<React.SetStateAction<string|null>>
 }
 
-const DynamicDnD = ({
-  params,
-  setParams,
-  handleParamsUpdate
-}:DynamicDnDProps
-) => {
+const DynamicDnD = ({params,setParams,handleParamsUpdate,inputSize,setError}:DynamicDnDProps) => {
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
     if (!over) return;
@@ -35,6 +33,16 @@ const DynamicDnD = ({
       const updatedParams=handleParamsUpdate(rearranged,params)
       setParams(updatedParams);
   }
+
+  const handleDelete = (id: number) => {
+    const updated = params.filter(item => item.id !== id);
+    try{
+      setParams(LayerIOCalculator(updated,inputSize));
+    } catch (error:any) {
+      setError(error.message)
+    }
+
+  };
 
   return (
     <div style={{width:'97%', margin:'3rem auto'}}>
@@ -50,7 +58,7 @@ const DynamicDnD = ({
                     <FontAwesomeIcon icon={faAngleRight} style={{ fontSize: '2rem', margin: '0 0.8rem' }} />
                   )}
                   <Sortable id={item.id}>
-                    <Layer name={item.model} input={`(${item.io.input})`} output={`(${item.io.output})`} />
+                    <Layer name={item.model} onDelete={() => handleDelete(item.id)} input={`(${item.io.input})`} output={`(${item.io.output})`} />
                   </Sortable>
                 </Flex>
               </Flex>
