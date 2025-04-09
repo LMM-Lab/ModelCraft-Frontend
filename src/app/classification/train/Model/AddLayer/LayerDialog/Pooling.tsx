@@ -57,7 +57,7 @@ const Pooling = ({addParams,onClick}:LayerProps) => {
         {errors.padding && <Text $variants="Small" color="red">{errors.padding.message}</Text>}
       </InputParam>
 
-      <InputParam $marginTop={gap} name="inputChannel">
+      <InputParam $marginTop={gap} name="input channel">
         <Input {...register('inputChannel', { required: 'enter inputChannel' })} $variants="params" type="number" min={0}></Input>
         {errors.inputChannel && <Text $variants="Small" color="red">{errors.inputChannel.message}</Text>}
       </InputParam>

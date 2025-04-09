@@ -44,24 +44,25 @@ const Affine = ({addParams,onClick,}:LayerProps) => {
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
 
-      <InputParam $marginTop='4rem' name="outputSize">
+      <InputParam $marginTop='4rem' name="output size">
         <Input {...register('outputSize', { required: 'enter poolingSize',valueAsNumber: true})} $variants="params" type="number" min={0}></Input>
         {errors.outputSize && <Text $variants="Small" color="red">{errors.outputSize.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="act func">
         <Select $variants="param" {...register('actFunc', { required: 'enter act func' })}>
-          <option value=""></option>
-          <option value="Sigmoid">Sigmoid</option>
           <option value="Relu">Relu</option>
+          <option value="LeakyRelu">Leaky Relu</option>
+          <option value="Sigmoid">Sigmoid</option>
+          <option value="Tanh">Tanh</option>
+          <option value="Softmax">Softmax</option>
         </Select>
         {errors.actFunc && <Text $variants="Small" color="red">{errors.actFunc.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="weight init">
         <Select $variants="param" {...register('weightInit', { required: 'enter weight init' })}>
-          <option value=""></option>
-          <option value="Zelo">Zelo</option>
+          <option value="StandardNormal">Standard Normal</option>
           <option value="Ramdom">Ramdom</option>
           <option value="Xavier">Xavier</option>
           <option value="He">He</option>
