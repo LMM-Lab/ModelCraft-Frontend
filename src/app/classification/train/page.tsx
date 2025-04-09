@@ -25,6 +25,7 @@ const Train = () => {
   const [data, setData] = useState<DataType | null>(null)
   const [params, setParams] = useState<paramsProps[]>([]);
   const [error, setError] = useState<string | null>(null)
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const stableInputSize = useMemo(() => {
     return data?.inputSize ?? []
@@ -32,54 +33,85 @@ const Train = () => {
 
   const handleTrain = async () => {
 
+    setProgressData(undefined)
+
+    if (!data?.train || data.train.length === 0) {
+      return setError("トレーニングデータが見つかりません");
+    }
+    if (!data?.label || data.label === undefined) {
+      return setError("ラベルデータが見つかりません");
+    }
+
     const lossFuncItems = params.filter(item => item.model === "LossFunc");
     if (lossFuncItems.length === 0) {
-      return setError("損失関数 (LossFunc) が含まれていません。");
+      return setError("損失関数が含まれていません。");
     }
     if (lossFuncItems.length > 1) {
-      return setError("損失関数 (LossFunc) が複数含まれています。");
+      return setError("損失関数が複数含まれています。");
     }
     const lastItem = params[params.length - 1];
     if (lastItem.model !== "LossFunc") {
-      return setError("損失関数 (LossFunc) は最後に配置してください。");
+      return setError("損失関数は最後に配置してください。");
     }
-    if (!data?.train || data.train.length === 0) {
-      console.warn("No training data found");
-      return;
+    if (!modelConfig?.modelName) {
+      return setError("モデルが選択されていません。")
     }
 
-    const CHUNK_SIZE = 100;
-    for (let i = 0; i < data.train.length; i += CHUNK_SIZE) {
-      const chunk = data.train.slice(i, i + CHUNK_SIZE);
-      const formData = new FormData();
-      chunk.forEach((file) => {
-        formData.append("files", file, file.webkitRelativePath || file.name);
-      });
-      if (data.label) {
-        formData.append("label", data.label);
-      }
-      formData.append("modelConfig", JSON.stringify(modelConfig));
-      formData.append("params", JSON.stringify(params));
+    try {
+      const CHUNK_SIZE = 100;
+      for (let i = 0; i < data.train.length; i += CHUNK_SIZE) {
+        const chunk = data.train.slice(i, i + CHUNK_SIZE);
+        const formData = new FormData();
+        chunk.forEach((file) => {
+          formData.append("files", file, file.webkitRelativePath || file.name);
+        });
+        if (data.label) {
+          formData.append("label", data.label);
+        }
 
-      try {
-        const res = await fetch("http://localhost:8000/train/train_job_submit", {
+        const res = await fetch(`${baseUrl}/train/upload_data`, {
           method: "POST",
           body: formData,
           credentials: "include",
         });
 
         if (!res.ok) {
-          const errorText = await res.text();
-          console.warn("サーバーエラー:", res.status, errorText);
-          alert(`サーバーエラー: ${res.status} ${res.statusText}`);
-          return;
+          const error = await res.json();
+          throw new Error(error.detail || "画像アップロードに失敗しました");
         }
-
-        const result = await res.json();
-      } catch (err) {
-        console.error("通信エラー:", err);
       }
+
+      console.log("✅ すべての画像アップロードが完了");
+
+      // ↓ ここで train_job_submit を安全に呼ぶ
+      const formData = new FormData();
+      formData.append("modelConfig", JSON.stringify(modelConfig));
+      formData.append("params", JSON.stringify(params));
+
+      const res = await fetch(`${baseUrl}/train/train_job_submit`, {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        if (res.status === 401) {
+          return setError("ログインしてください");
+        } else if (res.status === 400) {
+          return setError(error.detail);
+        } else {
+          return setError("エラーが発生しました。もう一度お試しください");
+        }
+      }
+
+      console.log("🎉 学習ジョブ送信完了");
+
+    } catch (err) {
+      console.log(err);
+      return setError("エラーが発生しました。もう一度お試しください");
     }
+
   }
 
   return (
@@ -93,9 +125,9 @@ const Train = () => {
         <Nav nav="train"></Nav>
         <Data setData={setData}></Data>
         <Model inputSize={stableInputSize} setParams={setParams} params={params}></Model>
-        <Button $variants="Medium" onClick={handleTrain}>Train</Button>
+        <Button $marginTop="4rem" $variants="Medium" onClick={handleTrain}>Train</Button>
         <ProgressDataContext.Provider value={{ progressData, setProgressData }}>
-          <Flex $justify_content="space-between" $marginTop="3rem">
+          <Flex $justify_content="space-between" $marginTop="6rem">
             <Progress></Progress>
           </Flex>
           <Output></Output>
