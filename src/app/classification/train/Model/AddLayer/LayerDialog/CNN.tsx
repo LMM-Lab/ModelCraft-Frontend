@@ -68,24 +68,25 @@ const CNN = ({addParams,onClick}:LayerProps) => {
         {errors.stride && <Text $variants="Small" color="red">{errors.stride.message}</Text>}
       </InputParam>
 
-      <InputParam $marginTop={gap} name="input-channel">
+      <InputParam $marginTop={gap} name="input channel">
         <Input {...register('inputChannel', { required: 'enter poolingSize' })} $variants="params" type="number" min={0}></Input>
         {errors.inputChannel && <Text $variants="Small" color="red">{errors.inputChannel.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="act func">
         <Select $variants="param" {...register('actFunc', { required: 'enter act func' })}>
-          <option value=""></option>
-          <option value="Sigmoid">Sigmoid</option>
           <option value="Relu">Relu</option>
+          <option value="LeakyRelu">Leaky Relu</option>
+          <option value="Sigmoid">Sigmoid</option>
+          <option value="Tanh">Tanh</option>
+          <option value="Softmax">Softmax</option>
         </Select>
         {errors.actFunc && <Text $variants="Small" color="red">{errors.actFunc.message}</Text>}
       </InputParam>
 
       <InputParam $marginTop={gap} name="weight init">
         <Select $variants="param" {...register('weightInit', { required: 'enter weight init' })}>
-          <option value=""></option>
-          <option value="Zelo">Zelo</option>
+          <option value="StandardNormal">Standard Normal</option>
           <option value="Ramdom">Ramdom</option>
           <option value="Xavier">Xavier</option>
           <option value="He">He</option>
