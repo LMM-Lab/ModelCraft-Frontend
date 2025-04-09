@@ -31,7 +31,7 @@ const ModelSetting = () => {
   const { control, register, handleSubmit, formState: { errors }, watch } = useForm<ModelConfigType>({
     defaultValues: {
       modelName:'ResNet',
-      epock: 1,
+      epock: 5,
       batchSize: 32,
       learningRate: 0.01,
       optimizer: 'Adam',
@@ -117,7 +117,7 @@ const ModelSetting = () => {
               </Select>
             </InputParam>
 
-            <SetSection><Text $variants="Medium">label</Text></SetSection>
+            {/* <SetSection><Text $variants="Medium">label</Text></SetSection>
             {fields.map((field, index) => (
               <Flex key={index} $flex_direction="column" $align_items="flex-end" $marginRight="6rem">
                 <Flex $justify_content="center" $align_items="flex-end">
@@ -128,7 +128,7 @@ const ModelSetting = () => {
                 {errors.label?.[index]?.label && <Text $variants="Small" $color="red">{errors.label[index].label.message}</Text>}
               </Flex>
             ))}
-            <Button $width="5rem" $margin="2rem 6rem 0 auto" onClick={() => append({ 'number': `${fields.length}`, 'label': '' })} type="button"><Text $variants="Small">+</Text></Button>
+            <Button $width="5rem" $margin="2rem 6rem 0 auto" onClick={() => append({ 'number': `${fields.length}`, 'label': '' })} type="button"><Text $variants="Small">+</Text></Button> */}
 
               {/* <SetSection><Text $variants="Medium">resorce</Text></SetSection>
               <InputParam name="resorce" $marginTop={gap}>
@@ -156,7 +156,7 @@ const ModelSetting = () => {
                 </InputParam>
               )} */}
 
-            <Button type="submit" $variants="Small" $width="10rem" $padding="0 1rem" $margin="2rem auto" $display="block">Add</Button>
+            <Button type="submit" $variants="Small" $width="10rem" $padding="0 1rem" $margin="5rem auto 2rem auto" $display="block">Add</Button>
           </form>
         </Dialog>
       )}
