@@ -19,6 +19,14 @@ const LabelUploader = ({setData}:LabelUploaderProps) => {
     const file=acceptedFiles[0]
     if(!file) return
 
+    const allowedExtensions = ['.csv', '.txt'];
+    const isAllowed = allowedExtensions.some(ext => file.name.toLowerCase().endsWith(ext));
+
+    if (!isAllowed) {
+      alert("CSV または TXT ファイルをアップロードしてください");
+      return;
+    }
+
     const reader=new FileReader()
     reader.onload=(event)=>{
       if(event.target?.result){
