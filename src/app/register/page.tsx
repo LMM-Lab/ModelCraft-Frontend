@@ -8,6 +8,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import InputImage from "@/component/common/InputImage";
 import { useState } from "react";
 import UserNameInput from "@/component/common/UserNameInput";
+import Dialog from "@/component/common/Dialog";
+import { useRouter } from 'next/navigation';
 
 type FormData = {
   name: string
@@ -18,37 +20,44 @@ type FormData = {
 const Register = () => {
   const [icon, setIcon] = useState<File>()
   const [userName, setUserName] = useState<string>('')
+  const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
     try {
-      const payload = {
-        username: userName,
-        email: data.email,
-        password: data.password,
+      const formData = new FormData();
+      formData.append('username', userName);
+      formData.append('email', data.email);
+      formData.append('password', data.password);
+  
+      if (icon) {
+        formData.append('icon', icon);
       }
-
-      const res = await fetch('http://localhost:8000/auth/register', {
+      const res = await fetch(`${baseUrl}/auth/register`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      })
-
+        body: formData,
+        credentials: 'include',
+      });
       if (!res.ok) {
-        const error = await res.json()
-        console.error('❌ 登録失敗:', error)
+        const error = await res.json();
+        if(res.status===409){
+          setError('ユーザー名またはメールアドレスが既に使用されています')
+        } else {
+          console.log(error.detail)
+          setError('登録に失敗しました。もう一度お試しください')
+        }
       } else {
-        const result = await res.json()
-        console.log('✅ 登録成功:', result)
+        router.push('/login')
       }
-
+  
     } catch (err) {
-      console.error('❌ ネットワークエラー:', err)
+      console.log(err);
+      setError('登録に失敗しました。もう一度お試しください')
     }
-  }
+  };
 
   const handleIcon = (iconFile: File) => {
     setIcon(iconFile)
@@ -63,6 +72,11 @@ const Register = () => {
   return (
     <div>
       <Text $variants="ExtraLarge" $margin="5rem 0 0 10rem">Register</Text>
+      {error &&
+          <Dialog onClick={() => { setError(null) }}>
+            <Text $marginBottom="1rem">Error Info</Text>
+            <Text $variants="Small" $color="red">{error}</Text>
+          </Dialog>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex $flex_direction="column" $marginTop="5rem" $justify_content="center" $align_items="center">
           <Flex>
@@ -77,7 +91,7 @@ const Register = () => {
             {...register('password', { required: 'Enter your Password' })}
             $marginTop="1.5rem" $variants="default" placeholder="Password" $textAlign="center" />
           {errors.password && <Text $color="red" $variants="Medium">{errors.password.message}</Text>}
-          <Button type="submit" $marginTop="5rem" $variants="Medium">login</Button>
+          <Button type="submit" $marginTop="5rem" $variants="Medium">Register</Button>
         </Flex>
       </form>
     </div>
