@@ -35,11 +35,10 @@ const LossFunc = ({addParams,onClick}:LayerProps) => {
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
 
-      <InputParam $marginTop='4rem' name="lossFunc">
+      <InputParam $marginTop='4rem' name="loss func">
         <Select $variants="param" {...register('lossFunc', { required: 'enter weight init' })}>
-          <option value=""></option>
-          <option value="CrossEntropy">CrossEntropy</option>
-          <option value="Relu">Relu</option>
+          <option value="CrossEntropy">Cross Entropy</option>
+          {/* <option value="BinaryCrossEntropy">Binary Cross Entropy</option> */}
         </Select>
         {errors.lossFunc && <Text $variants="Small" color="red">{errors.lossFunc.message}</Text>}
       </InputParam>
