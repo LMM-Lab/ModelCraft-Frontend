@@ -14,6 +14,8 @@ type FlexProps={
   $column_gap?:string
   $flexBasis?:string
   $flex?:string
+  $direction?:string
+  $overflowY?:string
 }
 
 const Flex=styled(Box)<FlexProps>`
@@ -29,6 +31,8 @@ const Flex=styled(Box)<FlexProps>`
   display:flex;
   flex-basis:${({$flexBasis})=>$flexBasis};
   flex:${({$flex})=>$flex};
+  direction:${({$direction})=>$direction};
+  overflow-y:${({$overflowY})=>$overflowY};
 `
 
 export default Flex

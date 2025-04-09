@@ -20,6 +20,7 @@ type TextProps={
   $marginLeft?:string
   $marginBottom?:string
   $color?:string
+  $textOverflow?:string
 }
 
 const Text=styled.p<TextProps>`
@@ -75,6 +76,7 @@ const Text=styled.p<TextProps>`
   margin-left: ${({ $marginLeft }) => $marginLeft};
   margin-bottom: ${({ $marginBottom }) => $marginBottom};
   display:inline-block;
+  text-overflow: ${({ $textOverflow }) => $textOverflow};
 `
 
 export default Text

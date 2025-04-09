@@ -6,7 +6,7 @@ type ButtonProps={
   $width?:string
   $height?:string
   $backColor?:string
-  $variants?:'Small'|'Medium'|'Large'|'Icon'|'nav'
+  $variants?:'Small'|'Medium'|'Large'|'Icon'|'nav'|'normal'
   children?:React.ReactNode
   $borderRadius?:string
   $padding?:string
@@ -56,16 +56,21 @@ const Button=styled.button<ButtonProps>`
         `
       case 'nav':
         return css`
-          font-size:${theme.fontSize.Medium};
-          border-radius:0!important;
+          font-size:2.5rem;
+          border-radius:10px !important;
           width:100%;
-          height:80px;
+          height:60px;
           background-color:${$isactive ? theme.colors.isActive:theme.colors.sideBar};
           &:hover{
             background-color:${theme.colors.isActive} !important;
             color:white !important;
             border:none !important;
           }
+        `
+        case 'normal':
+        return css`
+          background-color:#cecece;
+          border:none;
         `
     }
   }};
