@@ -36,7 +36,7 @@ const AddLayer = ({addParams}:AddLayerProps) => {
               <option value="Affine">Affine</option>
               <option value="CNN">CNN</option>
               <option value="Pooling">Pooling</option>
-              <option value="LossFunc">LossFunc</option>
+              <option value="LossFunc">Loss Func</option>
             </Select>
             {(layer === 'Affine') && (
               <Affine addParams={addParams} onClick={toggleOpen}></Affine>
