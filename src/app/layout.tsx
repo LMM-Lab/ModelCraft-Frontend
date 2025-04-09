@@ -6,7 +6,7 @@ import theme from "@/styles/theme";
 import SideBar from "@/component/common/SideBar";
 import Grid from "@/component/common/styles/Grid";
 import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css'; // 必須: CSSをインポート
+import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false; // 自動CSS追加を無効化
 import { useProgressBarAtTransition } from "@/hooks/useProgressBarAtTransition";
 import { UserContext, UserType } from "@/Context/User";
@@ -15,22 +15,23 @@ import { useEffect, useState } from "react";
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   useProgressBarAtTransition()
   const [user, setUser] = useState<UserType>()
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch("http://localhost:8000/auth/me", {
+      const res = await fetch(`${baseUrl}/auth/me`, {
         credentials: "include",
       });
       if (res.ok) {
         const user = await res.json();
-        setUser({'username':user.username})
+        setUser({'username':user.username,icon:user.icon})
       }
     };
     fetchUser();
   }, []);
 
   return (
-    <html lang="en">
+    <html lang="en" style={{overflowY: 'scroll'}}>
       <body>
         <StyledComponentsRegistry>
           <ThemeProvider theme={theme}>
