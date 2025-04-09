@@ -94,9 +94,9 @@ const ModelSetting = () => {
             <InputParam name="optimizer" $marginTop={gap}>
               <Select $variants="param" {...register('optimizer')}>
                 <option value="SGD">SGD</option>
-                <option value="Momentum">Momentum</option>
+                {/* <option value="Momentum">Momentum</option> */}
                 <option value="Adagrad">Adagrad</option>
-                <option value="RMSProp">RMSProp</option>
+                <option value="RMSprop">RMSprop</option>
                 <option value="Adam">Adam </option>
               </Select>
               {errors.optimizer && <Text $variants="Small">{errors.optimizer.message}</Text>}
