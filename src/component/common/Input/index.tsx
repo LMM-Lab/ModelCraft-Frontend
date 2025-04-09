@@ -24,13 +24,14 @@ type InputProps=React.InputHTMLAttributes<HTMLInputElement>&{
   $paddingLeft?: string
   $borderButton?:string
   $borderRadius?:string
-  $variants?:'default'|'serch'|'params'
+  $variants?:'default'|'account'|'params'
   onChange?:(event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?:string
   $textAlign?:string
 }
 
 const InputCSS=styled.input<InputProps>`
+  background-color:${({$backgroundColor,theme})=>$backgroundColor||theme.colors.white};
   ${({$variants,theme})=>{
     switch ($variants){
       case 'default':
@@ -39,9 +40,15 @@ const InputCSS=styled.input<InputProps>`
           height:7rem;
           font-size:${theme.fontSize.Medium};
         `
-      case 'serch':
+      case 'account':
         return css`
-          
+          background-color:#e5e5e5;
+          border-radius:5px;
+          width:100%;
+          height:4rem;
+          margin-top:1rem;
+          padding-left:2rem;
+          font-size:1.5rem;
         `
       case 'params':
         return css`
@@ -56,7 +63,6 @@ const InputCSS=styled.input<InputProps>`
     }
   }}
   color:${({color})=>color};
-  background-color:${({$backgroundColor,theme})=>$backgroundColor||theme.colors.white};
   width:${({$width})=>$width};
   height:${({$height})=>$height};
   min-width:${({$minWidth})=>$minWidth};
@@ -75,6 +81,7 @@ const InputCSS=styled.input<InputProps>`
   padding-bottom:${({$paddingBottom})=>$paddingBottom};
   padding-left:${({$paddingLeft='1rem'})=>$paddingLeft};
   text-align:${({$textAlign})=>$textAlign};
+  border-radius:${({$borderRadius})=>$borderRadius};
   &:focus{
     outline:none;
   }
