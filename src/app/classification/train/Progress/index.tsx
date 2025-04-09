@@ -20,12 +20,13 @@ const Progress=()=>{
   const {user}=useUser()
   const wsRef = useRef<WebSocket | null>(null)
   const reconnectTimerRef = useRef<NodeJS.Timeout | null>(null)
+  const wsUrl = process.env.NEXT_PUBLIC_WS_URL;
 
   useEffect(() => {
     let shouldReconnect = true
 
     const connect = () => {
-      const ws = new WebSocket('ws://localhost:8000/auth/ws')
+      const ws = new WebSocket(`${wsUrl}/auth/ws?page=training`)
       wsRef.current = ws
 
       ws.onopen = () => {
@@ -39,13 +40,13 @@ const Progress=()=>{
             return  
           }
           setProgressData(parsed)
+          console.log('data:',parsed)  
           setLogs((prev)=>[...prev,{
             epoch:parsed.epoch,
             trainLoss:parsed.loss_json.train,
             valLoss:parsed.loss_json.val,
             time:parsed.train_time,
           }])
-          console.log('data:', parsed)
         } catch (err) {
           console.log('Progress useEffect:', err)
         }
@@ -71,6 +72,13 @@ const Progress=()=>{
       wsRef.current?.close()
     }
   }, [])
+
+  useEffect(() => {
+    if (progressData === undefined) {
+      setLogs([])
+      return
+    }
+  },[progressData])
   
   
   return(

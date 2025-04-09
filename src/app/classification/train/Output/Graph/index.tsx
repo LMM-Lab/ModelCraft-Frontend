@@ -1,13 +1,22 @@
-'use client'
-import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Legend } from 'chart.js';
-import { useEffect, useRef } from 'react';
-import styled from 'styled-components';
+"use client";
+import {
+  Chart as ChartJS,
+  LineController,
+  LineElement,
+  PointElement,
+  LinearScale,
+  Title,
+  CategoryScale,
+  Legend,
+} from "chart.js";
+import { useEffect, useRef } from "react";
+import styled from "styled-components";
 
-Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Legend);
+ChartJS.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Legend);
 
 const Div = styled.div`
-  width:40rem;
-  height:30rem;
+  width: 40rem;
+  height: 30rem;
 `;
 
 type resultType = {
@@ -17,35 +26,36 @@ type resultType = {
 };
 
 type GraphProps = {
-  data: resultType; 
+  data: resultType;
 };
 
 const Graph = ({ data }: GraphProps) => {
   const chartRef = useRef<HTMLCanvasElement | null>(null);
-  const chartInstance = useRef<Chart | null>(null);
+  const chartInstance = useRef<ChartJS | null>(null);
 
   useEffect(() => {
     if (!chartRef.current) return;
-
-    // Chart インスタンスがまだ作られていない場合のみ初期化
+  
+    // 初期化
+    const ctx = chartRef.current.getContext("2d");
+    if (!ctx) return;
+  
+    // チャート初期化（初回だけ）
     if (!chartInstance.current) {
-      const ctx = chartRef.current.getContext('2d');
-      if (!ctx) return;
-
-      chartInstance.current = new Chart(ctx, {
-        type: 'line',
+      chartInstance.current = new ChartJS(ctx, {
+        type: "line",
         data: {
-          labels: data.epoch,
+          labels: [],
           datasets: [
             {
-              label: 'train',
-              data: data.train,
-              borderColor: 'rgba(75, 192, 192, 1)',
+              label: "train",
+              data: [],
+              borderColor: "rgba(75, 192, 192, 1)",
             },
             {
-              label: 'val',
-              data: data.val,
-              borderColor: '#759898',
+              label: "val",
+              data: [],
+              borderColor: "#759898",
             },
           ],
         },
@@ -55,49 +65,47 @@ const Graph = ({ data }: GraphProps) => {
           plugins: {
             legend: {
               display: true,
-              position: 'bottom',
-              align: 'end',
+              position: "bottom",
+              align: "end",
             },
           },
           scales: {
             x: {
               title: {
                 display: true,
-                text: 'epoch',
+                text: "epoch",
               },
             },
             y: {
               title: {
                 display: true,
-                text: 'Loss',
+                text: "Value",
               },
             },
           },
         },
       });
-    } else {
-      // すでに生成済みの場合は、新しいデータだけを追加して update() する
-      const chart = chartInstance.current;
-
-      /**
-       * 今回届いたデータすべてを再描画するなら:
-       * chart.data.labels = data.epoch;
-       * chart.data.datasets[0].data = data.train;
-       * chart.data.datasets[1].data = data.val;
-       */
-      
-      // 新規に追加された分だけ push したい場合 (例)
-      // 直近のラベル (epoch) と値をチャートに追加していくイメージ
-      const latestLabel = data.epoch[data.epoch.length - 1];
-      const latestTrain = data.train[data.train.length - 1];
-      const latestVal = data.val[data.val.length - 1];
-
-      chart.data.labels?.push(latestLabel);
-      chart.data.datasets[0].data.push(latestTrain);
-      chart.data.datasets[1].data.push(latestVal);
-
-      chart.update();
     }
+  
+    const chart = chartInstance.current;
+    if (!chart) return;
+  
+    if (data.epoch.length === 0) {
+      chart.data.labels = [];
+      chart.data.datasets[0].data = [];
+      chart.data.datasets[1].data = [];
+      chart.update();
+      return;
+    }
+  
+    const currentLen = chart.data.labels?.length ?? 0;
+    for (let i = currentLen; i < data.epoch.length; i++) {
+      chart.data.labels?.push(data.epoch[i]);
+      chart.data.datasets[0].data.push(data.train[i]);
+      chart.data.datasets[1].data.push(data.val[i]);
+    }
+  
+    chart.update();
   }, [data]);
 
   return (
