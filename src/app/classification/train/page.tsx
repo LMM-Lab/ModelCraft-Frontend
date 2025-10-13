@@ -25,6 +25,7 @@ const Train = () => {
   const [data, setData] = useState<DataType | null>(null)
   const [params, setParams] = useState<paramsProps[]>([]);
   const [error, setError] = useState<string | null>(null)
+  const [taskMessage, setTaskMessage] = useState<string | null>(null)
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const stableInputSize = useMemo(() => {
@@ -34,6 +35,7 @@ const Train = () => {
   const handleTrain = async () => {
 
     setProgressData(undefined)
+    setTaskMessage('処理を開始します')
 
     if (!data?.train || data.train.length === 0) {
       return setError("トレーニングデータが見つかりません");
@@ -68,22 +70,20 @@ const Train = () => {
         if (data.label) {
           formData.append("label", data.label);
         }
-
         const res = await fetch(`${baseUrl}/train/upload_data`, {
           method: "POST",
           body: formData,
           credentials: "include",
         });
-
         if (!res.ok) {
           const error = await res.json();
           throw new Error(error.detail || "画像アップロードに失敗しました");
+        } else {
+          const data = await res.json();
+          setTaskMessage(data.message)
         }
       }
 
-      console.log("✅ すべての画像アップロードが完了");
-
-      // ↓ ここで train_job_submit を安全に呼ぶ
       const formData = new FormData();
       formData.append("modelConfig", JSON.stringify(modelConfig));
       formData.append("params", JSON.stringify(params));
@@ -93,7 +93,7 @@ const Train = () => {
         body: formData,
         credentials: "include",
       });
-
+      setTaskMessage('画像をアップロード中')
       if (!res.ok) {
         const error = await res.json();
         if (res.status === 401) {
@@ -104,8 +104,47 @@ const Train = () => {
           return setError("エラーが発生しました。もう一度お試しください");
         }
       }
+      else {
+        const data = await res.json();
+        const taskId = data.task_id;
+        const interval = setInterval(async () => {
+          const response = await fetch(`${baseUrl}/train/task-status/${taskId}`, {
+            method: "GET",
+            credentials: "include",
+          });
 
-      console.log("🎉 学習ジョブ送信完了");
+          if (!response.ok) {
+            setError("プログラムエラーが発生しました");
+          }
+          const data = await response.json();
+          console.log(`状態: ${data.state}`);
+
+          if (data.state === "PENDING") {
+            setTaskMessage("まだ始まってない…");
+          } else if (data.state === "STARTED") {
+            setTaskMessage("学習中");
+          } else if (data.state === "SUCCESS") {
+            setTaskMessage("タスクが完了しました");
+            clearInterval(interval);
+          } else if (data.state === "FAILURE") {
+            setTaskMessage("タスク失敗しました");
+            clearInterval(interval);
+          } else if (data.state === "RETRY") {
+            setTaskMessage("再試行中…");
+          } else if (data.state === "REVOKED") {
+            setTaskMessage("取り消されました");
+          }
+
+          if (["SUCCESS", "FAILURE"].includes(data.state)) {
+            setTaskMessage("タスクが終了しました");
+            clearInterval(interval);
+          
+            setTimeout(() => {
+              setTaskMessage("");
+            }, 3000);
+          }
+        }, 1000);
+      }
 
     } catch (err) {
       console.log(err);
@@ -126,6 +165,7 @@ const Train = () => {
         <Data setData={setData}></Data>
         <Model inputSize={stableInputSize} setParams={setParams} params={params}></Model>
         <Button $marginTop="4rem" $variants="Medium" onClick={handleTrain}>Train</Button>
+        {taskMessage && <Text $marginTop="1rem" $variants="Small">{taskMessage}</Text>}
         <ProgressDataContext.Provider value={{ progressData, setProgressData }}>
           <Flex $justify_content="space-between" $marginTop="6rem">
             <Progress></Progress>

@@ -5,9 +5,11 @@ import Flex from "@/component/common/styles/Flex";
 import Text from "@/component/common/Text";
 import Button from "@/component/common/Button";
 import { redirect } from "next/navigation";
+import { useUser } from "@/Context/User";
 
 
 const Logout = () => {
+  const { setUser, user } = useUser()
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   const handleLogout=async()=>{
@@ -20,6 +22,7 @@ const Logout = () => {
       console.log('ログアウト失敗:', error);
     } else {
       console.log('ログアウト成功:');
+      setUser(undefined)
       redirect('/classification/train');
     }
   }
