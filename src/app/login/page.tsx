@@ -74,7 +74,7 @@ const Login = () => {
         <Flex $flex_direction="column" $marginTop="10rem" $justify_content="center" $align_items="center">
           <Input {...register('username', { required: 'please enter your e-mail' })} $textAlign="center" $variants="default" placeholder="e-username" />
           {errors.username && <Text $color="red" $variants="Medium">{errors.username.message}</Text>}
-          <Input {...register('password', { required: 'please enter your password' })} $textAlign="center" $marginTop="1.5rem" $variants="default" placeholder="password" />
+          <Input {...register('password', { required: 'please enter your password' })} type="password" $textAlign="center" $marginTop="1.5rem" $variants="default" placeholder="password" />
           {errors.password && <Text $color="red" $variants="Medium">{errors.password.message}</Text>}
           <Button $marginTop="10rem" $variants="Medium">login</Button>
         </Flex>

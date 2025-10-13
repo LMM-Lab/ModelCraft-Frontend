@@ -116,7 +116,7 @@ const EditProfile = () => {
               {previewSrc ? (
                 <img src={previewSrc} alt="Preview" />
               ) : (
-                <span style={{ color: '#999',fontSize:'1.5rem'}}>No icon</span>
+                <span style={{ color: '#999',fontSize:'1.5rem',textAlign:'center'}}>No icon</span>
               )}
           </Preview>
           <ImageUploadButton onClick={handleClick}>Upload image</ImageUploadButton>
