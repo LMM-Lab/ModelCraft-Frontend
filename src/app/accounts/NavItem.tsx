@@ -16,7 +16,7 @@ const StyledLink = styled(Link)<{ $active: boolean }>`
   display: flex;
   align-items: center;
   width:100%;
-  height:4.5rem;
+  min-height:4.5rem;
   border-radius: 10px;
   font-weight: 500;
   border: 2px solid ${({ $active }) => ($active ? "#6D9DC5" : "transparent")};

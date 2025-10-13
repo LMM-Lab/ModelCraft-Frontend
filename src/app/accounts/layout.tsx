@@ -31,13 +31,14 @@ const fontSize='2.5rem'
 
 export default function Layout({ children }: { children: ReactNode }) {
   if (!children) return null;
+  const navColor="#4e4e4e"
   return (
     <ContainerDiv>
       <Flex $marginRight="3rem" $width="25%" $height="fit-content" $flex_direction="column" $justify_content="center" $align_items="center">
-        <NavItem href="/accounts/EditProfile" text="Edit profile"><FontAwesomeIcon icon={faCircleUser} style={{fontSize:fontSize}}/></NavItem>
-        <NavItem href="/accounts/Password" text="Password"><FontAwesomeIcon icon={faLock} style={{fontSize:fontSize}}/></NavItem>
-        <NavItem href="/accounts/ModelList" text="Model list"><FontAwesomeIcon icon={faHexagonNodes} style={{fontSize:fontSize}}/></NavItem>
-        <NavItem href="/accounts/Logout" text="Logout"><FontAwesomeIcon icon={faRightFromBracket} style={{fontSize:fontSize}}/></NavItem>
+        <NavItem href="/accounts/EditProfile" text="Edit profile" color={navColor}><FontAwesomeIcon icon={faCircleUser} style={{fontSize:fontSize,color:navColor}}/></NavItem>
+        <NavItem href="/accounts/Password" text="Password" color={navColor}><FontAwesomeIcon icon={faLock} style={{fontSize:fontSize,color:navColor}}/></NavItem>
+        <NavItem href="/accounts/ModelList" text="Model list" color={navColor}><FontAwesomeIcon icon={faHexagonNodes} style={{fontSize:fontSize,color:navColor}}/></NavItem>
+        <NavItem href="/accounts/Logout" text="Logout" color={navColor}><FontAwesomeIcon icon={faRightFromBracket} style={{fontSize:fontSize,color:navColor}}/></NavItem>
         <Line></Line>
         <NavItem href="/accounts/DeleteAccount" text="Delete account" color="#e20000"><FontAwesomeIcon icon={faXmark} style={{fontSize:'3.5rem',color:'#e20000'}}/></NavItem>
       </Flex>
