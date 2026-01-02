@@ -30,8 +30,8 @@ const ModelSetting = () => {
   const {modelConfig,setModelConfig}=useModelConfig()
   const { control, register, handleSubmit, formState: { errors }, watch } = useForm<ModelConfigType>({
     defaultValues: {
-      modelName:'ResNet',
-      epock: 5,
+      modelName:'test19',
+      epock: 7,
       batchSize: 32,
       learningRate: 0.01,
       optimizer: 'Adam',
