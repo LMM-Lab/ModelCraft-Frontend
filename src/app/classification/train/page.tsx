@@ -1,17 +1,17 @@
 'use client'
-import Model from "./Model";
-import React, { useEffect, useMemo, useState } from "react";
-import Progress from "./Progress";
-import Flex from "@/component/common/styles/Flex";
-import { ModelConfigContext, ModelConfigType } from "@/Context/ModelConfig";
-import Output from "./Output";
-import Nav from "./Nav";
-import Data from "./Data";
-import { paramsProps } from "./Model/types";
 import Button from "@/component/common/Button";
 import Dialog from "@/component/common/Dialog";
+import Flex from "@/component/common/styles/Flex";
 import Text from "@/component/common/Text";
+import { ModelConfigContext, ModelConfigType } from "@/Context/ModelConfig";
 import { ProgressDataContext, ProgressDataType } from "@/Context/ProgressData";
+import { useMemo, useState } from "react";
+import Data from "./Data";
+import Model from "./Model";
+import { paramsProps } from "./Model/types";
+import Nav from "./Nav";
+import Output from "./Output";
+import Progress from "./Progress";
 
 export type DataType = {
   train?: File[]

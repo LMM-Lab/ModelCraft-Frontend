@@ -1,14 +1,13 @@
 'use client'
-import Text from "@/component/common/Text";
-import styled from "styled-components";
+import Button from "@/component/common/Button";
+import Dialog from "@/component/common/Dialog";
 import Input from "@/component/common/Input";
 import Flex from "@/component/common/styles/Flex";
-import Button from "@/component/common/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
+import Text from "@/component/common/Text";
 import { useUser } from "@/Context/User";
-import { useState } from "react";
-import Dialog from "@/component/common/Dialog";
 import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const Login = () => {
   const router = useRouter()

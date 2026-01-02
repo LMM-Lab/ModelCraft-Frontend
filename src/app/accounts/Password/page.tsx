@@ -1,11 +1,9 @@
 'use client'
-import styled from "styled-components";
-import React, { useState } from "react";
+import Button from "@/component/common/Button";
+import Input from "@/component/common/Input";
 import Text from "@/component/common/Text";
 import Flex from "@/component/common/styles/Flex";
 import { useForm } from "react-hook-form";
-import Input from "@/component/common/Input";
-import Button from "@/component/common/Button";
 
 type PasswordFormInputs  = {
   oldPassword: string;

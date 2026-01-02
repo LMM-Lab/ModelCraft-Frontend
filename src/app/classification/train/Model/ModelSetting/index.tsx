@@ -1,17 +1,14 @@
 'use client'
 import Button from "@/component/common/Button"
 import Dialog from "@/component/common/Dialog"
-import Select from "@/component/common/Select"
 import Input from "@/component/common/Input"
+import Select from "@/component/common/Select"
 import Text from "@/component/common/Text"
-import {  useEffect, useState } from "react"
-import InputParam from "../AddLayer/LayerDialog/InputParam"
+import { ModelConfigType, useModelConfig } from "@/Context/ModelConfig"
+import { useEffect, useState } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
 import styled from "styled-components"
-import Flex from "@/component/common/styles/Flex"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import { ModelConfigType, useModelConfig } from "@/Context/ModelConfig"
+import InputParam from "../AddLayer/LayerDialog/InputParam"
 
 const SetSection = styled.div`
   width:11rem;

@@ -1,11 +1,11 @@
 'use client'
-import styled from "styled-components";
-import React, { useRef, useState } from "react";
-import Text from "@/component/common/Text";
 import Button from "@/component/common/Button";
-import Flex from "@/component/common/styles/Flex";
 import Input from "@/component/common/Input";
+import Flex from "@/component/common/styles/Flex";
+import Text from "@/component/common/Text";
 import { useUser } from "@/Context/User";
+import React, { useRef, useState } from "react";
+import styled from "styled-components";
 
 type RequestData={
   username:string;
