@@ -68,7 +68,7 @@ const SelectModel = ({setData}:SelectModelProps) => {
         const modelNamesList: string[] = data.map((model: any) => model.model_name)
         setModels(modelNamesList || [])
       } catch (err) {
-        console.error("モデルの取得に失敗しました", err)
+        console.log("モデルの取得に失敗しました", err)
       }
     }
     fetchModels()

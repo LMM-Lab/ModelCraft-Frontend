@@ -22,11 +22,12 @@ const Password = () => {
 
   const newPassword = watch('newPassword');
 
-  const onSubmit =async (data: PasswordFormInputs ) => {
+const onSubmit = async (data: PasswordFormInputs) => {
+  try {
     const jsonData = JSON.stringify(data);
     const res = await fetch(`${baseUrl}/auth/editPassword`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' }, 
+      headers: { 'Content-Type': 'application/json' },
       body: jsonData,
       credentials: 'include',
     });
@@ -35,7 +36,10 @@ const Password = () => {
     } else {
       const userData = await res.json();
     }
-  };
+  } catch (error) {
+    alert('通信エラー');
+  }
+};
 
   return (
     <Flex $margin="2rem 0 0 3rem" $flex_direction="column" $width="40%" $height="fit-content">
@@ -47,7 +51,7 @@ const Password = () => {
             id="oldPassword"
             type="password"
             $variants="account"
-            {...register('oldPassword', { required: 'Old password is required' })}
+            {...register('oldPassword', { required: '古いパスワードを入力してください' })}
           />
           {errors.oldPassword && <p style={{ color: 'red' }}>{errors.oldPassword.message}</p>}
         </div>
@@ -59,7 +63,7 @@ const Password = () => {
             type="password"
             $variants="account"
             {...register('newPassword', {
-              required: 'New password is required',
+              required: '新しいパスワードを入力してください',
               minLength: { value: 6, message: 'At least 6 characters' },
             })}
           />
@@ -73,9 +77,9 @@ const Password = () => {
             type="password"
             $variants="account"
             {...register('confirmPassword', {
-              required: 'Please confirm your new password',
+              required: 'もう一度新しいパスワードを入力してください',
               validate: value =>
-                value === newPassword || 'Passwords do not match',
+                value === newPassword || 'パスワードが一致しません',
             })}
           />
           {errors.confirmPassword && <p style={{ color: 'red' }}>{errors.confirmPassword.message}</p>}
