@@ -27,7 +27,7 @@ const ModelSetting = () => {
   const {modelConfig,setModelConfig}=useModelConfig()
   const { control, register, handleSubmit, formState: { errors }, watch } = useForm<ModelConfigType>({
     defaultValues: {
-      modelName:'test19',
+      modelName:'',
       epock: 7,
       batchSize: 32,
       learningRate: 0.01,

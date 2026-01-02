@@ -35,13 +35,12 @@ const Train = () => {
   const handleTrain = async () => {
 
     setProgressData(undefined)
-    setTaskMessage('処理を開始します')
 
     if (!data?.train || data.train.length === 0) {
-      return setError("トレーニングデータが見つかりません");
+      return setError("訓練データを入力してください");
     }
     if (!data?.label || data.label === undefined) {
-      return setError("ラベルデータが見つかりません");
+      return setError("ラベルデータを入力してください");
     }
 
     const lossFuncItems = params.filter(item => item.model === "LossFunc");
@@ -56,8 +55,9 @@ const Train = () => {
       return setError("損失関数は最後に配置してください。");
     }
     if (!modelConfig?.modelName) {
-      return setError("モデルが選択されていません。")
+      return setError("モデルの名前を入力してください。")
     }
+    setTaskMessage('処理を開始します')
 
     try {
       const CHUNK_SIZE = 100;
@@ -101,6 +101,7 @@ const Train = () => {
         } else if (res.status === 400) {
           return setError(error.detail);
         } else {
+          setTaskMessage('')
           return setError("エラーが発生しました。もう一度お試しください");
         }
       }
@@ -148,6 +149,7 @@ const Train = () => {
 
     } catch (err) {
       console.log(err);
+      setTaskMessage('')
       return setError("エラーが発生しました。もう一度お試しください");
     }
 

@@ -2,7 +2,7 @@ import { AffineParams, CNNParams, PoolingParams, LossFuncParams,paramsProps } fr
 
 const AffineIOCalculator = (input: number[], params: AffineParams, batch?: number):paramsProps => {
   if (input.length === 0) {
-    throw new Error("入力が空です");
+    throw new Error("先にデータを入力してください");
   }
   // 入力次元数を計算
   const inputSize = input.length > 1 ? input.reduce((prev, curr) => prev * curr, 1) : input[0];
@@ -18,7 +18,7 @@ const AffineIOCalculator = (input: number[], params: AffineParams, batch?: numbe
 
 const CNNIOCalculator = (input: number[], params: CNNParams, batch?: number): paramsProps => {
   if (input.length === 0) {
-    throw new Error("入力が空です");
+    throw new Error("先にデータを入力してください");
   }
   let inChannels: number;
   let spatialDims: number[];
@@ -33,7 +33,7 @@ const CNNIOCalculator = (input: number[], params: CNNParams, batch?: number): pa
     // 三次元以外の入力を `(inputChannel, height, width)` に変換
     const totalSize = input.reduce((a, b) => a * b, 1); 
     if (totalSize % params.inputChannel !== 0) {
-      throw new Error("入力データを正常に整形できません");
+      throw new Error("入力データの形状が仕様に適していません。他の値を試してください");
     }
     const spatialSize = totalSize / params.inputChannel;
     const height = Math.floor(Math.sqrt(spatialSize));
@@ -48,14 +48,14 @@ const CNNIOCalculator = (input: number[], params: CNNParams, batch?: number): pa
   spatialDims.forEach((dim) => {
     if (params.kernel > dim + 2 * params.padding) {
       throw new Error(
-        `カーネルサイズ (${params.kernel}) を (${dim + 2 * params.padding}) 以下の値にしてください`
+        `カーネルサイズを ${dim + 2 * params.padding} 以下にしてください`
       );
     }
   });
-
+// (${params.kernel}) 
   if (params.padding > Math.floor(params.kernel / 2)) {
     throw new Error(
-      `パディング (${params.padding}) はカーネルサイズの半分以下 (${Math.floor(params.kernel / 2)}) である必要があります`
+      `パディングはカーネルサイズの半分以下である必要があります`
     );
   }
   
@@ -77,7 +77,7 @@ const CNNIOCalculator = (input: number[], params: CNNParams, batch?: number): pa
 
 const PoolingIOCalculator = (input: number[], params: PoolingParams, batch?: number): paramsProps => {
   if (input.length === 0) {
-    throw new Error("入力が空です");
+    throw new Error("先にデータを入力してください");
   }
   let inChannels: number;
   let spatialDims: number[];
@@ -89,7 +89,7 @@ const PoolingIOCalculator = (input: number[], params: PoolingParams, batch?: num
     // 三次元以外の入力を `(inputChannel, height, width)` に変換
     const totalSize = input.reduce((a, b) => a * b, 1); 
     if (totalSize % params.inputChannel !== 0) {
-      throw new Error("入力データを正常に整形できません");
+      throw new Error("入力データの形状が仕様に適していません。他の値を試してください");
     }
     const spatialSize = totalSize / params.inputChannel; 
     const height = Math.floor(Math.sqrt(spatialSize));
@@ -104,14 +104,14 @@ const PoolingIOCalculator = (input: number[], params: PoolingParams, batch?: num
   spatialDims.forEach((dim) => {
     if (params.kernel > dim + 2 * params.padding) {
       throw new Error(
-        `カーネルサイズ (${params.kernel}) を (${dim + 2 * params.padding}) 以下の値にしてください`
+        `カーネルサイズを ${dim + 2 * params.padding})以下にしてください`
       );
     }
   });
 
   if (params.padding > Math.floor(params.kernel / 2)) {
     throw new Error(
-      `パディング (${params.padding}) はカーネルサイズの半分以下 (${Math.floor(params.kernel / 2)}) である必要があります`
+      `パディングはカーネルサイズの半分以下である必要があります`
     );
   }
 
