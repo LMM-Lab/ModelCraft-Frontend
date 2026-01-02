@@ -7,7 +7,7 @@ import SideBar from "@/component/common/SideBar";
 import Grid from "@/component/common/styles/Grid";
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-config.autoAddCss = false; // 自動CSS追加を無効化
+config.autoAddCss = false; 
 import { useProgressBarAtTransition } from "@/hooks/useProgressBarAtTransition";
 import { UserContext, UserType } from "@/Context/User";
 import { useEffect, useState } from "react";

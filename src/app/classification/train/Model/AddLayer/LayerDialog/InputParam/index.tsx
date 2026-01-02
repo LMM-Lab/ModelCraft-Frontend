@@ -1,6 +1,6 @@
 import Flex from "@/component/common/styles/Flex"
 import Text from "@/component/common/Text"
-import React, { Children } from "react"
+import React from "react"
 
 type InputParamProps = {
   children: React.ReactNode

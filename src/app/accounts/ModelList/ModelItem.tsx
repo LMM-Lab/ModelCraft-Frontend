@@ -1,8 +1,8 @@
 'use client'
 import Flex from "@/component/common/styles/Flex";
 import Text from "@/component/common/Text";
-import React, { ReactNode } from "react";
 import dayjs from "dayjs";
+import { ReactNode } from "react";
 
 type ModelItemProps = {
   modelName: string;

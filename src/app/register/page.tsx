@@ -1,15 +1,14 @@
 "use client";
-import Text from "@/component/common/Text";
-import styled from "styled-components";
-import Input from "@/component/common/Input";
-import Flex from "@/component/common/styles/Flex";
 import Button from "@/component/common/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import InputImage from "@/component/common/InputImage";
-import { useState } from "react";
-import UserNameInput from "@/component/common/UserNameInput";
 import Dialog from "@/component/common/Dialog";
+import Input from "@/component/common/Input";
+import InputImage from "@/component/common/InputImage";
+import Flex from "@/component/common/styles/Flex";
+import Text from "@/component/common/Text";
+import UserNameInput from "@/component/common/UserNameInput";
 import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type FormData = {
   name: string

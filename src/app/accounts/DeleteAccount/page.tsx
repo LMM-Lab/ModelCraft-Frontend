@@ -1,11 +1,10 @@
 'use client'
-import styled from "styled-components";
-import React, { useState } from "react";
-import Flex from "@/component/common/styles/Flex";
-import Text from "@/component/common/Text";
 import Button from "@/component/common/Button";
 import Dialog from "@/component/common/Dialog";
+import Flex from "@/component/common/styles/Flex";
+import Text from "@/component/common/Text";
 import { useUser } from "@/Context/User";
+import { useState } from "react";
 // import { useRouter } from "next/router";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;

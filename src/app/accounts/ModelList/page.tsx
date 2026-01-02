@@ -1,13 +1,12 @@
 'use client'
-import styled from "styled-components";
-import React, { useEffect, useState } from "react";
+import Button from "@/component/common/Button";
+import Dialog from "@/component/common/Dialog";
 import Flex from "@/component/common/styles/Flex";
 import Text from "@/component/common/Text";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
 import ModelItem from "./ModelItem";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTrash } from "@fortawesome/free-solid-svg-icons"
-import Dialog from "@/component/common/Dialog";
-import Button from "@/component/common/Button";
 
 type Model = {
   model_id: number;

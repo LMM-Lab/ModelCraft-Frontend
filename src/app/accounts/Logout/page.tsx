@@ -1,11 +1,8 @@
 'use client'
-import styled from "styled-components";
-import React, { useState } from "react";
-import Flex from "@/component/common/styles/Flex";
-import Text from "@/component/common/Text";
 import Button from "@/component/common/Button";
-import { redirect } from "next/navigation";
+import Flex from "@/component/common/styles/Flex";
 import { useUser } from "@/Context/User";
+import { redirect } from "next/navigation";
 
 
 const Logout = () => {
