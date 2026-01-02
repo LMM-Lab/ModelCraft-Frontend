@@ -17,14 +17,18 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
   const [user, setUser] = useState<UserType>()
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  useEffect(() => {
+useEffect(() => {
     const fetchUser = async () => {
-      const res = await fetch(`${baseUrl}/auth/me`, {
-        credentials: "include",
-      });
-      if (res.ok) {
-        const user = await res.json();
-        setUser({'username':user.username,icon:user.icon})
+      try {
+        const res = await fetch(`${baseUrl}/auth/me`, {
+          credentials: "include",
+        });
+        if (res.ok) {
+          const user = await res.json();
+          setUser({'username':user.username, icon:user.icon})
+        }
+      } catch (error) {
+        console.log("バックエンドに接続できませんでした");
       }
     };
     fetchUser();
