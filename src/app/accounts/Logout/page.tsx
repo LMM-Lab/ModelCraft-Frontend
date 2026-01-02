@@ -9,20 +9,25 @@ const Logout = () => {
   const { setUser, user } = useUser()
   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-  const handleLogout=async()=>{
-    const res=await fetch(`${baseUrl}/auth/logout`, {
+const handleLogout = async () => {
+  try {
+    const res = await fetch(`${baseUrl}/auth/logout`, {
       method: "POST",
       credentials: "include",
     });
+
     if (!res.ok) {
       const error = await res.json();
       console.log('ログアウト失敗:', error);
     } else {
       console.log('ログアウト成功:');
-      setUser(undefined)
+      setUser(undefined);
       redirect('/classification/train');
     }
+  } catch (error) {
+    alert('通信エラー');
   }
+};
 
   return (
     <Flex $margin="2rem 0 0 3rem" $flex_direction="column" $width="40%" $height="fit-content">

@@ -49,15 +49,19 @@ const Login = () => {
       console.log("ログインエラー:", error);
     }
 
-    const userResponse = await fetch("http://localhost:8000/auth/me", {
-      method: "GET",
-      credentials: "include",
-    });
-    if (userResponse.ok) {
-      const userData = await userResponse.json();
-      setUser({ 'username': userData.username ,'icon':userData.icon})
-    } else {
-      console.log("ユーザー情報取得失敗");
+    try {
+      const userResponse = await fetch("http://localhost:8000/auth/me", {
+        method: "GET",
+        credentials: "include",
+      });
+      if (userResponse.ok) {
+        const userData = await userResponse.json();
+        setUser({ 'username': userData.username, 'icon': userData.icon })
+      } else {
+        console.log("ユーザー情報取得失敗");
+      }
+    } catch (error) {
+      alert('通信エラー');
     }
   }
 
@@ -71,9 +75,9 @@ const Login = () => {
         </Dialog>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Flex $flex_direction="column" $marginTop="10rem" $justify_content="center" $align_items="center">
-          <Input {...register('username', { required: 'please enter your e-mail' })} $textAlign="center" $variants="default" placeholder="e-username" />
+          <Input {...register('username', { required: 'メールアドレスを入力してください' })} $textAlign="center" $variants="default" placeholder="e-username" />
           {errors.username && <Text $color="red" $variants="Medium">{errors.username.message}</Text>}
-          <Input {...register('password', { required: 'please enter your password' })} type="password" $textAlign="center" $marginTop="1.5rem" $variants="default" placeholder="password" />
+          <Input {...register('password', { required: 'パスワードを入力してください' })} type="password" $textAlign="center" $marginTop="1.5rem" $variants="default" placeholder="password" />
           {errors.password && <Text $color="red" $variants="Medium">{errors.password.message}</Text>}
           <Button $marginTop="10rem" $variants="Medium">login</Button>
         </Flex>

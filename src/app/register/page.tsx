@@ -83,11 +83,11 @@ const Register = () => {
             <UserNameInput width="150px" onChange={handleInput}>{userName}</UserNameInput>
           </Flex>
           <Input
-            {...register('email', { required: 'Enter your email' })}
+            {...register('email', { required: 'メールアドレスを入力してください' })}
             $marginTop="5rem" $variants="default" placeholder="e-mail" $textAlign="center" />
           {errors.email && <Text $color="red" $variants="Medium">{errors.email.message}</Text>}
           <Input
-            {...register('password', { required: 'Enter your Password' })}
+            {...register('password', { required: 'パスワードを入力してください' })}
             $marginTop="1.5rem" $variants="default" placeholder="Password" $textAlign="center" />
           {errors.password && <Text $color="red" $variants="Medium">{errors.password.message}</Text>}
           <Button type="submit" $marginTop="5rem" $variants="Medium">Register</Button>

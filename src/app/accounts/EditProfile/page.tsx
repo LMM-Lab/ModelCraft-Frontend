@@ -82,27 +82,35 @@ const EditProfile = () => {
     }
     console.log('Icon',icon)
 
-    const res = await fetch('http://localhost:8000/auth/editProfile', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include',
-    });
-    if (!res.ok) {
-      console.error('Failed to update profile:', await res.json());
-    } else {
-      const userData = await res.json();
-      setUser({ 'username': userData.username ,'icon':userData.icon})
+    try {
+      const res = await fetch('http://localhost:8000/auth/editProfile', {
+        method: 'POST',
+        body: formData,
+        credentials: 'include',
+      });
+      if (!res.ok) {
+        console.error('Failed to update profile:', await res.json());
+      } else {
+        const userData = await res.json();
+        setUser({ 'username': userData.username, 'icon': userData.icon });
+      }
+    } catch (error) {
+      alert('通信エラー');
     }
 
-    const userResponse = await fetch("http://localhost:8000/auth/me", {
-      method: "GET",
-      credentials: "include",
-    });
-    if (userResponse.ok) {
-      const userData = await userResponse.json();
-      setUser({ 'username': userData.username ,'icon':userData.icon})
-    } else {
-      console.log("ユーザー情報取得失敗");
+    try {
+      const userResponse = await fetch("http://localhost:8000/auth/me", {
+        method: "GET",
+        credentials: "include",
+      });
+      if (userResponse.ok) {
+        const userData = await userResponse.json();
+        setUser({ 'username': userData.username, 'icon': userData.icon })
+      } else {
+        console.log("ユーザー情報取得失敗");
+      }
+    } catch (error) {
+      alert('通信エラー');
     }
   };
 

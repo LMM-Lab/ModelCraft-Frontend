@@ -37,7 +37,7 @@ const ModelList = () => {
         console.log('model一覧', data)
         setModels(data || [])
       } catch (err) {
-        console.error("モデルの取得に失敗しました", err)
+        console.log("モデルの取得に失敗しました", err)
       }
     }
     fetchModels()

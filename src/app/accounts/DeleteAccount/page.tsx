@@ -50,7 +50,7 @@ const DeleteAccount = () => {
 
   return (
     <Flex $margin="2rem 0 0 3rem" $flex_direction="column" $width="40%" $height="fit-content">
-      <Button onClick={handleTrash} $width="100%" $height="6rem" $marginTop="12rem" $fontSize="3rem" $backColor="transparent" $color="#e20000">Delete account</Button>
+      <Button onClick={handleTrash} $width="100%" $height="6rem" $marginTop="12rem" $fontSize="3rem" $backColor="transparent" $color="#e20000">delete account</Button>
       {isOpen && <Dialog onClick={() => setIsOpen(false)}>
         <Text>本当に削除しますか？</Text>
         <Button onClick={handleDeleteAccount} $margin="2rem auto 0 auto" $width="30%" $height="4rem">Delete</Button>

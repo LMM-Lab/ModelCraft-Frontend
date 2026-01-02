@@ -40,7 +40,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <NavItem href="/accounts/ModelList" text="Model list" color={navColor}><FontAwesomeIcon icon={faHexagonNodes} style={{fontSize:fontSize,color:navColor}}/></NavItem>
         <NavItem href="/accounts/Logout" text="Logout" color={navColor}><FontAwesomeIcon icon={faRightFromBracket} style={{fontSize:fontSize,color:navColor}}/></NavItem>
         <Line></Line>
-        <NavItem href="/accounts/DeleteAccount" text="Delete account" color="#e20000"><FontAwesomeIcon icon={faXmark} style={{fontSize:'3.5rem',color:'#e20000'}}/></NavItem>
+        <NavItem href="/accounts/DeleteAccount" text="delete account" color="#e20000"></NavItem>
       </Flex>
       {children}
     </ContainerDiv>
